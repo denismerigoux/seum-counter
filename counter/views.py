@@ -5,6 +5,8 @@ from datetime import datetime
 from django import forms
 from django.http import HttpResponseRedirect
 from django.core import serializers
+from graphos.renderers import gchart
+from graphos.sources.simple import SimpleDataSource
 
 class resetCounterForm(forms.ModelForm):
     class Meta:
@@ -15,6 +17,9 @@ class resetCounterForm(forms.ModelForm):
 def home(request):
     #Display counters
     counters = Counter.objects.all()
+    lastResets = [['Trigramme','Jours sans seum']]
+    #Calculates infos for each counter
+    maxJSS = 0
     for counter in counters:
         lastReset = Reset.objects.filter(counter=counter).order_by('-timestamp')
         if (lastReset.count() == 0):
@@ -22,9 +27,16 @@ def home(request):
         else:
             counter.lastReset = lastReset[0]
             counter.lastReset.delta = datetime.now()-counter.lastReset.timestamp.replace(tzinfo=None)
+            lastResets.append([counter.trigramme,(counter.lastReset.delta.total_seconds())/(24*3600)])
+            if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
+                maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
             counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr')
         counter.isHidden = "hidden"
-    return render(request,'counterTemplate.html', {'counters' : counters})
+
+    #Generate graph
+    data = SimpleDataSource(lastResets)
+    chart = gchart.ColumnChart(data,options={'title' : 'Graphe du seum', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : maxJSS+0.25} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
+    return render(request,'counterTemplate.html', {'counters' : counters, 'chart' : chart})
 
 def resetCounter(request):
     #Update Form counter

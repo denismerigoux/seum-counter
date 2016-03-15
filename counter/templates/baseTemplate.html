@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="author" content="Seum Man"/>
-	<meta name="keywords" content="seum compteur"/>
-	<meta name="description" content="Compteur de seum"/>
+	<meta charset="UTF-8" />
+	<meta name="author" content="Seum Man" />
+	<meta name="keywords" content="seum compteur" />
+	<meta name="description" content="Compteurs de seum" />
 
 	<title>Seum – {% block title %}{% endblock %}</title>
 
-	{# Load the tag library #}
-	{% load bootstrap3 %}
-
-	{# Load CSS and JavaScript #}
-	{% bootstrap_css %}
-	{% bootstrap_javascript %}
-
-	{# Display django.contrib.messages as Bootstrap alerts #}
-	{% bootstrap_messages %}
+	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {% bootstrap_javascript %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
 
 	<style>
 		.seum-counter {
-			height:125px;
+			height: 125px;
 			overflow: auto;
-			margin-bottom:15px;
+			margin-bottom: 15px;
 		}
 	</style>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {
+			packages: ["corechart"]
+		});
+	</script>
 </head>
-	<section id="content">
-		{% block content %}{% endblock %}
-	</section>
+<section id="content">
+	{% block content %}{% endblock %}
+</section>
 </body>
+
 </html>

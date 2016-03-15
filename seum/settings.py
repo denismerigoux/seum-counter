@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'babel',
+    'graphos',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',

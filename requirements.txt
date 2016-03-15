@@ -1,3 +1,4 @@
 django
 babel
 django-bootstrap3
+django-graphos-3
