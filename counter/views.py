@@ -35,7 +35,7 @@ def home(request):
 
     #Generate graph
     data = SimpleDataSource(lastResets)
-    chart = gchart.ColumnChart(data,options={'title' : 'Graphe du seum', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : maxJSS+0.25} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
+    chart = gchart.ColumnChart(data,options={'title' : 'Graphe du seum', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : max(maxJSS,1) , 'min' : 0} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
     return render(request,'counterTemplate.html', {'counters' : counters, 'chart' : chart})
 
 def resetCounter(request):
