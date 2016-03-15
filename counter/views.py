@@ -32,7 +32,7 @@ def home(request):
                 maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
             counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr')
         counter.isHidden = "hidden"
-
+    counters = sorted(counters,key=lambda t: -t.lastReset.delta)
     #Generate graph
     lastResets.sort(key=lambda x: (x[1],x[0]))
     lastResets.insert(0,['Trigramme','Jours sans seum'])
