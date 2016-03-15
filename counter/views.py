@@ -17,7 +17,7 @@ class resetCounterForm(forms.ModelForm):
 def home(request):
     #Display counters
     counters = Counter.objects.all()
-    lastResets = [['Trigramme','Jours sans seum']]
+    lastResets = []
     #Calculates infos for each counter
     maxJSS = 0
     for counter in counters:
@@ -34,6 +34,8 @@ def home(request):
         counter.isHidden = "hidden"
 
     #Generate graph
+    lastResets.sort(key=lambda x: (x[1],x[0]))
+    lastResets.insert(0,['Trigramme','Jours sans seum'])
     data = SimpleDataSource(lastResets)
     chart = gchart.ColumnChart(data,options={'title' : 'Graphe du seum', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : max(maxJSS,1) , 'min' : 0} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
     return render(request,'counterTemplate.html', {'counters' : counters, 'chart' : chart})
