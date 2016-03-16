@@ -1,6 +1,6 @@
 {% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %}
 <div class="text-center">
-	<h1>Compteurs de seum</h1>
+	<h1>Seum Center</h1>
 </div>
 <div class="container-fluid">
 	<div class="row">
@@ -45,7 +45,19 @@
 					<h2 class="panel-title">Graphe du seum</h2>
 				</div>
 				<div class="panel-body graphs">
-					{{ chart.as_html }}
+					{{ col_chart.as_html }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">Timeline du seum</h2>
+				</div>
+				<div class="panel-body timeline graphs">
+					{{ line_chart.as_html }}
 				</div>
 			</div>
 		</div>

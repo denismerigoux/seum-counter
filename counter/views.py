@@ -39,12 +39,31 @@ def home(request):
             counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
         counter.isHidden = "hidden"
     counters = sorted(counters,key=lambda t: -t.lastReset.delta)
-    #Generate graph
+    #Column graph
     lastResets.sort(key=lambda x: x[1]['v'])
     lastResets.insert(0,['Trigramme','Jours sans seum'])
-    data = SimpleDataSource(lastResets)
-    chart = gchart.ColumnChart(data,options={'title' : '', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : max(maxJSS,1) , 'min' : 0} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
-    return render(request,'homeTemplate.html', {'counters' : counters, 'chart' : chart})
+    col_data = SimpleDataSource(lastResets)
+    col_chart = gchart.ColumnChart(col_data,options={'title' : '', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : max(maxJSS,1) , 'min' : 0} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
+
+    ###Timeline graph
+    #Data pre-processing
+    resets = Reset.objects.filter(timestamp__gte=datetime.now() - timedelta(days=1))
+    for reset in resets:
+        reset.timestamp={'v' : reset.timestamp.timestamp(), 'f' : "Il y a "+format_timedelta(datetime.now()-reset.timestamp.replace(tzinfo=None),locale='fr',threshold=1) }
+        reset.Seum={'v' : 0, 'f' : reset.counter.trigramme+" : "+reset.reason}
+    #Drawing the graph
+    line_data = ModelDataSource(resets,fields=['timestamp','Seum'])
+    line_chart = gchart.LineChart(line_data, options={
+        'lineWidth' : 0,
+        'pointSize' : 10,
+        'title' : '',
+        'vAxis' : { 'ticks' : []},
+        'hAxis' : {'ticks' : [{'v' : (datetime.now() - timedelta(days=1)).timestamp(), 'f' : 'Il y a 24 h' }, { 'v' :datetime.now().timestamp(), 'f' : 'Présent'}]},
+        'legend' : 'none',
+        'height' : 90
+    })
+
+    return render(request,'homeTemplate.html', {'counters' : counters, 'col_chart' : col_chart, 'line_chart' : line_chart})
 
 def resetCounter(request):
     #Update Form counter
