@@ -19,7 +19,7 @@ class Reset(models.Model):
     counter = models.ForeignKey('Counter')
 
     def __str__(self):
-        return "%s : %s" % (self.counter,format_timedelta(datetime.now()-self.timestamp.replace(tzinfo=None),locale='fr'))
+        return "%s : %s (%s)" % (self.counter,format_timedelta(datetime.now()-self.timestamp.replace(tzinfo=None),locale='fr'),self.reason)
 
     class Meta:
         verbose_name = "Remise à zéro"

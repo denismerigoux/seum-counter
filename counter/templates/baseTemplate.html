@@ -12,15 +12,28 @@
 	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {% bootstrap_javascript %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
 
 	<style>
+		body {
+			background-color: #EEEEEE
+		}
+
 		.seum-counter {
 			height: 125px;
 			overflow: auto;
-			margin-bottom: 15px;
+		}
+
+		.timeline {
+			height: 125px;
+			overflow-y: hidden;
 		}
 
 		.graphs > div {
 			display: block;
 			margin: 0 auto;
+		}
+
+		.counter-link, .counter-link:hover {
+  	color: inherit; /* blue colors for links too */
+  	text-decoration: inherit; /* no underline */
 		}
 	</style>
 

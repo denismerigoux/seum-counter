@@ -1,13 +1,13 @@
-{% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %}
+{% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %}
 <div class="text-center">
-  <h1>{{counter.trigramme}}</h1>
+  <h1>{{counter.trigramme}} <small>{{ counter.name }}</small></h1>
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 col-sm-6 col-lg-3">
+    <div class="col-md-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h2 class="panel-title">{{ counter.name }}</h2>
+          <h2 class="panel-title">Dernier seum</h2>
         </div>
         <div class="seum-counter panel-body">
           {% if counter.lastReset.noSeum %}
@@ -27,6 +27,7 @@
               <textarea class="form-control" name="reason"></textarea>
             </div>
             <input type="hidden" name="counter" value="{{counter.id}}"></input>
+            <input type="hidden" name="redirect" value="counter/{{counter.id}}"></input>
             <div class="text-center">
               <button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
             </div>
@@ -34,16 +35,19 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 col-sm-6 col-lg-9">
+    <div class="col-md-9">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Timeline du seum</h2>
         </div>
-        <div class="seum-counter panel-body">
-          Salut !
+        <div class="graphs timeline panel-body">
+          {{chart.as_html}}
         </div>
       </div>
     </div>
+  </div>
+  <div class="text-center">
+    <a class="btn btn-success" href="{% url 'counter.views.home' %}">Retour à la liste des compteurs</a>
   </div>
 </div>
 {% endblock %}
