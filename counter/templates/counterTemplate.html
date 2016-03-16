@@ -11,7 +11,7 @@
 					<h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2>
 				</div>
 				<div class="seum-counter panel-body">
-					{% if counter.lastReset == False %}
+					{% if counter.lastReset.noSeum  %}
 					<strong>N'a pas encore eu le seum.</strong>
 					<br> {% else %}
 					<strong>N'a pas eu le seum depuis {{ counter.lastReset.formatted_delta }}.</strong>

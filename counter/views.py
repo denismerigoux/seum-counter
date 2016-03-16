@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from counter.models import Counter,Reset
 from babel.dates import format_timedelta
-from datetime import datetime
+from datetime import datetime,timedelta
 from django import forms
 from django.http import HttpResponseRedirect
 from django.core import serializers
@@ -20,12 +20,16 @@ def home(request):
     lastResets = []
     #Calculates infos for each counter
     maxJSS = 0
+    timezero = timedelta(0)
     for counter in counters:
         lastReset = Reset.objects.filter(counter=counter).order_by('-timestamp')
         if (lastReset.count() == 0):
-            counter.lastReset = False
+            counter.lastReset = Reset()
+            counter.lastReset.delta = timezero
+            counter.lastReset.noSeum = True
         else:
             counter.lastReset = lastReset[0]
+            counter.lastReset.noSeum = False
             counter.lastReset.delta = datetime.now()-counter.lastReset.timestamp.replace(tzinfo=None)
             lastResets.append([counter.trigramme,(counter.lastReset.delta.total_seconds())/(24*3600)])
             if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
