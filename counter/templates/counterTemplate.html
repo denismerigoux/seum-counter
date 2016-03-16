@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h2 class="panel-title">Timeline du seum</h2>
         </div>
@@ -46,8 +46,38 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Historique du seum</h2>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Motif</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for reset in resets %}
+              <tr>
+                <td>{{ reset.date }}</td>
+                <td>{{ reset.reason }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="text-center">
     <a class="btn btn-success" href="{% url 'home' %}">Retour à la liste des compteurs</a>
   </div>
+</div>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from counter.models import Counter,Reset
-from babel.dates import format_timedelta
+from babel.dates import format_timedelta, format_datetime
 from datetime import datetime,timedelta
 from django import forms
 from django.http import HttpResponseRedirect
@@ -83,22 +83,24 @@ def resetCounter(request):
 def counter(request, id_counter):
 
     counter = Counter.objects.get(pk=id_counter)
-    resets = Reset.objects.filter(counter=counter)
-    lastReset = resets.order_by('-timestamp')
+    resets = Reset.objects.filter(counter=counter).order_by('-timestamp')
     #Display
-    if (lastReset.count() == 0):
+    if (resets.count() == 0):
         counter.lastReset = Reset()
         counter.lastReset.delta = timezero
         counter.lastReset.noSeum = True
     else:
-        counter.lastReset = lastReset[0]
+        counter.lastReset = resets[0]
         counter.lastReset.noSeum = False
         counter.lastReset.delta = datetime.now()-counter.lastReset.timestamp.replace(tzinfo=None)
         counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
 
+    for reset in resets:
+        reset.date = format_datetime(reset.timestamp,locale='fr',format="EEEE dd MMMM Y 'à' HH:mm:ss").capitalize()
     ###Timeline graph
     #Data pre-processing
-    for reset in resets:
+    resets_graph=resets
+    for reset in resets_graph:
         reset.timestamp={'v' : reset.timestamp.timestamp(), 'f' : "Il y a "+format_timedelta(datetime.now()-reset.timestamp.replace(tzinfo=None),locale='fr',threshold=1) }
         reset.Seum={'v' : 0, 'f' : reset.reason}
     #Drawing the graph
@@ -113,4 +115,4 @@ def counter(request, id_counter):
         'height' : 90
     })
 
-    return render(request,'counterTemplate.html', { 'counter' : counter, 'chart' : chart})
+    return render(request,'counterTemplate.html', { 'counter' : counter, 'chart' : chart, 'resets' : resets })
