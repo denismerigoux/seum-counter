@@ -9,6 +9,7 @@ from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
 import random
+from django.utils import timezone
 
 class resetCounterForm(forms.ModelForm):
     class Meta:
@@ -47,7 +48,7 @@ def home(request):
 
     ###Timeline graph
     #Data pre-processing
-    resets = Reset.objects.filter(timestamp__gte=datetime.now() - timedelta(days=1))
+    resets = Reset.objects.filter(timestamp__gte=timezone.now() - timedelta(days=1))
     for reset in resets:
         reset.timestamp={'v' : reset.timestamp.timestamp(), 'f' : "Il y a "+format_timedelta(datetime.now()-reset.timestamp.replace(tzinfo=None),locale='fr',threshold=1) }
         reset.Seum={'v' : 0, 'f' : reset.counter.trigramme+" : "+reset.reason}
@@ -77,7 +78,7 @@ def resetCounter(request):
         reset.timestamp = datetime.now()
         reset.save()
         # check whether it's valid
-    return HttpResponseRedirect('/'+data['redirect'][0])
+    return HttpResponseRedirect(data['redirect'][0])
 
 def counter(request, id_counter):
 

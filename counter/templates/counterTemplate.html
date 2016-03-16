@@ -20,14 +20,14 @@
           <div class="text-center">
             <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
           </div>
-          <form style="display:none" id="counter{{counter.id}}" action="/reset-counter/" method="post">
+          <form style="display:none" id="counter{{counter.id}}" action="{% url 'reset-counter' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
               <label for="reason">Motif du seum :</label>
               <textarea class="form-control" name="reason"></textarea>
             </div>
             <input type="hidden" name="counter" value="{{counter.id}}"></input>
-            <input type="hidden" name="redirect" value="counter/{{counter.id}}"></input>
+            <input type="hidden" name="redirect" value="{% url 'counter' id_counter=counter.id %}"></input>
             <div class="text-center">
               <button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
             </div>
@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="text-center">
-    <a class="btn btn-success" href="{% url 'counter.views.home' %}">Retour à la liste des compteurs</a>
+    <a class="btn btn-success" href="{% url 'home' %}">Retour à la liste des compteurs</a>
   </div>
 </div>
 {% endblock %}

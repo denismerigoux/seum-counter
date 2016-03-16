@@ -8,7 +8,7 @@
 		<div class="col-md-4 col-sm-6 col-lg-3">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<a class="counter-link" href="{% url 'counter.views.counter' id_counter=counter.id %}"><h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2></a>
+					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}"><h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2></a>
 				</div>
 				<div class="seum-counter panel-body">
 					{% if counter.lastReset.noSeum %}
@@ -21,14 +21,14 @@
 					<div class="text-center">
 						<button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
 					</div>
-					<form style="display:none" id="counter{{counter.id}}" action="/reset-counter/" method="post">
+					<form style="display:none" id="counter{{counter.id}}" action="{% url 'reset-counter' %}" method="post">
 						{% csrf_token %}
 						<div class="form-group">
 							<label for="reason">Motif du seum :</label>
 							<textarea class="form-control" name="reason"></textarea>
 						</div>
 						<input type="hidden" name="counter" value="{{counter.id}}"></input>
-						<input type="hidden" name="redirect" value="home"></input>
+						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
 						<div class="text-center">
 							<button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
 						</div>
