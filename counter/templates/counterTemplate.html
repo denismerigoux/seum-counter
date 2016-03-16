@@ -1,42 +1,49 @@
 {% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %}
 <div class="text-center">
-	<h1>Compteurs de seum</h1>
+  <h1>{{counter.trigramme}}</h1>
 </div>
 <div class="container-fluid">
-	<div class="row">
-		{% for counter in counters %}
-		<div class="col-md-4 col-sm-6 col-lg-3">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2>
-				</div>
-				<div class="seum-counter panel-body">
-					{% if counter.lastReset.noSeum  %}
-					<strong>N'a pas encore eu le seum.</strong>
-					<br> {% else %}
-					<strong>N'a pas eu le seum depuis {{ counter.lastReset.formatted_delta }}.</strong>
-					<br> {% endif %}
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-lg-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">{{ counter.name }}</h2>
+        </div>
+        <div class="seum-counter panel-body">
+          {% if counter.lastReset.noSeum %}
+          <strong>N'a pas encore eu le seum.</strong>
+          <br> {% else %}
+          <strong>N'a pas eu le seum depuis {{ counter.lastReset.formatted_delta }}.</strong>
+          <br> {% endif %}
 
-					<p>{{ counter.lastReset.reason }}</p>
-					<div class="text-center">
-						<button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
-					</div>
-					<form style="display:none" id="counter{{counter.id}}" action="/reset-counter/" method="post">
-						{% csrf_token %}
-						<div class="form-group">
-							<label for="reason">Motif du seum :</label>
-							<textarea class="form-control" name="reason"></textarea>
-						</div>
-						<input type="hidden" name="counter" value="{{counter.id}}"></input>
-						<div class="text-center">
-							<button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-			{{ chart.as_html }}
-	</div>
-	{% endblock %}
+          <p>{{ counter.lastReset.reason }}</p>
+          <div class="text-center">
+            <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
+          </div>
+          <form style="display:none" id="counter{{counter.id}}" action="/reset-counter/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="reason">Motif du seum :</label>
+              <textarea class="form-control" name="reason"></textarea>
+            </div>
+            <input type="hidden" name="counter" value="{{counter.id}}"></input>
+            <div class="text-center">
+              <button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-6 col-lg-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Timeline du seum</h2>
+        </div>
+        <div class="seum-counter panel-body">
+          Salut !
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
