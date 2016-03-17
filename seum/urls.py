@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('counter.urls'))
+    url(r'^seum/', include('counter.urls')),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
+    url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
+    url(r'^', RedirectView.as_view(url='seum/')),
 ]
