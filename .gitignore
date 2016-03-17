@@ -53,6 +53,7 @@ coverage.xml
 *.log
 *.sqlite3
 counter/migrations/
+static/
 
 # Sphinx documentation
 docs/_build/
