@@ -84,6 +84,7 @@ def counter(request, id_counter):
 
     counter = Counter.objects.get(pk=id_counter)
     resets = Reset.objects.filter(counter=counter).order_by('-timestamp')
+    timezero = timedelta(0)
     #Display
     if (resets.count() == 0):
         counter.lastReset = Reset()
