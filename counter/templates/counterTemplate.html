@@ -41,7 +41,13 @@
           <h2 class="panel-title">Timeline du seum</h2>
         </div>
         <div class="graphs timeline panel-body">
-          {{chart.as_html}}
+            {% if counter.lastReset.noSeum %}
+            <div class="text-center text-muted">
+                <p>Pas encore de timeline du seum...</p>
+            </div>
+            {% else %}
+            {{chart.as_html}}
+            {% endif %}
         </div>
       </div>
     </div>

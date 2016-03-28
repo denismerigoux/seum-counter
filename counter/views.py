@@ -16,8 +16,9 @@ class resetCounterForm(forms.ModelForm):
         model = Reset
         fields = ['reason','counter']
 
-# Create your views here.
 def home(request):
+    #JSS above this limit will not be displayed on the col graph
+    JSS_limit = 7
     #Display counters
     counters = Counter.objects.all()
     lastResets = []
@@ -30,41 +31,83 @@ def home(request):
             counter.lastReset = Reset()
             counter.lastReset.delta = timezero
             counter.lastReset.noSeum = True
+            counter.CSSclass = "warning"
         else:
             counter.lastReset = lastReset[0]
             counter.lastReset.noSeum = False
             counter.lastReset.delta = datetime.now()-counter.lastReset.timestamp.replace(tzinfo=None)
-            lastResets.append([counter.trigramme,{'v' : (counter.lastReset.delta.total_seconds())/(24*3600), 'f' : str(round((counter.lastReset.delta.total_seconds())/(24*3600),1))} ])
-            if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
-                maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
-            counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
+            if ((counter.lastReset.delta.total_seconds())/(24*3600)<JSS_limit):
+                #If more thant 7 JSS do not display on graph
+                lastResets.append([counter.trigramme,{'v' : (counter.lastReset.delta.total_seconds())/(24*3600), 'f' : str(round((counter.lastReset.delta.total_seconds())/(24*3600),1))} ])
+                counter.CSSclass = "primary"
+                if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
+                    maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
+                counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
+            else:
+                counter.CSSclass = "danger"
         counter.isHidden = "hidden"
-    counters = sorted(counters,key=lambda t: -t.lastReset.delta)
+    counters = sorted(counters,key=lambda t: t.lastReset.delta)
     #Column graph
-    lastResets.sort(key=lambda x: x[1]['v'])
-    lastResets.insert(0,['Trigramme','Jours sans seum'])
-    col_data = SimpleDataSource(lastResets)
-    col_chart = gchart.ColumnChart(col_data,options={'title' : '', 'legend' : 'none','vAxis' : { 'viewWindow' : { 'max' : max(maxJSS,1) , 'min' : 0} , 'ticks' : [1,2,3,4,5,6,7,8,9,10,11,12,13,14],'title' : 'Jours sans seum' }, 'hAxis' : {'title' : 'Trigramme' }})
+    if (len(lastResets) ==0):
+        noGraph = True
+        col_chart = None
+    else:
+        noGraph = False
+        lastResets.sort(key=lambda x: x[1]['v'])
+        lastResets.insert(0,['Trigramme','Jours sans seum'])
+        col_data = SimpleDataSource(lastResets)
+        col_chart = gchart.ColumnChart(col_data,options={
+            'title' : '',
+            'legend' : 'none',
+            'vAxis' : {
+                'viewWindow' : {
+                    'max' : max(maxJSS,1) ,
+                    'min' : 0
+                    },
+                'ticks' : [1,2,3,4,5,6,7],
+                'title' : 'Jours sans seum'
+                },
+            'hAxis' : {'title' : 'Trigramme' },
+        })
 
     ###Timeline graph
     #Data pre-processing
     resets = Reset.objects.filter(timestamp__gte=timezone.now() - timedelta(days=1))
-    for reset in resets:
-        reset.timestamp={'v' : reset.timestamp.timestamp(), 'f' : "Il y a "+format_timedelta(datetime.now()-reset.timestamp.replace(tzinfo=None),locale='fr',threshold=1) }
-        reset.Seum={'v' : 0, 'f' : reset.counter.trigramme+" : "+reset.reason}
-    #Drawing the graph
-    line_data = ModelDataSource(resets,fields=['timestamp','Seum'])
-    line_chart = gchart.LineChart(line_data, options={
-        'lineWidth' : 0,
-        'pointSize' : 10,
-        'title' : '',
-        'vAxis' : { 'ticks' : []},
-        'hAxis' : {'ticks' : [{'v' : (datetime.now() - timedelta(days=1)).timestamp(), 'f' : 'Il y a 24 h' }, { 'v' :datetime.now().timestamp(), 'f' : 'Présent'}]},
-        'legend' : 'none',
-        'height' : 90
-    })
+    if (resets.count() == 0):
+        noTimeline = True
+        line_chart = None
+    else:
+        noTimeline = False
+        for reset in resets:
+            reset.timestamp={
+                'v' : reset.timestamp.timestamp(),
+                'f' : "Il y a "+format_timedelta(datetime.now()-reset.timestamp.replace(tzinfo=None),locale='fr',threshold=1)
+                }
+            reset.Seum={'v' : 0, 'f' : reset.counter.trigramme+" : "+reset.reason}
+            #Drawing the graph
+            line_data = ModelDataSource(resets,fields=['timestamp','Seum'])
+            line_chart = gchart.LineChart(line_data, options={
+            'lineWidth' : 0,
+            'pointSize' : 10,
+            'title' : '',
+            'vAxis' : { 'ticks' : []},
+            'hAxis' : {
+                'ticks' : [
+                        {'v' : (datetime.now() - timedelta(days=1)).timestamp(), 'f' : 'Il y a 24 h' },
+                        { 'v' :datetime.now().timestamp(), 'f' : 'Présent'}
+                    ]
+                },
+            'legend' : 'none',
+            'height' : 90
+            })
 
-    return render(request,'homeTemplate.html', {'counters' : counters, 'col_chart' : col_chart, 'line_chart' : line_chart})
+    return render(request,'homeTemplate.html', {
+        'counters' : counters,
+        'col_chart' : col_chart,
+        'line_chart' : line_chart,
+        'noTimeline' : noTimeline,
+        'noGraph' : noGraph
+        })
 
 def resetCounter(request):
     #Update Form counter
