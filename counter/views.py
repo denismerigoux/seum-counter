@@ -85,8 +85,8 @@ def home(request):
                 }
             reset.Seum={'v' : 0, 'f' : reset.counter.trigramme+" : "+reset.reason}
             #Drawing the graph
-            line_data = ModelDataSource(resets,fields=['timestamp','Seum'])
-            line_chart = gchart.LineChart(line_data, options={
+        line_data = ModelDataSource(resets,fields=['timestamp','Seum'])
+        line_chart = gchart.LineChart(line_data, options={
             'lineWidth' : 0,
             'pointSize' : 10,
             'title' : '',
