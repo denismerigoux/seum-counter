@@ -42,9 +42,9 @@ def home(request):
                 counter.CSSclass = "primary"
                 if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
                     maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
-                counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
             else:
                 counter.CSSclass = "danger"
+        counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
         counter.isHidden = "hidden"
     counters = sorted(counters,key=lambda t: t.lastReset.delta)
     #Column graph
