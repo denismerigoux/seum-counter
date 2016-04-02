@@ -9,6 +9,7 @@ from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
 import random
+import math
 from django.utils import timezone
 
 class resetCounterForm(forms.ModelForm):
@@ -43,7 +44,8 @@ def home(request):
                 if (counter.lastReset.delta.total_seconds())/(24*3600) > maxJSS:
                     maxJSS = (counter.lastReset.delta.total_seconds())/(24*3600)
             else:
-                counter.CSSclass = "danger"
+                counter.CSSclass = "primary"
+            counter.opacity = 0.3 + 0.7*math.exp(-(counter.lastReset.delta.total_seconds())/(7*24*3600))
         counter.lastReset.formatted_delta = format_timedelta(counter.lastReset.delta,locale='fr',threshold=1)
         counter.isHidden = "hidden"
     counters = sorted(counters,key=lambda t: t.lastReset.delta)

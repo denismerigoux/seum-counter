@@ -6,7 +6,7 @@
 	<div class="row">
 		{% for counter in counters %}
 		<div class="col-md-4 col-sm-6 col-lg-3">
-			<div class="panel panel-{{counter.CSSclass}}">
+			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
 				<div class="panel-heading">
 					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}"><h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2></a>
 				</div>
