@@ -5,6 +5,7 @@ from datetime import datetime,timedelta
 from django import forms
 from django.http import HttpResponseRedirect
 from django.core import serializers
+from django.core.mail import send_mail
 from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
@@ -122,7 +123,15 @@ def resetCounter(request):
         reset.reason = data['reason'][0]
         reset.timestamp = datetime.now()
         reset.save()
-        # check whether it's valid
+        emails = [u[0] for u in Counter.objects.all().values_list('email') if u[0] != 'null@localhost']
+        #Now send emails to everyone
+        send_mail( counter.name, data['reason'][0]+'''
+
+--
+SeumBook™
+Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com''',
+        'SeumMan <seum@merigoux.ovh>', emails)
+
     return HttpResponseRedirect(data['redirect'][0])
 
 def counter(request, id_counter):

@@ -5,6 +5,7 @@ from babel.dates import format_timedelta
 # Create your models here.
 class Counter(models.Model):
     name = models.CharField("Nom",max_length=60)
+    email = models.EmailField("Email",max_length=264,default="null@localhost")
     trigramme = models.CharField("Trigramme", max_length=3)
 
     def __str__(self):
