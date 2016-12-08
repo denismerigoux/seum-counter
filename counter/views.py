@@ -125,7 +125,7 @@ def resetCounter(request):
         reset.save()
         emails = [u[0] for u in Counter.objects.all().values_list('email') if u[0] != 'null@localhost']
         #Now send emails to everyone
-        send_mail( counter.name, data['reason'][0]+'''
+        send_mail( counter.name+' a le seum', data['reason'][0]+'''
 
 --
 SeumBook™
