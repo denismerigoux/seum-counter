@@ -1,13 +1,15 @@
 {% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %}
 <div class="text-center">
-  <h1>{{counter.trigramme}} <small>{{ counter.name }}</small></h1>
+  <h1>
+      {{counter.trigramme}} <small>{{ counter.name }}</small>
+  </h1>
 </div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h2 class="panel-title">Dernier seum</h2>
+          <h2 class="panel-title">Dernier seum {% if not counter.lastReset.noSeum %}<span class="badge pull-right">{{ counter.seumCount }}</span>{% endif %}</h2>
         </div>
         <div class="seum-counter panel-body">
           {% if counter.lastReset.noSeum %}

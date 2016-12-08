@@ -8,7 +8,11 @@
 		<div class="col-md-4 col-sm-6 col-lg-3">
 			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
 				<div class="panel-heading">
-					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}"><h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small></h2></a>
+					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
+						<h2 class="panel-title">{{ counter.trigramme }} <small>{{ counter.name }}</small>
+							{% if not counter.lastReset.noSeum %}<span class="pull-right badge">{{ counter.seumCount }}</span>{% endif %}
+						</h2>
+					</a>
 				</div>
 				<div class="seum-counter panel-body">
 					{% if counter.lastReset.noSeum %}
@@ -49,9 +53,7 @@
 					<div class="text-center text-muted">
 						<p>Personne n'a le seum...</p>
 					</div>
-					{% else %}
-					{{ col_chart.as_html }}
-					{% endif %}
+					{% else %} {{ col_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -67,9 +69,7 @@
 					<div class="text-center text-muted">
 						<p>Pas de seum dans les dernières 24 heures...</p>
 					</div>
-					{% else %}
-					{{ line_chart.as_html }}
-					{% endif %}
+					{% else %} {{ line_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
