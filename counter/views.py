@@ -128,8 +128,9 @@ def resetCounter(request):
         send_mail( counter.name+' a le seum', data['reason'][0]+'''
 
 --
-SeumBook™
-Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com''',
+SeumBook™ - http://seum.merigoux.ovh
+
+P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com''',
         'SeumMan <seum@merigoux.ovh>', emails)
 
     return HttpResponseRedirect(data['redirect'][0])
