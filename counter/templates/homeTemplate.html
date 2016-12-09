@@ -74,5 +74,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">Meilleurs seumeurs</h2>
+				</div>
+				<div class="panel-body graphs">
+					{% if noBestSeum %}
+					<div class="text-center text-muted">
+						<p>Personne n'a eu le seum...</p>
+					</div>
+					{% else %} {{ best_chart.as_html }} {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

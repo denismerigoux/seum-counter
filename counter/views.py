@@ -24,11 +24,12 @@ class resetCounterForm(forms.ModelForm):
 def home(request):
     # JSS above this limit will not be displayed on the col graph
     JSS_limit = 7
+    maxJSS = 0
+    bestSeumeursNumber = 15
     # Display counters
     counters = Counter.objects.all()
     lastResets = []
     # Calculates infos for each counter
-    maxJSS = 0
     timezero = timedelta(0)
     for counter in counters:
         lastReset = Reset.objects.filter(
@@ -130,13 +131,34 @@ def home(request):
             'legend': 'none',
             'height': 90
         })
+    # Graph of greatest seumers
+    seumCounts = []
+    for counter in counters:
+        seumCounts.append([counter.trigramme, Reset.objects.filter(
+            counter=counter).count()])
+    if (len(seumCounts) == 0):
+        noBestSeum = True
+        best_chart = None
+    else:
+        seumCounts.sort(key=lambda x: -x[1])
+        noBestSeum = False
+        seumCounts.insert(0, ['Trigramme', 'Nombre de seums'])
+        best_data = SimpleDataSource(seumCounts[:bestSeumeursNumber])
+        best_chart = gchart.ColumnChart(best_data, options={
+            'title': '',
+            'legend': 'none',
+            'vAxis': {'title': 'Nombre de seums'},
+            'hAxis': {'title': 'Trigramme'},
+        })
 
     return render(request, 'homeTemplate.html', {
         'counters': counters,
         'col_chart': col_chart,
         'line_chart': line_chart,
+        'best_chart': best_chart,
         'noTimeline': noTimeline,
-        'noGraph': noGraph
+        'noGraph': noGraph,
+        'noBestSeum': noBestSeum
     })
 
 
