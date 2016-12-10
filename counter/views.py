@@ -11,6 +11,7 @@ from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
 import random
 import math
+import copy
 from django.utils import timezone
 
 
@@ -195,12 +196,14 @@ def counter(request, id_counter):
 
     counter = Counter.objects.get(pk=id_counter)
     resets = Reset.objects.filter(counter=counter).order_by('-timestamp')
+    firstReset = copy.copy(resets[len(resets) - 1])
     timezero = timedelta(0)
     # Display
     if (resets.count() == 0):
         counter.lastReset = Reset()
         counter.lastReset.delta = timezero
         counter.lastReset.noSeum = True
+        seumFrequency = 'inconnu'
     else:
         counter.lastReset = resets[0]
         counter.lastReset.noSeum = False
@@ -210,6 +213,9 @@ def counter(request, id_counter):
             counter.lastReset.delta, locale='fr', threshold=1)
         counter.seumCount = Reset.objects.filter(
             counter=counter).count()
+        seumFrequency = format_timedelta((
+            datetime.now() - firstReset.timestamp.replace(tzinfo=None)) /
+            counter.seumCount, locale='fr', threshold=1)
 
     for reset in resets:
         reset.date = format_datetime(
@@ -234,8 +240,10 @@ def counter(request, id_counter):
         'title': '',
         'vAxis': {'ticks': []},
         'hAxis': {'ticks': [{
-            'v': datetime(2016, 3, 9, 23, 0, 0, 0).timestamp(),
-            'f': 'ADD des X2013'
+            'v': firstReset.timestamp.timestamp(),
+            'f': 'Il y a ' + format_timedelta(
+                datetime.now() - firstReset.timestamp.replace(tzinfo=None),
+                locale='fr', threshold=1)
         }, {
             'v': datetime.now().timestamp(),
             'f': 'Présent'}
@@ -244,4 +252,9 @@ def counter(request, id_counter):
         'height': 90
     })
 
-    return render(request, 'counterTemplate.html', {'counter': counter, 'chart': chart, 'resets': resets})
+    return render(request, 'counterTemplate.html', {
+        'counter': counter,
+        'chart': chart,
+        'resets': resets,
+        'seumFrequency': seumFrequency
+    })
