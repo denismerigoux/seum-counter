@@ -151,15 +151,44 @@ def home(request):
             'vAxis': {'title': 'Nombre de seums'},
             'hAxis': {'title': 'Trigramme'},
         })
+    # Graph of seum activity
+    resets = Reset.objects.filter(
+        timestamp__gte=timezone.now() - timedelta(days=365))
+    months = {}
+    for reset in resets:
+        monthDate = datetime(reset.timestamp.year, reset.timestamp.month, 1)
+        months[monthDate] = months.get(monthDate, 0) + 1
+
+    monthList = sorted(months.items(), key=lambda t: t[0])
+    seumActivity = []
+    for month in monthList:
+        seumActivity.append(
+            [format_datetime(month[0], locale='fr',
+                             format="MMM Y").capitalize(), month[1]])
+    if (len(seumActivity) == 0):
+        noSeumActivity = True
+        activity_chart = None
+    else:
+        noSeumActivity = False
+        seumActivity.insert(0, ['Mois', 'Nombre de seums'])
+        activity_data = SimpleDataSource(seumActivity)
+        activity_chart = gchart.ColumnChart(activity_data, options={
+            'title': '',
+            'legend': 'none',
+            'vAxis': {'title': 'Nombre de seums'},
+            'hAxis': {'title': 'Mois'},
+        })
 
     return render(request, 'homeTemplate.html', {
         'counters': counters,
         'col_chart': col_chart,
         'line_chart': line_chart,
         'best_chart': best_chart,
+        'activity_chart': activity_chart,
         'noTimeline': noTimeline,
         'noGraph': noGraph,
-        'noBestSeum': noBestSeum
+        'noBestSeum': noBestSeum,
+        'noSeumActivity': noSeumActivity,
     })
 
 
