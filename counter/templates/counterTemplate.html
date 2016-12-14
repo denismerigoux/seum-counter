@@ -11,7 +11,7 @@
         <div class="panel-heading">
           <h2 class="panel-title">Dernier seum {% if not counter.lastReset.noSeum %}<span class="badge pull-right">{{ counter.seumCount }}</span>{% endif %}</h2>
         </div>
-        <div class="seum-counter panel-body">
+        <div class="seum-counter panel-body" style="height:125px" id="container{{counter.id}}">
           {% if counter.lastReset.noSeum %}
           <strong>N'a pas encore eu le seum.</strong>
           <br> {% else %}
@@ -20,7 +20,7 @@
 
           <p>{{ counter.lastReset.reason }}</p>
           <div class="text-center">
-            <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
+            <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';getElementById('container{{counter.id}}').style.height='225px';">Remettre à zéro</button>
           </div>
           <form style="display:none" id="counter{{counter.id}}" action="{% url 'reset-counter' %}" method="post">
             {% csrf_token %}

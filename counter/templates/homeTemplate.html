@@ -3,8 +3,80 @@
 	<h1>SeumBook™</h1>
 </div>
 <div class="container-fluid">
+	{% if chooseCounter %}
+	<div class="row" id="my-counter">
+		<div class="col-sm-12">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<h2 class="panel-title">Mon compteur</h2>
+				</div>
+				<div class="panel-body">
+					<p>Choisis ton compteur pour qu'il apparaisse en haut de la liste quand tu reviendras sur le site !</p>
+					<form action="{% url 'set-my-counter'%}" method="post">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="myCounterSelect">Mon trigramme:</label>
+							<select class="form-control" name="myCounter">
+								{% for counter in counters %}
+								<option value="{{ counter.id }}">{{ counter.trigramme }} ({{ counter.name }})</option>
+								{% endfor %}
+							</select>
+						</div>
+						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+						<div class="text-center">
+							<button type="submit" class="btn btn-default btn-success">Définir mon compteur</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% else %}
+	<div class="row" id="my-counter">
+		<div class="col-sm-12">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<a class="counter-link" href="{% url 'counter' id_counter=myCounter.id %}">
+						<h2 class="panel-title">{{ myCounter.trigramme }} <small>{{ myCounter.name }}</small>
+							{% if not myCounter.lastReset.noSeum %}<span class="pull-right badge">{{ myCounter.seumCount }}</span>{% endif %}
+						</h2>
+					</a>
+				</div>
+				<div class="seum-counter panel-body" id="container{{myCounter.id}}" style="height:125px">
+					{% if myCounter.lastReset.noSeum %}
+					<strong>N'a pas encore eu le seum.</strong>
+					<br> {% else %}
+					<strong>Je n'ai pas eu le seum depuis {{ myCounter.lastReset.formatted_delta }}.</strong>
+					<br> {% endif %}
+
+					<p>{{ myCounter.lastReset.reason }}</p>
+					<div class="text-center" id="button{{myCounter.id}}">
+						<form action="{% url 'reset-my-counter' %}" method="post">
+							{% csrf_token %}
+							<button class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{myCounter.id}}').style.display='inline';getElementById('button{{myCounter.id}}').style.display='none';getElementById('container{{myCounter.id}}').style.height='225px';">Remettre à zéro</button>
+							<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+							<button type="submit" class="btn btn-default">Changer mon compteur</button>
+						</form>
+					</div>
+					<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="reason">Motif du seum :</label>
+							<textarea class="form-control" name="reason"></textarea>
+						</div>
+						<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
+						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+						<div class="text-center">
+							<button type="submit" class="btn btn-default btn-success">J'ai le seum</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
 	<div class="row">
-		{% for counter in counters %}
+		{% for counter in counters %} {% if chooseCounter or not counter.id == myCounter.id %}
 		<div class="col-md-4 col-sm-6 col-lg-3">
 			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
 				<div class="panel-heading">
@@ -22,25 +94,10 @@
 					<br> {% endif %}
 
 					<p>{{ counter.lastReset.reason }}</p>
-					<div class="text-center">
-						<button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{counter.id}}').style.display='inline';getElementById('button{{counter.id}}').style.display='none';">Remettre à zéro</button>
-					</div>
-					<form style="display:none" id="counter{{counter.id}}" action="{% url 'reset-counter' %}" method="post">
-						{% csrf_token %}
-						<div class="form-group">
-							<label for="reason">Motif du seum :</label>
-							<textarea class="form-control" name="reason"></textarea>
-						</div>
-						<input type="hidden" name="counter" value="{{counter.id}}"></input>
-						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
-						<div class="text-center">
-							<button type="submit" class="btn btn-default btn-success">Foutre le seum</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
-		{% endfor %}
+		{% endif %} {% endfor %}
 	</div>
 	<div class="row">
 		<div class="col-sm-12">

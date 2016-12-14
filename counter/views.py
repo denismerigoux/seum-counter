@@ -28,10 +28,38 @@ def home(request):
     maxJSS = 0
     bestSeumeursNumber = 15
     # Display counters
-    counters = Counter.objects.all()
     lastResets = []
     # Calculates infos for each counter
     timezero = timedelta(0)
+
+    # First we determine if the session
+    if 'my-counter' in request.session:
+        chooseCounter = False
+        try:
+            myCounter = Counter.objects.get(id=request.session['my-counter'])
+            lastReset = Reset.objects.filter(
+                counter=myCounter).order_by('-timestamp')
+            if (lastReset.count() == 0):
+                # This person never had the seum
+                myCounter.lastReset = Reset()
+                myCounter.lastReset.delta = timezero
+                myCounter.lastReset.noSeum = True
+            else:
+                myCounter.lastReset = lastReset[0]
+                myCounter.lastReset.noSeum = False
+                myCounter.lastReset.delta = datetime.now(
+                ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
+                myCounter.seumCount = Reset.objects.filter(
+                    counter=myCounter).count()
+            myCounter.lastReset.formatted_delta = format_timedelta(
+                myCounter.lastReset.delta, locale='fr', threshold=1)
+        except ObjectDoesNotExist:
+            chooseCounter = True
+    else:
+        myCounter = None
+        chooseCounter = True
+
+    counters = Counter.objects.all()
     for counter in counters:
         lastReset = Reset.objects.filter(
             counter=counter).order_by('-timestamp')
@@ -189,6 +217,8 @@ def home(request):
         'noGraph': noGraph,
         'noBestSeum': noBestSeum,
         'noSeumActivity': noSeumActivity,
+        'chooseCounter': chooseCounter,
+        'myCounter': myCounter,
     })
 
 
@@ -287,3 +317,19 @@ def counter(request, id_counter):
         'resets': resets,
         'seumFrequency': seumFrequency
     })
+
+
+def setMyCounter(request):
+    if (request.method == 'POST'):
+        # create a form instance and populate it with data from the request:
+        data = dict(request.POST)
+        # We put the id of the counter in the session
+        request.session['my-counter'] = data['myCounter'][0]
+        return HttpResponseRedirect(data['redirect'][0])
+
+
+def resetMyCounter(request):
+    if (request.method == 'POST'):
+        data = dict(request.POST)
+        del request.session['my-counter']
+        return HttpResponseRedirect(data['redirect'][0])
