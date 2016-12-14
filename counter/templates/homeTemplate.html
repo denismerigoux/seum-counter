@@ -51,12 +51,7 @@
 
 					<p>{{ myCounter.lastReset.reason }}</p>
 					<div class="text-center" id="button{{myCounter.id}}">
-						<form action="{% url 'reset-my-counter' %}" method="post">
-							{% csrf_token %}
-							<button class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{myCounter.id}}').style.display='inline';getElementById('button{{myCounter.id}}').style.display='none';getElementById('container{{myCounter.id}}').style.height='225px';">Remettre à zéro</button>
-							<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
-							<button type="submit" class="btn btn-default">Changer mon compteur</button>
-						</form>
+						<button class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{myCounter.id}}').style.display='inline';getElementById('button{{myCounter.id}}').style.display='none';getElementById('container{{myCounter.id}}').style.height='225px';">Remettre à zéro</button>
 					</div>
 					<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
 						{% csrf_token %}
@@ -163,5 +158,12 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row text-center">
+	<form action="{% url 'reset-my-counter' %}" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+		<button type="submit" class="btn btn-success">Changer mon compteur</button>
+	</form>
 </div>
 {% endblock %}
