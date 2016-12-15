@@ -14,14 +14,6 @@ import math
 import copy
 from django.utils import timezone
 
-
-class resetCounterForm(forms.ModelForm):
-
-    class Meta:
-        model = Reset
-        fields = ['reason', 'counter']
-
-
 def home(request):
     # JSS above this limit will not be displayed on the col graph
     JSS_limit = 7
@@ -237,7 +229,7 @@ def resetCounter(request):
         emails = [u[0] for u in Counter.objects.all().values_list('email')
                   if u[0] != 'null@localhost']
         # Now send emails to everyone
-        email_to_send = EmailMessage(counter.name + ' a le seum',
+        email_to_send = EmailMessage('[SeumBook] '+counter.name + ' a le seum',
                                      data['reason'][0] + '''
 
 --
@@ -279,7 +271,7 @@ def counter(request, id_counter):
     for reset in resets:
         reset.date = format_datetime(
             reset.timestamp, locale='fr',
-            format="EEEE dd MMMM Y 'à' HH:mm:ss").capitalize()
+            format="EEEE dd MMMM Y 'à' HH:mm").capitalize()
     # Timeline graph
     # Data pre-processing
     resets_graph = resets
