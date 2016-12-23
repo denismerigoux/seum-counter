@@ -51,13 +51,13 @@
 
 					<p>{{ myCounter.lastReset.reason }}</p>
 					<div class="text-center" id="button{{myCounter.id}}">
-						<button class="btn btn-default btn-danger" type="button" onclick="getElementById('counter{{myCounter.id}}').style.display='inline';getElementById('button{{myCounter.id}}').style.display='none';getElementById('container{{myCounter.id}}').style.height='225px';">Remettre à zéro</button>
+						<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">Remettre à zéro</button>
 					</div>
 					<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
 						{% csrf_token %}
 						<div class="form-group">
 							<label for="reason">Motif du seum :</label>
-							<textarea class="form-control" name="reason"></textarea>
+							<input id="reason{{myCounter.id}}" type="text" class="form-control" name="reason"></input>
 						</div>
 						<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
 						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>

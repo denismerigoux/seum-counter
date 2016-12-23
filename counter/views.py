@@ -4,7 +4,6 @@ from babel.dates import format_timedelta, format_datetime
 from datetime import datetime, timedelta
 from django import forms
 from django.http import HttpResponseRedirect
-from django.core import serializers
 from django.core.mail import EmailMessage
 from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
@@ -13,6 +12,7 @@ import random
 import math
 import copy
 from django.utils import timezone
+
 
 def home(request):
     # JSS above this limit will not be displayed on the col graph
@@ -51,6 +51,7 @@ def home(request):
         myCounter = None
         chooseCounter = True
 
+    # Building data for counters display
     counters = Counter.objects.all()
     for counter in counters:
         lastReset = Reset.objects.filter(
@@ -152,6 +153,7 @@ def home(request):
             'legend': 'none',
             'height': 90
         })
+
     # Graph of greatest seumers
     seumCounts = []
     for counter in counters:
@@ -171,6 +173,7 @@ def home(request):
             'vAxis': {'title': 'Nombre de seums'},
             'hAxis': {'title': 'Trigramme'},
         })
+
     # Graph of seum activity
     resets = Reset.objects.filter(
         timestamp__gte=timezone.now() - timedelta(days=365))
