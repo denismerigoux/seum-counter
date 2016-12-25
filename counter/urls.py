@@ -34,5 +34,9 @@ urlpatterns = [
         auth_views.password_reset_complete,
         {'template_name': 'passwordResetComplete.html'},
         name="password_reset_complete"),
+    url(r'^password/reset/done/$',
+        auth_views.password_reset_done,
+        {'template_name': 'passwordResetDone.html'},
+        name="password_reset_done"),
     url(r'^', RedirectView.as_view(pattern_name='home')),
 ]

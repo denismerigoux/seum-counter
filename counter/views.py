@@ -41,6 +41,11 @@ def home(request):
         else:
             myCounter.lastReset = lastReset[0]
             myCounter.lastReset.noSeum = False
+            if (myCounter.lastReset.who is None or
+                    myCounter.lastReset.who.id == myCounter.id):
+                myCounter.lastReset.selfSeum = True
+            else:
+                myCounter.lastReset.selfSeum = False
             myCounter.lastReset.delta = datetime.now(
             ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
             myCounter.seumCount = Reset.objects.filter(
@@ -63,6 +68,11 @@ def home(request):
             counter.CSSclass = "warning"
         else:
             counter.lastReset = lastReset[0]
+            if (counter.lastReset.who is None or
+                    counter.lastReset.who.id == counter.id):
+                counter.lastReset.selfSeum = True
+            else:
+                counter.lastReset.selfSeum = False
             counter.lastReset.noSeum = False
             counter.lastReset.delta = datetime.now(
             ) - counter.lastReset.timestamp.replace(tzinfo=None)
@@ -222,18 +232,28 @@ def resetCounter(request):
         # create a form instance and populate it with data from the request:
         data = dict(request.POST)
         counter = Counter.objects.get(pk=int(data['counter'][0]))
+        who = Counter.objects.get(pk=int(data['who'][0]))
         reset = Reset()
         reset.counter = counter
+        reset.who = who
         reset.reason = data['reason'][0]
         reset.timestamp = datetime.now()
         reset.save()
-        # We send the emails only to those who have an email address
-        emails = [u[0] for u in Counter.objects.all().values_list('email')
-                  if u[0] != 'null@localhost']
+        # We send the emails only to those who want
+        emails = [u.email for u in Counter.objects.all()
+                  if u.email_notifications]
         # Now send emails to everyone
+        if (reset.who is None or
+                reset.who.id == counter.id):
+            selfSeum = True
+        else:
+            selfSeum = False
         text_of_email = render_to_string(
             'seumEmail.txt', {'reason': data['reason'][0],
-                              'name': counter.name})
+                              'name': counter.name,
+                              'who': reset.who,
+                              'selfSeum': selfSeum,
+                              })
         email_to_send = EmailMessage(
             '[SeumBook] ' + counter.trigramme + ' a le seum',
             text_of_email,
@@ -246,6 +266,11 @@ def resetCounter(request):
 
 @login_required
 def counter(request, id_counter):
+
+    try:
+        myCounter = Counter.objects.get(user__id=request.user.id)
+    except Counter.DoesNotExist:
+        return HttpResponseRedirect(reverse('login'))
 
     counter = Counter.objects.get(pk=id_counter)
     resets = Reset.objects.filter(counter=counter).order_by('-timestamp')
@@ -260,6 +285,11 @@ def counter(request, id_counter):
     else:
         counter.lastReset = resets[0]
         counter.lastReset.noSeum = False
+        if (counter.lastReset.who is None or
+                counter.lastReset.who.id == counter.id):
+            counter.lastReset.selfSeum = True
+        else:
+            counter.lastReset.selfSeum = False
         counter.lastReset.delta = datetime.now(
         ) - counter.lastReset.timestamp.replace(tzinfo=None)
         counter.lastReset.formatted_delta = format_timedelta(
@@ -271,6 +301,11 @@ def counter(request, id_counter):
             counter.seumCount, locale='fr', threshold=1)
 
     for reset in resets:
+        if (reset.who is None or
+                reset.who.id == reset.counter.id):
+            reset.selfSeum = True
+        else:
+            reset.selfSeum = False
         reset.date = format_datetime(
             reset.timestamp, locale='fr',
             format="EEEE dd MMMM Y 'à' HH:mm").capitalize()
@@ -309,5 +344,6 @@ def counter(request, id_counter):
         'counter': counter,
         'chart': chart,
         'resets': resets,
-        'seumFrequency': seumFrequency
+        'seumFrequency': seumFrequency,
+        'myCounter': myCounter,
     })

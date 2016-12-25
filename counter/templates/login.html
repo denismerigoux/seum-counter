@@ -15,7 +15,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="id_username">Trigramme</label>
-                        <input id="id_username" maxlength="3" type="text" class="form-control text-uppercase" name="username" required />
+                        <input id="id_username" maxlength="3" type="text" class="text-uppercase form-control" name="username" onkeyup="javascript:this.value=this.value.toUpperCase();" required />
                     </div>
                     <div class="form-group">
                         <label for="id_username">Mot de passe</label>

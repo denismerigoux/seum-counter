@@ -17,7 +17,13 @@
 					{% if myCounter.lastReset.noSeum %}
 					<strong>N'a pas encore eu le seum.</strong>
 					<br> {% else %}
-					<strong>Je n'ai pas eu le seum depuis {{ myCounter.lastReset.formatted_delta }}.</strong>
+					<strong>
+						{% if myCounter.lastReset.selfSeum %}
+						J'ai eu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
+						{% else %}
+						{{myCounter.lastReset.who.trigramme}} m'a foutu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
+						{% endif %}
+					</strong>
 					<br> {% endif %}
 
 					<p>{{ myCounter.lastReset.reason }}</p>
@@ -32,6 +38,7 @@
 						</div>
 						<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
 						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+						<input type="hidden" name="who" value="{{myCounter.id}}"></input>
 						<div class="text-center">
 							<button type="submit" class="btn btn-default btn-success">J'ai le seum</button>
 						</div>
@@ -55,7 +62,13 @@
 					{% if counter.lastReset.noSeum %}
 					<strong>N'a pas encore eu le seum.</strong>
 					<br> {% else %}
-					<strong>N'a pas eu le seum depuis {{ counter.lastReset.formatted_delta }}.</strong>
+					<strong>
+					{% if counter.lastReset.selfSeum %}
+						A eu le seum il y a {{ counter.lastReset.formatted_delta }}.
+					{% else %}
+						{{ counter.lastReset.who.trigramme }} lui a foutu le seum il y a {{ counter.lastReset.formatted_delta }}.
+					{% endif %}
+					</strong>
 					<br> {% endif %}
 
 					<p>{{ counter.lastReset.reason }}</p>
@@ -130,7 +143,7 @@
 	</div>
 </div>
 <div class="row text-center">
-		<a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a>
-		<a href="{% url 'password_change' %}" class="btn btn-warning">Changer de mot de passe</a>
+	<a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a>
+	<a href="{% url 'password_change' %}" class="btn btn-warning">Changer de mot de passe</a>
 </div>
 {% endblock %}
