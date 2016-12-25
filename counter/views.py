@@ -8,6 +8,7 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from graphos.renderers import gchart
+from django.template.loader import render_to_string
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
 import random
@@ -230,16 +231,15 @@ def resetCounter(request):
         emails = [u[0] for u in Counter.objects.all().values_list('email')
                   if u[0] != 'null@localhost']
         # Now send emails to everyone
-        email_to_send = EmailMessage('[SeumBook] '+counter.name + ' a le seum',
-                                     data['reason'][0] + '''
-
---
-SeumBook™ - http://seum.merigoux.ovh
-
-P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com''',
-                                     'SeumMan <seum@merigoux.ovh>', emails, [],
-                                     reply_to=emails)
-    email_to_send.send()
+        text_of_email = render_to_string(
+            'seumEmail.txt', {'reason': data['reason'][0],
+                              'name': counter.name})
+        email_to_send = EmailMessage(
+            '[SeumBook] ' + counter.trigramme + ' a le seum',
+            text_of_email,
+            'SeumMan <seum@merigoux.ovh>', emails, [],
+            reply_to=emails)
+    email_to_send.send(fail_silently=True)
 
     return HttpResponseRedirect(data['redirect'][0])
 

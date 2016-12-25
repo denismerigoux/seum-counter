@@ -1,0 +1,5 @@
+{{name}} a le seum : {{reason}}
+--
+SeumBook™ - http://seum.merigoux.ovh
+
+P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com'''
