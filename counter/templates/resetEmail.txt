@@ -1,4 +1,3 @@
-{% autoescape off %}
 T'as perdu ton mot de passe et t'as le seum.
 
 Please go to the following page and choose a new password:
@@ -12,4 +11,3 @@ Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié a
 SeumBook™ - http://seum.merigoux.ovh
 
 P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com
-{% endautoescape %}
