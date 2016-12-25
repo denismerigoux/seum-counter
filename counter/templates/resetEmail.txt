@@ -1,0 +1,15 @@
+{% autoescape off %}
+T'as perdu ton mot de passe et t'as le seum.
+
+Please go to the following page and choose a new password:
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+{% endblock %}
+
+Ton trigramme c'est {{ user.username }} au cas où tu l'aurais oublié aussi.
+
+--
+SeumBook™ - http://seum.merigoux.ovh
+
+P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com
+{% endautoescape %}

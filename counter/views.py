@@ -6,6 +6,7 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
@@ -46,7 +47,7 @@ def home(request):
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:
-        return HttpResponseRedirect('login')
+        return HttpResponseRedirect(reverse('login'))
 
     # Building data for counters display
     counters = Counter.objects.all()
