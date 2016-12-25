@@ -6,7 +6,7 @@ Please go to the following page and choose a new password:
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
 
-Ton trigramme c'est {{ user.username }} au cas où tu l'aurais oublié aussi.
+Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié aussi.
 
 --
 SeumBook™ - http://seum.merigoux.ovh
