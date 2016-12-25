@@ -14,7 +14,7 @@
                 <form class='' method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="id_username">Trigramme</label>
+                        <label for="id_username">Nom d'utilisateur</label>
                         <input id="id_username" type="text" class="form-control" name="username" required />
                     </div>
                     <div class="form-group">
