@@ -3,35 +3,6 @@
 	<h1>SeumBook™</h1>
 </div>
 <div class="container-fluid">
-	{% if chooseCounter %}
-	<div class="row" id="my-counter">
-		<div class="col-sm-12">
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h2 class="panel-title">Mon compteur</h2>
-				</div>
-				<div class="panel-body">
-					<p>Choisis ton compteur pour qu'il apparaisse en haut de la liste quand tu reviendras sur le site !</p>
-					<form action="{% url 'set-my-counter'%}" method="post">
-						{% csrf_token %}
-						<div class="form-group">
-							<label for="myCounterSelect">Mon trigramme:</label>
-							<select class="form-control" name="myCounter">
-								{% for counter in counters %}
-								<option value="{{ counter.id }}">{{ counter.trigramme }} ({{ counter.name }})</option>
-								{% endfor %}
-							</select>
-						</div>
-						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
-						<div class="text-center">
-							<button type="submit" class="btn btn-default btn-success">Définir mon compteur</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% else %}
 	<div class="row" id="my-counter">
 		<div class="col-sm-12">
 			<div class="panel panel-warning">
@@ -69,7 +40,6 @@
 			</div>
 		</div>
 	</div>
-	{% endif %}
 	<div class="row">
 		{% for counter in counters %} {% if chooseCounter or not counter.id == myCounter.id %}
 		<div class="col-md-4 col-sm-6 col-lg-3">
@@ -160,10 +130,6 @@
 	</div>
 </div>
 <div class="row text-center">
-	<form action="{% url 'reset-my-counter' %}" method="post">
-		{% csrf_token %}
-		<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
-		<button type="submit" class="btn btn-success">Changer mon compteur</button>
-	</form>
+		<a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a>
 </div>
 {% endblock %}

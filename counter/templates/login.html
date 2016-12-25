@@ -1,0 +1,45 @@
+{% extends 'baseTemplate.html' %} {% block title %}Login{% endblock %}{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h1>SeumBook™</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title">Connecte toi pour avoir le seum !</h2>
+            </div>
+            <div class=" panel-body">
+                <form class='' method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Trigramme</label>
+                        <input id="id_username" maxlength="3" type="text" class="form-control text-uppercase" name="username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="id_username">Mot de passe</label>
+                        <input id="id_username" type="password" class="form-control" name="password" />
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-default btn-success">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if form.errors %}
+    <div class="row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h2 class="panel-title">Erreur</h2>
+            </div>
+            <div class=" panel-body">
+                <p>T'arrives même pas à te connecter, seum.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

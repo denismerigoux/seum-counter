@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from django import forms
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
 from graphos.renderers import gchart
 from graphos.sources.simple import SimpleDataSource
 from graphos.sources.model import ModelDataSource
@@ -14,6 +15,7 @@ import copy
 from django.utils import timezone
 
 
+@login_required
 def home(request):
     # JSS above this limit will not be displayed on the col graph
     JSS_limit = 7
@@ -24,32 +26,27 @@ def home(request):
     # Calculates infos for each counter
     timezero = timedelta(0)
 
-    # First we determine if the session
-    if 'my-counter' in request.session:
-        chooseCounter = False
-        try:
-            myCounter = Counter.objects.get(id=request.session['my-counter'])
-            lastReset = Reset.objects.filter(
-                counter=myCounter).order_by('-timestamp')
-            if (lastReset.count() == 0):
-                # This person never had the seum
-                myCounter.lastReset = Reset()
-                myCounter.lastReset.delta = timezero
-                myCounter.lastReset.noSeum = True
-            else:
-                myCounter.lastReset = lastReset[0]
-                myCounter.lastReset.noSeum = False
-                myCounter.lastReset.delta = datetime.now(
-                ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
-                myCounter.seumCount = Reset.objects.filter(
-                    counter=myCounter).count()
-            myCounter.lastReset.formatted_delta = format_timedelta(
-                myCounter.lastReset.delta, locale='fr', threshold=1)
-        except ObjectDoesNotExist:
-            chooseCounter = True
-    else:
-        myCounter = None
-        chooseCounter = True
+    # First select our counter
+    try:
+        myCounter = Counter.objects.get(user__id=request.user.id)
+        lastReset = Reset.objects.filter(
+            counter=myCounter).order_by('-timestamp')
+        if (lastReset.count() == 0):
+            # This person never had the seum
+            myCounter.lastReset = Reset()
+            myCounter.lastReset.delta = timezero
+            myCounter.lastReset.noSeum = True
+        else:
+            myCounter.lastReset = lastReset[0]
+            myCounter.lastReset.noSeum = False
+            myCounter.lastReset.delta = datetime.now(
+            ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
+            myCounter.seumCount = Reset.objects.filter(
+                counter=myCounter).count()
+        myCounter.lastReset.formatted_delta = format_timedelta(
+            myCounter.lastReset.delta, locale='fr', threshold=1)
+    except Counter.DoesNotExist:
+        return HttpResponseRedirect('login')
 
     # Building data for counters display
     counters = Counter.objects.all()
@@ -212,11 +209,11 @@ def home(request):
         'noGraph': noGraph,
         'noBestSeum': noBestSeum,
         'noSeumActivity': noSeumActivity,
-        'chooseCounter': chooseCounter,
         'myCounter': myCounter,
     })
 
 
+@login_required
 def resetCounter(request):
     # Update Form counter
     if (request.method == 'POST'):
@@ -246,6 +243,7 @@ P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmai
     return HttpResponseRedirect(data['redirect'][0])
 
 
+@login_required
 def counter(request, id_counter):
 
     counter = Counter.objects.get(pk=id_counter)
@@ -312,19 +310,3 @@ def counter(request, id_counter):
         'resets': resets,
         'seumFrequency': seumFrequency
     })
-
-
-def setMyCounter(request):
-    if (request.method == 'POST'):
-        # create a form instance and populate it with data from the request:
-        data = dict(request.POST)
-        # We put the id of the counter in the session
-        request.session['my-counter'] = data['myCounter'][0]
-        return HttpResponseRedirect(data['redirect'][0])
-
-
-def resetMyCounter(request):
-    if (request.method == 'POST'):
-        data = dict(request.POST)
-        del request.session['my-counter']
-        return HttpResponseRedirect(data['redirect'][0])
