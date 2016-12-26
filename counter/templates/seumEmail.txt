@@ -2,4 +2,4 @@
 --
 SeumBook™ - http://seum.merigoux.ovh
 
-P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com'''{% endautoescape %}
+P.S. : Pour ne plus recevoir ces messages, coche le bouton en bas de la page d'acceuil du site{% endautoescape %}
