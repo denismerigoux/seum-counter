@@ -143,8 +143,8 @@ def home(request):
                                                       tzinfo=None),
                                                   locale='fr', threshold=1)
             }
-            if (counter.lastReset.who is None or
-                    counter.lastReset.who.id == counter.id):
+            if (reset.who is None or
+                    reset.who.id == reset.counter.id):
                 reset.Seum = {'v': 0,
                               'f': reset.counter.trigramme +
                               " : " + reset.reason}
@@ -327,7 +327,11 @@ def counter(request, id_counter):
                 datetime.now() - reset.timestamp.replace(tzinfo=None),
                 locale='fr', threshold=1)
         }
-        reset.Seum = {'v': 0, 'f': reset.reason}
+        if reset.selfSeum:
+            reset.Seum = {'v': 0, 'f': reset.reason}
+        else:
+            reset.Seum = {'v': 0, 'f': 'De ' + reset.who.trigramme + ' : ' +
+                          reset.reason}
     # Drawing the graph
     data = ModelDataSource(resets, fields=['timestamp', 'Seum'])
     chart = gchart.LineChart(data, options={
