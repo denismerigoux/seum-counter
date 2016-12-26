@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from counter.models import Counter, Reset
+from django.contrib.auth.models import User
 from babel.dates import format_timedelta, format_datetime
 from datetime import datetime, timedelta
 from django import forms
@@ -7,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 from graphos.renderers import gchart
 from django.template.loader import render_to_string
 from graphos.sources.simple import SimpleDataSource
@@ -359,3 +361,41 @@ def counter(request, id_counter):
         'seumFrequency': seumFrequency,
         'myCounter': myCounter,
     })
+
+
+def createUser(request):
+    if (request.method == 'POST'):
+        # create a form instance and populate it with data from the request:
+        data = dict(request.POST)
+        email = data['email'][0]
+        username = email.split('@')[0]
+        trigramme = data['trigramme'][0]
+        nick = data['nick'][0]
+        password1 = data['password1'][0]
+        password2 = data['password2'][0]
+        email_notifications = (data['email_notifications'][0] == "on")
+
+        if password1 != password2:
+            error = "Les deux mots de passe sont différents."
+            return render(request, 'createUser.html', {'error': error})
+        try:
+            test_user = User.objects.get(email=email)
+            error = "Un utilisateur avec cette adresse email existe déjà !"
+            return render(request, 'createUser.html', {'error': error})
+        except User.DoesNotExist:
+            try:
+                user = User.objects.create_user(username, email, password1)
+            except IntegrityError:
+                error = "Utilise une autre adresse email, un autre utilisateur \
+                 a le même login que toi."
+                return render(request, 'createUser.html', {'error': error})
+            counter = Counter()
+            counter.name = nick
+            counter.email = email
+            counter.trigramme = trigramme
+            counter.user = user
+            counter.email_notifications = False
+            counter.save()
+            return render(request, 'createUserDone.html', {})
+    else:
+        return render(request, 'createUser.html', {'error': None})

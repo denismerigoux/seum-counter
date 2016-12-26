@@ -1,7 +1,7 @@
 {% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %}
 <div class="text-center">
   <h1>
-      <a class="counter-link" href="{% url 'home' %}">{{counter.trigramme}} <small>{{ counter.name }}</small></a>
+      <a class="counter-link" href="{% url 'home' %}"><b>{{counter.trigramme}}</b> <small>{{ counter.name }}</small></a>
   </h1>
 </div>
 <div class="container-fluid">

@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^reset-counter/$', views.resetCounter, name="reset-counter"),
     url(r'^counter/(?P<id_counter>\d+)/$', views.counter, name="counter"),
     url(r'^rss/$', SeumFeed()),
+    url(r'^create_user/$', views.createUser, name="create_user"),
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'},
         name="login"),

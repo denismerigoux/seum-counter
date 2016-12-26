@@ -42,5 +42,18 @@
         </div>
     </div>
     {% endif %}
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Pas encore de compteur ?</h2>
+            </div>
+            <div class=" panel-body">
+                <p>Dépếche toi d'aller le créer pour partager ton seum !</p>
+                    <div class="text-center">
+                        <a href="{% url 'create_user' %}" class="btn btn-default btn-info">Créer un compteur</a>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
