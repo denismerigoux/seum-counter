@@ -1,3 +1,4 @@
+{% autoescape off %}
 {% if selfSeum %}
 {{name}} a le seum : {{reason}}
 {% else %}
@@ -7,3 +8,4 @@
 SeumBook™ - http://seum.merigoux.ovh
 
 P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com'''
+{% endautoescape %}
