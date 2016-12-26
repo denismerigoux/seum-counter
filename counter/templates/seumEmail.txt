@@ -1,7 +1,5 @@
-{% autoescape off %}
-{% if selfSeum %}{{name}} a le seum : {{reason}}{% else %}{{who.trigramme}} ({{who.name}}) a foutu le seum à {{name}} : {{reason}}{% endif %}
+{% autoescape off %}{% if selfSeum %}{{name}} a le seum : {{reason}}{% else %}{{who.trigramme}} ({{who.name}}) a foutu le seum à {{name}} : {{reason}}{% endif %}
 --
 SeumBook™ - http://seum.merigoux.ovh
 
-P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com'''
-{% endautoescape %}
+P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com'''{% endautoescape %}

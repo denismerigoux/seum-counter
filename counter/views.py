@@ -399,3 +399,11 @@ def createUser(request):
             return render(request, 'createUserDone.html', {})
     else:
         return render(request, 'createUser.html', {'error': None})
+
+
+@login_required
+def toggleEmailNotifications(request):
+    counter = Counter.objects.get(user=request.user)
+    counter.email_notifications = not counter.email_notifications
+    counter.save()
+    return HttpResponseRedirect(reverse('home'))

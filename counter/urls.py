@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^counter/(?P<id_counter>\d+)/$', views.counter, name="counter"),
     url(r'^rss/$', SeumFeed()),
     url(r'^create_user/$', views.createUser, name="create_user"),
+    url(r'^toggle-notif/$', views.toggleEmailNotifications,
+        name="toggle_email_notifications"),
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'},
         name="login"),
