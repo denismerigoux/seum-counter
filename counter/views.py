@@ -92,8 +92,8 @@ def home(request):
                     maxJSS = (counter.lastReset.delta.total_seconds() /
                               (24 * 3600))
             # Defining CSS attributes for the counter
-            counter.CSSclass = "primary"
-            counter.opacity = 0.3 + 0.7 * \
+            counter.CSSclass = "default"
+            counter.opacity = 0.4 + 0.6 * \
                 math.exp(-(counter.lastReset.delta.total_seconds()) /
                          (7 * 24 * 3600))
             # Computing the total number of resets for this counter
@@ -316,7 +316,7 @@ def counter(request, id_counter):
             reset.selfSeum = False
         reset.date = format_datetime(
             reset.timestamp, locale='fr',
-            format="EEEE dd MMMM Y 'à' HH:mm").capitalize()
+            format="dd/MM/Y HH:mm")
     # Timeline graph
     # Data pre-processing
     resets_graph = resets

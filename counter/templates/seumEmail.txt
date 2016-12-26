@@ -1,9 +1,5 @@
 {% autoescape off %}
-{% if selfSeum %}
-{{name}} a le seum : {{reason}}
-{% else %}
-{{who.trigramme}} ({{who.name}}) a foutu le seum à {{name}} : {{reason}}
-{% endif %}
+{% if selfSeum %}{{name}} a le seum : {{reason}}{% else %}{{who.trigramme}} ({{who.name}}) a foutu le seum à {{name}} : {{reason}}{% endif %}
 --
 SeumBook™ - http://seum.merigoux.ovh
 

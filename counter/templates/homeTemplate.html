@@ -1,11 +1,11 @@
 {% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %}
 <div class="text-center">
-	<h1>SeumBook™</h1>
+	<h1><a class="counter-link" href="{% url 'home' %}">SeumBook™</a></h1>
 </div>
 <div class="container-fluid">
 	<div class="row" id="my-counter">
 		<div class="col-sm-12">
-			<div class="panel panel-warning">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<a class="counter-link" href="{% url 'counter' id_counter=myCounter.id %}">
 						<h2 class="panel-title">{{ myCounter.trigramme }} <small>{{ myCounter.name }}</small>
@@ -49,7 +49,7 @@
 	</div>
 	<div class="row">
 		{% for counter in counters %} {% if chooseCounter or not counter.id == myCounter.id %}
-		<div class="col-md-4 col-sm-6 col-lg-3">
+		<div class="col-md-3 col-sm-4 col-lg-2">
 			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
 				<div class="panel-heading">
 					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
@@ -79,7 +79,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h2 class="panel-title">Timeline des 24 heures du seum</h2>
 				</div>
@@ -95,7 +95,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h2 class="panel-title">Graphe des jours sans seum</h2>
 				</div>
@@ -111,7 +111,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h2 class="panel-title">Meilleurs seumeurs</h2>
 				</div>
@@ -127,7 +127,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h2 class="panel-title">Activité seumesque</h2>
 				</div>

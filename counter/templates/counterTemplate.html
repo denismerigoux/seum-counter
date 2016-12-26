@@ -1,7 +1,7 @@
 {% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %}
 <div class="text-center">
   <h1>
-      {{counter.trigramme}} <small>{{ counter.name }}</small>
+      <a class="counter-link" href="{% url 'home' %}">{{counter.trigramme}} <small>{{ counter.name }}</small></a>
   </h1>
 </div>
 <div class="container-fluid">
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div class="panel panel-primary">
+      <div class="panel panel-info">
         <div class="panel-heading">
           <h2 class="panel-title">Timeline du seum</h2>
         </div>
@@ -65,9 +65,9 @@
     <div class="col-sm-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h2 class="panel-title">Historique du seum <small class="pull-right">Temps moyen entre deux seums : {{seumFrequency}}</small></h2>
+          <h2 class="panel-title">Historique du seum <small class="badge pull-right">{{seumFrequency}}/seum</small></h2>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="max-height:350px;overflow:auto;">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -79,7 +79,7 @@
             <tbody>
               {% for reset in resets %}
               <tr>
-                <td>{{ reset.date }}</td>
+                <td><b>{{ reset.date }}</b></td>
                 <td>{{ reset.reason }}</td>
                 <td>
                 {% if not reset.selfSeum %}
