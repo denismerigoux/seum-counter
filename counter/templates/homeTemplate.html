@@ -54,7 +54,7 @@
 					<h2 class="panel-title">QuickSeum™ <small>Brise le mur du seum</small></h2>
 				</div>
 				<div class="primary-counter panel-body">
-					<form class="form-horizontal" action="{% url 'reset-counter'%}" method="POST">
+					<form class="form-horizontal" action="{% url 'reset-counter'%}" method="POST" style="width:100%;">
 						{% csrf_token %}
 						<div class="form-group">
 							<label for="id_quicktrigramme" class="col-sm-3 control-label">Trigramme</label>
