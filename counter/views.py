@@ -242,12 +242,12 @@ def resetCounter(request):
         # create a form instance and populate it with data from the request:
         data = dict(request.POST)
 
-        counter = Counter.objects.get(pk=int(data['counter'][0]))
-        if 'who' in data.keys():
-            who = Counter.objects.get(pk=int(data['who'][0]))
+        who = Counter.objects.get(pk=int(data['who'][0]))
+        if 'counter' in data.keys():
+            counter = Counter.objects.get(pk=int(data['counter'][0]))
         else:
             try:
-                who = Counter.objects.get(trigramme=data['trigramme'][0])
+                counter = Counter.objects.get(trigramme=data['trigramme'][0])
             except Counter.DoesNotExist:
                 return HttpResponseRedirect(data['redirect'][0])
         reset = Reset()
@@ -257,7 +257,8 @@ def resetCounter(request):
         reset.timestamp = datetime.now()
 
         # we check that the seumer is the autenticated user
-        if reset.counter.id != request.user.id:
+        if (reset.who.user is None or
+                reset.who.user.id != request.user.id):
             return HttpResponseRedirect(data['redirect'][0])
 
         reset.save()

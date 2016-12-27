@@ -51,7 +51,7 @@
 		<div class="col-sm-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h2 class="panel-title">QuickSeum™ <small>Brise le mur du seum</small></h2>
+					<h2 class="panel-title"><b>QuickSeum™</b> <small>Brise le mur du seum</small></h2>
 				</div>
 				<div class="primary-counter panel-body">
 					<form class="form-horizontal" action="{% url 'reset-counter'%}" method="POST" style="width:100%;">
@@ -73,7 +73,7 @@
 								<button type="submit" class="btn btn-danger">Foutre le seum</button>
 							</div>
 						</div>
-						<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
+						<input type="hidden" name="who" value="{{myCounter.id}}"></input>
 						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
 					</form>
 				</div>
