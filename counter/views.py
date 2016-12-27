@@ -241,13 +241,25 @@ def resetCounter(request):
     if (request.method == 'POST'):
         # create a form instance and populate it with data from the request:
         data = dict(request.POST)
+
         counter = Counter.objects.get(pk=int(data['counter'][0]))
-        who = Counter.objects.get(pk=int(data['who'][0]))
+        if 'who' in data.keys():
+            who = Counter.objects.get(pk=int(data['who'][0]))
+        else:
+            try:
+                who = Counter.objects.get(trigramme=data['trigramme'][0])
+            except Counter.DoesNotExist:
+                return HttpResponseRedirect(data['redirect'][0])
         reset = Reset()
         reset.counter = counter
         reset.who = who
         reset.reason = data['reason'][0]
         reset.timestamp = datetime.now()
+
+        # we check that the seumer is the autenticated user
+        if reset.counter.id != request.user.id:
+            return HttpResponseRedirect(data['redirect'][0])
+
         reset.save()
         # We send the emails only to those who want
         emails = [u.email for u in Counter.objects.all()
@@ -269,7 +281,7 @@ def resetCounter(request):
             text_of_email,
             'SeumMan <seum@merigoux.ovh>', emails, [],
             reply_to=emails)
-    email_to_send.send(fail_silently=True)
+        email_to_send.send(fail_silently=True)
 
     return HttpResponseRedirect(data['redirect'][0])
 

@@ -4,7 +4,7 @@
 </div>
 <div class="container-fluid">
 	<div class="row" id="my-counter">
-		<div class="col-sm-12">
+		<div class="col-sm-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<a class="counter-link" href="{% url 'counter' id_counter=myCounter.id %}">
@@ -13,35 +13,68 @@
 						</h2>
 					</a>
 				</div>
-				<div class="seum-counter panel-body" id="container{{myCounter.id}}" style="height:125px">
-					{% if myCounter.lastReset.noSeum %}
-					<strong>N'a pas encore eu le seum.</strong>
-					<br> {% else %}
-					<strong>
+				<div class="primary-counter panel-body" id="container{{myCounter.id}}">
+					<div style="width:100%;">
+						{% if myCounter.lastReset.noSeum %}
+						<strong>N'a pas encore eu le seum.</strong>
+						<br> {% else %}
+						<strong>
 						{% if myCounter.lastReset.selfSeum %}
 						J'ai eu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
 						{% else %}
 						{{myCounter.lastReset.who.trigramme}} m'a foutu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
 						{% endif %}
 					</strong>
-					<br> {% endif %}
+						<br> {% endif %}
 
-					<p>{{ myCounter.lastReset.reason }}</p>
-					<div class="text-center" id="button{{myCounter.id}}">
-						<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">Remettre à zéro</button>
+						<p>{{ myCounter.lastReset.reason }}</p>
+						<div class="text-center" id="button{{myCounter.id}}">
+							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">Remettre à zéro</button>
+						</div>
+						<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
+							{% csrf_token %}
+							<div class="form-group">
+								<label for="reason">Motif du seum</label>
+								<input id="reason{{myCounter.id}}" type="text" class="form-control" name="reason"></input>
+							</div>
+							<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
+							<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
+							<input type="hidden" name="who" value="{{myCounter.id}}"></input>
+							<div class="text-center">
+								<button type="submit" class="btn btn-default btn-success">J'ai le seum</button>
+							</div>
+						</form>
 					</div>
-					<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h2 class="panel-title">QuickSeum™ <small>Brise le mur du seum</small></h2>
+				</div>
+				<div class="primary-counter panel-body">
+					<form class="form-horizontal" action="{% url 'reset-counter'%}" method="POST">
 						{% csrf_token %}
 						<div class="form-group">
-							<label for="reason">Motif du seum :</label>
-							<input id="reason{{myCounter.id}}" type="text" class="form-control" name="reason"></input>
+							<label for="id_quicktrigramme" class="col-sm-3 control-label">Trigramme</label>
+							<div class="col-sm-9">
+								<input id="id_quicktrigramme" maxlength="3" type="text" class="form-control text-uppercase" name="trigramme" onkeyup="this.value=this.value.toUpperCase();" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="id_quickreason" class="col-sm-3 control-label">Motif</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="id_quickreason" name="reason" />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+								<button type="submit" class="btn btn-danger">Foutre le seum</button>
+							</div>
 						</div>
 						<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
 						<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
-						<input type="hidden" name="who" value="{{myCounter.id}}"></input>
-						<div class="text-center">
-							<button type="submit" class="btn btn-default btn-success">J'ai le seum</button>
-						</div>
 					</form>
 				</div>
 			</div>

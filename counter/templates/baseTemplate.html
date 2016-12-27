@@ -7,7 +7,7 @@
 	<meta name="keywords" content="seum compteur" />
 	<meta name="description" content="Ça fout le seum" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/>
+	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico" />
 	<title>SeumBook™ – {% block title %}{% endblock %}</title>
 
 	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
@@ -22,6 +22,13 @@
 			overflow: auto;
 		}
 
+		.primary-counter {
+			height: 215px;
+			overflow: auto;
+			display: flex;
+			align-items: center;
+		}
+
 		.timeline {
 			height: 125px;
 		}
@@ -29,14 +36,18 @@
 		.graphs {
 			overflow-y: hidden;
 		}
-		.graphs > div {
+
+		.graphs>div {
 			display: block;
 			margin: 0 auto;
 		}
 
-		.counter-link, .counter-link:hover {
-  			color: inherit; /* blue colors for links too */
-  			text-decoration: inherit; /* no underline */
+		.counter-link,
+		.counter-link:hover {
+			color: inherit;
+			/* blue colors for links too */
+			text-decoration: inherit;
+			/* no underline */
 		}
 	</style>
 
@@ -47,10 +58,9 @@
 		});
 
 		function revealSeumForm(counterID) {
-			document.getElementById('counter'+counterID).style.display='inline';
-			document.getElementById('button'+counterID).style.display='none';
-			document.getElementById('reason'+counterID).focus();
-			document.getElementById('container'+counterID).style.height='200px';
+			document.getElementById('counter' + counterID).style.display = 'inline';
+			document.getElementById('button' + counterID).style.display = 'none';
+			document.getElementById('reason' + counterID).focus();
 		}
 	</script>
 </head>
