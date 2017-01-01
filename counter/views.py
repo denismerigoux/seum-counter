@@ -386,7 +386,7 @@ def createUser(request):
         nick = data['nick'][0]
         password1 = data['password1'][0]
         password2 = data['password2'][0]
-        email_notifications = (data['email_notifications'][0] == "on")
+        email_notifications = ('email_notifications' in data.keys())
 
         if password1 != password2:
             error = "Les deux mots de passe sont différents."
