@@ -297,7 +297,6 @@ def counter(request, id_counter):
 
     counter = Counter.objects.get(pk=id_counter)
     resets = Reset.objects.filter(counter=counter).order_by('-timestamp')
-    firstReset = copy.copy(resets[len(resets) - 1])
     timezero = timedelta(0)
     # Display
     if (resets.count() == 0):
@@ -306,6 +305,7 @@ def counter(request, id_counter):
         counter.lastReset.noSeum = True
         seumFrequency = 'inconnu'
     else:
+        firstReset = copy.copy(resets[len(resets) - 1])
         counter.lastReset = resets[0]
         counter.lastReset.noSeum = False
         if (counter.lastReset.who is None or
@@ -334,38 +334,42 @@ def counter(request, id_counter):
             format="dd/MM/Y HH:mm")
     # Timeline graph
     # Data pre-processing
-    resets_graph = resets
-    for reset in resets_graph:
-        reset.timestamp = {
-            'v': reset.timestamp.timestamp(),
-            'f': "Il y a " + format_timedelta(
-                datetime.now() - reset.timestamp.replace(tzinfo=None),
-                locale='fr', threshold=1)
-        }
-        if reset.selfSeum:
-            reset.Seum = {'v': 0, 'f': reset.reason}
-        else:
-            reset.Seum = {'v': 0, 'f': 'De ' + reset.who.trigramme + ' : ' +
-                          reset.reason}
-    # Drawing the graph
-    data = ModelDataSource(resets, fields=['timestamp', 'Seum'])
-    chart = gchart.LineChart(data, options={
-        'lineWidth': 0,
-        'pointSize': 10,
-        'title': '',
-        'vAxis': {'ticks': []},
-        'hAxis': {'ticks': [{
-            'v': firstReset.timestamp.timestamp(),
-            'f': 'Il y a ' + format_timedelta(
-                datetime.now() - firstReset.timestamp.replace(tzinfo=None),
-                locale='fr', threshold=1)
-        }, {
-            'v': datetime.now().timestamp(),
-            'f': 'Présent'}
-        ]},
-        'legend': 'none',
-        'height': 90
-    })
+    if not counter.lastReset.noSeum:
+        resets_graph = resets
+        for reset in resets_graph:
+            reset.timestamp = {
+                'v': reset.timestamp.timestamp(),
+                'f': "Il y a " + format_timedelta(
+                    datetime.now() - reset.timestamp.replace(tzinfo=None),
+                    locale='fr', threshold=1)
+            }
+            if reset.selfSeum:
+                reset.Seum = {'v': 0, 'f': reset.reason}
+            else:
+                reset.Seum = {'v': 0, 'f': 'De ' + reset.who.trigramme + ' : ' +
+                              reset.reason}
+        # Drawing the graph
+        data = ModelDataSource(
+            resets, fields=['timestamp', 'Seum'])
+        chart = gchart.LineChart(data, options={
+            'lineWidth': 0,
+            'pointSize': 10,
+            'title': '',
+            'vAxis': {'ticks': []},
+            'hAxis': {'ticks': [{
+                'v': firstReset.timestamp.timestamp(),
+                'f': 'Il y a ' + format_timedelta(
+                    datetime.now() - firstReset.timestamp.replace(tzinfo=None),
+                    locale='fr', threshold=1)
+            }, {
+                'v': datetime.now().timestamp(),
+                'f': 'Présent'}
+            ]},
+            'legend': 'none',
+            'height': 90
+        })
+    else:
+        chart = None
 
     return render(request, 'counterTemplate.html', {
         'counter': counter,
@@ -409,7 +413,7 @@ def createUser(request):
             counter.user = user
             counter.email_notifications = False
             counter.save()
-            return render(request, 'createUserDone.html', {})
+            return render(request, 'createUserDone.html', {'login': username})
     else:
         return render(request, 'createUser.html', {'error': None})
 
