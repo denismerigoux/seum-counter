@@ -93,7 +93,7 @@
 					<form action="{% url 'like' %}" method="POST" name="like{{counter.id}}">
 						{% csrf_token %}
 						<input type="hidden" name="liker" value="{{myCounter.id}}" />
-						<input type="hidden" name="redirect" value="{% url 'counter' id_counter=counter.id %}" />
+						<input type="hidden" name="redirect" value="{% url 'home' %}" />
 						<input type="hidden" name="reset" value="{{counter.lastReset.id}}" />
 						<h2 class="panel-title">
 							<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
