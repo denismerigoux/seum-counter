@@ -42,7 +42,7 @@ class Reset(models.Model):
                                          locale='fr'), self.reason)
         else:
             return '%s à %s : %s (%s)' % (self.who, self.counter,
-                                           format_timedelta(
+                                          format_timedelta(
                                               datetime.now() -
                                               self.timestamp.replace(
                                                   tzinfo=None),
@@ -61,3 +61,7 @@ class Like(models.Model):
     class Meta:
         verbose_name = 'like'
         verbose_name_plural = 'likes'
+        unique_together = ('liker', 'reset')
+
+    def __str__(self):
+        return '%s aime %s' % (self.liker, self.reset)

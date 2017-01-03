@@ -7,11 +7,16 @@
 		<div class="col-sm-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<a class="counter-link" href="{% url 'counter' id_counter=myCounter.id %}">
-						<h2 class="panel-title"><b>{{ myCounter.trigramme }}</b> <small>{{ myCounter.name }}</small>
-							{% if not myCounter.lastReset.noSeum %}<span class="pull-right badge">{{ myCounter.seumCount }}</span>{% endif %}
+					<h2 class="panel-title">
+						<a class="counter-link panel-title" href="{% url 'counter' id_counter=myCounter.id %}">
+							<b>{{ myCounter.trigramme }}</b> <small>{{ myCounter.name }}</small>
+						</a>
+						{% if not myCounter.lastReset.noSeum %}
+							<span class="pull-right badge">
+								<span class="glyphicon glyphicon-fire" />&nbsp;{{ myCounter.likeCount }}
+							</span>
+						{% endif %}
 						</h2>
-					</a>
 				</div>
 				<div class="primary-counter panel-body" id="container{{myCounter.id}}">
 					<div style="width:100%;">
@@ -85,11 +90,28 @@
 		<div class="col-md-3 col-sm-4 col-lg-2">
 			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
 				<div class="panel-heading">
-					<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
-						<h2 class="panel-title"><b>{{ counter.trigramme }}</b> <small>{{ counter.name }}</small>
-							{% if not counter.lastReset.noSeum %}<span class="pull-right badge">{{ counter.seumCount }}</span>{% endif %}
+					<form action="{% url 'like' %}" method="POST" name="like{{counter.id}}">
+						{% csrf_token %}
+						<input type="hidden" name="liker" value="{{myCounter.id}}" />
+						<input type="hidden" name="redirect" value="{% url 'counter' id_counter=counter.id %}" />
+						<input type="hidden" name="reset" value="{{counter.lastReset.id}}" />
+						<h2 class="panel-title">
+							<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
+								<b>{{ counter.trigramme }}</b> <small>{{ counter.name }}</small>
+							</a>
+							{% if not counter.lastReset.noSeum %}
+							{% if counter.alreadyLiked %}
+							<span class="pull-right badge">
+								<span class="glyphicon glyphicon-ok" />&nbsp;{{ counter.likeCount }}
+							</span>
+							{% else %}
+							<a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
+								<span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+							</a>
+							{% endif %}
+							{% endif %}
 						</h2>
-					</a>
+					</form>
 				</div>
 				<div class="seum-counter panel-body">
 					{% if counter.lastReset.noSeum %}

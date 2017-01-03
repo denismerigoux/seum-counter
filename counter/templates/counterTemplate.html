@@ -9,7 +9,31 @@
     <div class="col-md-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h2 class="panel-title">Dernier seum {% if not counter.lastReset.noSeum %}<span class="badge pull-right">{{ counter.seumCount }}</span>{% endif %}</h2>
+            <form action="{% url 'like' %}" method="POST" name="like{{counter.id}}">
+                {% csrf_token %}
+                <input type="hidden" name="liker" value="{{myCounter.id}}" />
+                <input type="hidden" name="reset" value="{{counter.lastReset.id}}" <h2 class="panel-title" />
+                <input type="hidden" name="redirect" value="{% url 'counter' id_counter=counter.id %}" />
+                <a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
+                    <b>{{ counter.trigramme }}</b> <small>{{ counter.name }}</small>
+                </a>
+                {% if not counter.lastReset.noSeum %}
+                {% if counter.alreadyLiked %}
+                <span class="pull-right badge">
+                    <span class="glyphicon glyphicon-ok" />&nbsp;{{ counter.likeCount }}
+                </span>
+                {% elif counter.id == myCounter.id %}
+                <span class="pull-right badge">
+                    <span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+                </span>
+                {% else %}
+                <a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
+                    <span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+                </a>
+                {% endif %}
+                {% endif %}
+                </h2>
+            </form>
         </div>
         <div class="seum-counter panel-body" style="height:125px" id="container{{counter.id}}">
           {% if counter.lastReset.noSeum %}
@@ -74,6 +98,7 @@
                 <th>Date</th>
                 <th>Motif</th>
                 <th>Fouteur de seum</th>
+                <th>Nombre de likes</th>
               </tr>
             </thead>
             <tbody>
@@ -86,6 +111,7 @@
                     {{ reset.who.trigramme }}
                 {% endif %}
                 </td>
+                <td>{{ reset.likeCount }}</td>
               </tr>
               {% endfor %}
             </tbody>

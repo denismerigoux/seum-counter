@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from counter.models import Counter, Reset
+from counter.models import Counter, Reset, Like
 from django.contrib.auth.models import User
 from babel.dates import format_timedelta, format_datetime
 from datetime import datetime, timedelta
@@ -51,8 +51,8 @@ def home(request):
                 myCounter.lastReset.selfSeum = False
             myCounter.lastReset.delta = datetime.now(
             ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
-            myCounter.seumCount = Reset.objects.filter(
-                counter=myCounter).count()
+            myCounter.likeCount = Like.objects.filter(
+                reset=myCounter.lastReset).count()
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:
@@ -61,7 +61,7 @@ def home(request):
     # Building data for counters display
     counters = Counter.objects.all()
     for counter in counters:
-        #Only the last reset is displayed
+        # Only the last reset is displayed
         lastReset = Reset.objects.filter(
             counter=counter).order_by('-timestamp')
         if (lastReset.count() == 0):  # This person never had the seum
@@ -101,9 +101,12 @@ def home(request):
             counter.opacity = 0.4 + 0.6 * \
                 math.exp(-(counter.lastReset.delta.total_seconds()) /
                          (7 * 24 * 3600))
-            # Computing the total number of resets for this counter
-            counter.seumCount = Reset.objects.filter(
-                counter=counter).count()
+            # Computing the total number of likes for this counter
+            counter.likeCount = Like.objects.filter(
+                reset=counter.lastReset).count()
+            counter.alreadyLiked = (Like.objects.filter(
+                reset=counter.lastReset, liker=myCounter).exists())
+
         counter.lastReset.formatted_delta = format_timedelta(
             counter.lastReset.delta, locale='fr', threshold=1)
         counter.isHidden = "hidden"
@@ -327,6 +330,10 @@ def counter(request, id_counter):
         seumFrequency = format_timedelta((
             datetime.now() - firstReset.timestamp.replace(tzinfo=None)) /
             counter.seumCount, locale='fr', threshold=1)
+        counter.alreadyLiked = (Like.objects.filter(
+            reset=counter.lastReset, liker=myCounter).exists())
+        counter.likeCount = Like.objects.filter(
+            reset=counter.lastReset).count()
 
     for reset in resets:
         if (reset.who is None or
@@ -337,6 +344,8 @@ def counter(request, id_counter):
         reset.date = format_datetime(
             reset.timestamp, locale='fr',
             format="dd/MM/Y HH:mm")
+        reset.likeCount = Like.objects.filter(reset=reset).count()
+
     # Timeline graph
     # Data pre-processing
     if not counter.lastReset.noSeum:
@@ -429,3 +438,17 @@ def toggleEmailNotifications(request):
     counter.email_notifications = not counter.email_notifications
     counter.save()
     return HttpResponseRedirect(reverse('home'))
+
+
+@login_required
+def like(request):
+    if (request.method == 'POST'):
+        # create a form instance and populate it with data from the request:
+        data = dict(request.POST)
+        liker = Counter.objects.get(pk=data['liker'][0])
+        reset = Reset.objects.get(pk=data['reset'][0])
+        like = Like()
+        like.liker = liker
+        like.reset = reset
+        like.save()
+    return HttpResponseRedirect(data['redirect'][0])
