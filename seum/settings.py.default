@@ -26,9 +26,6 @@ SECRET_KEY = '(#lovv#uky9unr9azzqy14gktpf0(d&+cp@++l95*y4e%m%_ex'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['seum.merigoux.ovh']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -124,6 +121,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
+ALLOWED_HOSTS = ['seum.merigoux.ovh']
 
 
 #login

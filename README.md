@@ -52,3 +52,13 @@ To give Apache the permission to serve the files, execute these three commands :
 To launch or restart the server, simply run :
 
     sudo service apache2 restart
+
+### Backup data
+
+To backup the database, execute the command
+
+    python manage.py dumpdata --exclude contenttypes > seum.json
+
+You can then restore your data into a freshly migrated new database with
+
+    python manage.py loaddata seum.json

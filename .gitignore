@@ -67,3 +67,4 @@ target/
 #Custom
 python3/
 seum/settings.py
+seum.json

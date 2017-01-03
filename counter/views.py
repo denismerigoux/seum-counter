@@ -25,10 +25,8 @@ def home(request):
     JSS_limit = 7
     maxJSS = 0
     bestSeumeursNumber = 15
-    # Display counters
     lastResets = []
-    # Calculates infos for each counter
-    timezero = timedelta(0)
+    no_seum_delta = timedelta.max
 
     # First select our counter
     try:
@@ -38,7 +36,7 @@ def home(request):
         if (lastReset.count() == 0):
             # This person never had the seum
             myCounter.lastReset = Reset()
-            myCounter.lastReset.delta = timezero
+            myCounter.lastReset.delta = no_seum_delta
             myCounter.lastReset.noSeum = True
         else:
             myCounter.lastReset = lastReset[0]
@@ -65,7 +63,7 @@ def home(request):
         if (lastReset.count() == 0):
             # This person never had the seum
             counter.lastReset = Reset()
-            counter.lastReset.delta = timezero
+            counter.lastReset.delta = no_seum_delta
             counter.lastReset.noSeum = True
             counter.CSSclass = "warning"
         else:
