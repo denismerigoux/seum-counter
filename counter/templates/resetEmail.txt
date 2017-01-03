@@ -1,6 +1,4 @@
-T'as perdu ton mot de passe et t'as le seum.
-
-Please go to the following page and choose a new password:
+T'as perdu ton mot de passe et t'as le seum. Il te reste plus qu'à suivre le lien pour le réinitialiser :
 {% block reset_link %}
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
