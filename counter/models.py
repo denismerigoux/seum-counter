@@ -7,35 +7,57 @@ from django.contrib.auth.models import User
 
 
 class Counter(models.Model):
-    name = models.CharField("Nom", max_length=60)
-    email = models.EmailField("Email", max_length=264,
-                              default="null@localhost")
-    trigramme = models.CharField("Trigramme", max_length=3)
-    user = models.ForeignKey(User, blank=True, null=True)
+    name = models.CharField('nom', max_length=60)
+    email = models.EmailField('email', max_length=264,
+                              default='null@localhost')
+    trigramme = models.CharField('trigramme', max_length=3)
+    user = models.ForeignKey(User, blank=True, null=True,
+                             verbose_name='utilisateur associé')
     email_notifications = models.BooleanField(
-        "Notifications par email", default=False)
+        'notifications par email', default=False)
 
     def __str__(self):
-        return "%s (%s)" % (self.trigramme, self.name)
+        return '%s (%s)' % (self.trigramme, self.name)
 
     class Meta:
-        verbose_name = "Compteur"
+        verbose_name = 'compteur'
 
 
 class Reset(models.Model):
-    timestamp = models.DateTimeField("Date et heure", auto_now_add=True)
-    reason = models.TextField("Raison")
-    counter = models.ForeignKey('Counter', related_name='counter')
+    timestamp = models.DateTimeField('date et heure', auto_now_add=True)
+    reason = models.TextField('raison')
+    counter = models.ForeignKey('Counter', related_name='counter',
+                                verbose_name='victime')
     who = models.ForeignKey('Counter', related_name='who',
+                            verbose_name='fouteur de seum',
                             blank=True, null=True, default=None)
 
     def __str__(self):
-        return "%s : %s (%s)" % (self.counter,
-                                 format_timedelta(
-                                     datetime.now() -
-                                     self.timestamp.replace(tzinfo=None),
-                                     locale='fr'), self.reason)
+        if (self.who is None or
+                self.who.id == self.counter.id):
+            return '%s : %s (%s)' % (self.counter,
+                                     format_timedelta(
+                                         datetime.now() -
+                                         self.timestamp.replace(tzinfo=None),
+                                         locale='fr'), self.reason)
+        else:
+            return '%s à %s : %s (%s)' % (self.who, self.counter,
+                                           format_timedelta(
+                                              datetime.now() -
+                                              self.timestamp.replace(
+                                                  tzinfo=None),
+                                              locale='fr'), self.reason)
 
     class Meta:
-        verbose_name = "Remise à zéro"
-        verbose_name_plural = "Remises à zéro"
+        verbose_name = 'remise à zéro'
+        verbose_name_plural = 'remises à zéro'
+
+
+class Like(models.Model):
+    liker = models.ForeignKey('Counter', verbose_name='likeur')
+    reset = models.ForeignKey('Reset', verbose_name='seum')
+    timestamp = models.DateTimeField('date et heure', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'like'
+        verbose_name_plural = 'likes'
