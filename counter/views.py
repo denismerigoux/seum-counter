@@ -18,13 +18,16 @@ import math
 import copy
 from django.utils import timezone
 
+# JSS above this limit will not be displayed on the home page col graph
+JSS_limit = 7
+# Number of counters displayed on the home page's best seumeurs graph
+bestSeumeursNumber = 15
+
 
 @login_required
 def home(request):
-    # JSS above this limit will not be displayed on the col graph
-    JSS_limit = 7
+    # Used later to keep track of the maximum JSS
     maxJSS = 0
-    bestSeumeursNumber = 15
     lastResets = []
     no_seum_delta = timedelta.max
 
@@ -58,21 +61,23 @@ def home(request):
     # Building data for counters display
     counters = Counter.objects.all()
     for counter in counters:
+        #Only the last reset is displayed
         lastReset = Reset.objects.filter(
             counter=counter).order_by('-timestamp')
-        if (lastReset.count() == 0):
-            # This person never had the seum
+        if (lastReset.count() == 0):  # This person never had the seum
             counter.lastReset = Reset()
             counter.lastReset.delta = no_seum_delta
             counter.lastReset.noSeum = True
             counter.CSSclass = "warning"
-        else:
+        else:  # This person already had the seum
             counter.lastReset = lastReset[0]
+            # To display the last seum we have to know if it is self-inflicted
             if (counter.lastReset.who is None or
                     counter.lastReset.who.id == counter.id):
                 counter.lastReset.selfSeum = True
             else:
                 counter.lastReset.selfSeum = False
+            # Now we compute the duration since the reset
             counter.lastReset.noSeum = False
             counter.lastReset.delta = datetime.now(
             ) - counter.lastReset.timestamp.replace(tzinfo=None)
@@ -102,7 +107,10 @@ def home(request):
         counter.lastReset.formatted_delta = format_timedelta(
             counter.lastReset.delta, locale='fr', threshold=1)
         counter.isHidden = "hidden"
+
+    # Eventually we sort the counters to display the most recent resets top
     counters = sorted(counters, key=lambda t: t.lastReset.delta)
+
     # Column graph
     if (len(lastResets) == 0):
         noGraph = True
@@ -127,7 +135,6 @@ def home(request):
         })
 
     # Timeline graph
-    # Data pre-processing
     resets = Reset.objects.filter(
         timestamp__gte=timezone.now() - timedelta(days=1))
     if (resets.count() == 0):
@@ -153,7 +160,6 @@ def home(request):
                               'f': reset.who.trigramme + ' à ' +
                               reset.counter.trigramme +
                               " : " + reset.reason}
-        # Drawing the graph
         line_data = ModelDataSource(resets, fields=['timestamp', 'Seum'])
         line_chart = gchart.LineChart(line_data, options={
             'lineWidth': 0,
@@ -219,6 +225,7 @@ def home(request):
             'hAxis': {'title': 'Mois'},
         })
 
+    # At last we render the page
     return render(request, 'homeTemplate.html', {
         'counters': counters,
         'col_chart': col_chart,
