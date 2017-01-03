@@ -6,11 +6,17 @@ Clone the repo, then create a `virtualenv` with Python 3, then install the requi
 
     pip install -r requirements.txt
 
+Then copy and paste the settings file template located in folder `seum`:
+```
+cd seum && cp settings.py.default settings.py
+```
+
 ## Running the server
 
 ### Developement
 
-Simply use the django command :
+First, comment out the lines below "#Production settings".  
+Then simply use the django command:
 
     python manage.py runserver 0.0.0.0:8000
 
