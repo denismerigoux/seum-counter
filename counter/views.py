@@ -55,9 +55,10 @@ def home(request):
             likesMe = Like.objects.filter(
                 reset=myCounter.lastReset)
             myCounter.likeCount = likesMe.count()
-            myCounter.likersString = functools.reduce(
-                        lambda a,b: a + ", " +  b,
-                        [like.liker.trigramme for like in likesMe])
+            if myCounter.likeCount:
+                myCounter.likersString = functools.reduce(
+                            lambda a,b: a + ", " +  b,
+                            [like.liker.trigramme for like in likesMe])
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:
