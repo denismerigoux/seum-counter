@@ -104,6 +104,10 @@
 							<span class="pull-right badge">
 								<span class="glyphicon glyphicon-ok" />&nbsp;{{ counter.likeCount }}
 							</span>
+							{% elif counter.id == myCounter.id %}
+			                <span class="pull-right badge">
+			                    <span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+			                </span>
 							{% else %}
 							<a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
 								<span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
