@@ -12,12 +12,9 @@
 							<b>{{ myCounter.trigramme }}</b> <small>{{ myCounter.name }}</small>
 						</a>
 						{% if not myCounter.lastReset.noSeum %}
-							<span class="pull-right badge">
+							<span class="pull-right badge" data-toggle="tooltip" data-placement="top" title="{{ myCounter.likersString }}">
 								<span class="glyphicon glyphicon-fire"></span>&emsp;{{ myCounter.likeCount }}
 							</span>
-                            {% for liker in myCounter.likers %}
-                                <span>{{ liker.trigramme }}</span>
-                            {% endfor %}
 						{% endif %}
 						</h2>
 				</div>
@@ -215,4 +212,10 @@
 		{% endif %}
 	</a>
 </div>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 {% endblock %}
