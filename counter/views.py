@@ -51,8 +51,10 @@ def home(request):
                 myCounter.lastReset.selfSeum = False
             myCounter.lastReset.delta = datetime.now(
             ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
-            myCounter.likeCount = Like.objects.filter(
-                reset=myCounter.lastReset).count()
+            likesMe = Like.objects.filter(
+                reset=myCounter.lastReset)
+            myCounter.likeCount = likesMe.count()
+            myCounter.likers = [like.liker for like in likesMe]
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:

@@ -15,6 +15,9 @@
 							<span class="pull-right badge">
 								<span class="glyphicon glyphicon-fire"></span>&emsp;{{ myCounter.likeCount }}
 							</span>
+                            {% for liker in myCounter.likers %}
+                                <span>{{ liker.trigramme }}</span>
+                            {% endfor %}
 						{% endif %}
 						</h2>
 				</div>
