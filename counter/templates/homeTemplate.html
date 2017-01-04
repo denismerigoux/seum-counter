@@ -13,7 +13,7 @@
 						</a>
 						{% if not myCounter.lastReset.noSeum %}
 							<span class="pull-right badge">
-								<span class="glyphicon glyphicon-fire" />&nbsp;{{ myCounter.likeCount }}
+								<span class="glyphicon glyphicon-fire"></span>&emsp;{{ myCounter.likeCount }}
 							</span>
 						{% endif %}
 						</h2>
@@ -102,15 +102,15 @@
 							{% if not counter.lastReset.noSeum %}
 							{% if counter.alreadyLiked %}
 							<span class="pull-right badge">
-								<span class="glyphicon glyphicon-ok" />&nbsp;{{ counter.likeCount }}
+								<span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
 							</span>
 							{% elif counter.id == myCounter.id %}
 			                <span class="pull-right badge">
-			                    <span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+			                    <span class="glyphicon glyphicon-fire"></span>&emsp;{{ counter.likeCount }}
 			                </span>
 							{% else %}
 							<a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
-								<span class="glyphicon glyphicon-fire" />&nbsp;{{ counter.likeCount }}
+								<span class="glyphicon glyphicon-fire"></span>&emsp;{{ counter.likeCount }}
 							</a>
 							{% endif %}
 							{% endif %}
