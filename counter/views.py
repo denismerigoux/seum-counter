@@ -69,6 +69,7 @@ def home(request):
             counter.lastReset.delta = no_seum_delta
             counter.lastReset.noSeum = True
             counter.CSSclass = "warning"
+            counter.likeCount = -1
         else:  # This person already had the seum
             counter.lastReset = lastReset[0]
             # To display the last seum we have to know if it is self-inflicted
@@ -98,9 +99,6 @@ def home(request):
                               (24 * 3600))
             # Defining CSS attributes for the counter
             counter.CSSclass = "default"
-            counter.opacity = 0.4 + 0.6 * \
-                math.exp(-(counter.lastReset.delta.total_seconds()) /
-                         (7 * 24 * 3600))
             # Computing the total number of likes for this counter
             counter.likeCount = Like.objects.filter(
                 reset=counter.lastReset).count()
@@ -111,8 +109,16 @@ def home(request):
             counter.lastReset.delta, locale='fr', threshold=1)
         counter.isHidden = "hidden"
 
-    # Eventually we sort the counters to display the most recent resets top
-    counters = sorted(counters, key=lambda t: t.lastReset.delta)
+    # Now we sort the counters according to a reddit-like ranking formula
+    # We take into account the number of likes of a reset and its recentness
+    # The log on the score will give increased value to the first likes
+    # The negative exp for the time with a characteristic time of 1 day will
+    # cause that after 1 day the « recentness score drops from 1 to 0.36
+    # The counters with no seum have a like count of -1 by convention
+    counters = sorted(counters, key=lambda t: - (
+                      math.log(t.likeCount + 2) *
+                      math.exp(-(t.lastReset.delta.total_seconds()) /
+                                (24 * 3600))))
 
     # Column graph
     if (len(lastResets) == 0):
@@ -360,8 +366,8 @@ def counter(request, id_counter):
             if reset.selfSeum:
                 reset.Seum = {'v': 0, 'f': reset.reason}
             else:
-                reset.Seum = {'v': 0, 'f': 'De ' + reset.who.trigramme + ' : ' +
-                              reset.reason}
+                reset.Seum = {'v': 0, 'f': 'De ' +
+                              reset.who.trigramme + ' : ' + reset.reason}
         # Drawing the graph
         data = ModelDataSource(
             resets, fields=['timestamp', 'Seum'])

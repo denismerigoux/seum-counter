@@ -88,7 +88,7 @@
 	<div class="row">
 		{% for counter in counters %} {% if chooseCounter or not counter.id == myCounter.id %}
 		<div class="col-md-3 col-sm-4 col-lg-2">
-			<div class="panel panel-{{counter.CSSclass}}" style="opacity:{{counter.opacity}}">
+			<div class="panel panel-{{counter.CSSclass}}">
 				<div class="panel-heading">
 					<form action="{% url 'like' %}" method="POST" name="like{{counter.id}}">
 						{% csrf_token %}
