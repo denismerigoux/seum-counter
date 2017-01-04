@@ -15,7 +15,12 @@ cd seum && cp settings.py.default settings.py
 
 ### Developement
 
-First, comment out the lines below "#Production settings".  
+First, comment out the lines below "#Production settings" in `settings.py`.
+
+You will also need to apply the unapplied migrations:
+
+    python manage.py migrate
+
 Then simply use the django command:
 
     python manage.py runserver 0.0.0.0:8000
