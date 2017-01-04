@@ -98,7 +98,10 @@ def home(request):
                     maxJSS = (counter.lastReset.delta.total_seconds() /
                               (24 * 3600))
             # Defining CSS attributes for the counter
-            counter.CSSclass = "default"
+            if counter.id == myCounter.id:
+                counter.CSSclass = 'primary'
+            else:
+                counter.CSSclass = 'default'
             # Computing the total number of likes for this counter
             counter.likeCount = Like.objects.filter(
                 reset=counter.lastReset).count()
@@ -107,7 +110,7 @@ def home(request):
 
         counter.lastReset.formatted_delta = format_timedelta(
             counter.lastReset.delta, locale='fr', threshold=1)
-        counter.isHidden = "hidden"
+        counter.isHidden = 'hidden'
 
     # Now we sort the counters according to a reddit-like ranking formula
     # We take into account the number of likes of a reset and its recentness

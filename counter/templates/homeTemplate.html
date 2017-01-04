@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	<div class="row">
-		{% for counter in counters %} {% if chooseCounter or not counter.id == myCounter.id %}
+		{% for counter in counters %}
 		<div class="col-md-4 col-sm-6 col-lg-3">
 			<div class="panel panel-{{counter.CSSclass}}">
 				<div class="panel-heading">
@@ -96,7 +96,7 @@
 						<input type="hidden" name="redirect" value="{% url 'home' %}" />
 						<input type="hidden" name="reset" value="{{counter.lastReset.id}}" />
 						<h2 class="panel-title">
-							<a class="counter-link" href="{% url 'counter' id_counter=counter.id %}">
+							<a class="counter-link panel-title" href="{% url 'counter' id_counter=counter.id %}">
 								<b>{{ counter.trigramme }}</b> <small>{{ counter.name }}</small>
 							</a>
 							{% if not counter.lastReset.noSeum %}
@@ -130,7 +130,7 @@
 				</div>
 			</div>
 		</div>
-		{% endif %} {% endfor %}
+		{% endfor %}
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
