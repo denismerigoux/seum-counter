@@ -12,7 +12,7 @@
 							<b>{{ myCounter.trigramme }}</b> <small>{{ myCounter.name }}</small>
 						</a>
 						{% if not myCounter.lastReset.noSeum %}
-							<span class="pull-right badge">
+							<span class="pull-right badge" {% if myCounter.likeCount %} data-toggle="tooltip" data-placement="top" title="{{ myCounter.likersString }}" {% endif %}>
 								<span class="glyphicon glyphicon-fire"></span>&emsp;{{ myCounter.likeCount }}
 							</span>
 						{% endif %}
@@ -212,4 +212,10 @@
 		{% endif %}
 	</a>
 </div>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 {% endblock %}

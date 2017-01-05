@@ -10,7 +10,7 @@
 	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico" />
 	<title>SeumBook™ – {% block title %}{% endblock %}</title>
 
-	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
+	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {% bootstrap_javascript jquery=True %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
 
 	<style>
 		body {

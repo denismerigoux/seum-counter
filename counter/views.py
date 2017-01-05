@@ -16,6 +16,7 @@ from graphos.sources.model import ModelDataSource
 import random
 import math
 import copy
+import functools
 from django.utils import timezone
 
 # JSS above this limit will not be displayed on the home page col graph
@@ -51,8 +52,13 @@ def home(request):
                 myCounter.lastReset.selfSeum = False
             myCounter.lastReset.delta = datetime.now(
             ) - myCounter.lastReset.timestamp.replace(tzinfo=None)
-            myCounter.likeCount = Like.objects.filter(
-                reset=myCounter.lastReset).count()
+            likesMe = Like.objects.filter(
+                reset=myCounter.lastReset)
+            myCounter.likeCount = likesMe.count()
+            if myCounter.likeCount:
+                myCounter.likersString = functools.reduce(
+                            lambda a,b: a + ", " +  b,
+                            [like.liker.trigramme for like in likesMe])
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:
