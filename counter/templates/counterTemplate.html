@@ -19,11 +19,11 @@
                 </a>
                 {% if not counter.lastReset.noSeum %}
                 {% if counter.alreadyLiked %}
-                <span class="pull-right badge">
+                <span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
                     <span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
                 </span>
                 {% elif counter.id == myCounter.id or counter.lastReset.who.id == myCounter.id %}
-                <span class="pull-right badge">
+                <span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
                     <span class="glyphicon glyphicon-fire"></span>&emsp;{{ counter.likeCount }}
                 </span>
                 {% else %}

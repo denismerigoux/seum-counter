@@ -109,10 +109,15 @@ def home(request):
             else:
                 counter.CSSclass = 'default'
             # Computing the total number of likes for this counter
-            counter.likeCount = Like.objects.filter(
-                reset=counter.lastReset).count()
+            likesMe = Like.objects.filter(
+                reset=counter.lastReset)
+            counter.likeCount = likesMe.count()
             counter.alreadyLiked = (Like.objects.filter(
                 reset=counter.lastReset, liker=myCounter).exists())
+            if counter.likeCount > 0:
+                counter.likersString = functools.reduce(
+                    lambda a, b: a + ", " + b,
+                    [like.liker.trigramme for like in likesMe])
 
         counter.lastReset.formatted_delta = format_timedelta(
             counter.lastReset.delta, locale='fr', threshold=1)
@@ -347,8 +352,13 @@ def counter(request, id_counter):
             counter.seumCount, locale='fr', threshold=1)
         counter.alreadyLiked = (Like.objects.filter(
             reset=counter.lastReset, liker=myCounter).exists())
-        counter.likeCount = Like.objects.filter(
-            reset=counter.lastReset).count()
+        likesMe = Like.objects.filter(
+            reset=counter.lastReset)
+        counter.likeCount = likesMe.count()
+        if counter.likeCount > 0:
+            counter.likersString = functools.reduce(
+                lambda a, b: a + ", " + b,
+                [like.liker.trigramme for like in likesMe])
 
     for reset in resets:
         if (reset.who is None or
