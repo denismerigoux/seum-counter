@@ -104,7 +104,7 @@
 							<span class="pull-right badge">
 								<span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
 							</span>
-							{% elif counter.id == myCounter.id %}
+							{% elif counter.id == myCounter.id or counter.lastReset.who.id == myCounter.id %}
 			                <span class="pull-right badge">
 			                    <span class="glyphicon glyphicon-fire"></span>&emsp;{{ counter.likeCount }}
 			                </span>
