@@ -57,8 +57,8 @@ def home(request):
             myCounter.likeCount = likesMe.count()
             if myCounter.likeCount:
                 myCounter.likersString = functools.reduce(
-                            lambda a,b: a + ", " +  b,
-                            [like.liker.trigramme for like in likesMe])
+                    lambda a, b: a + ", " + b,
+                    [like.liker.trigramme for like in likesMe])
         myCounter.lastReset.formatted_delta = format_timedelta(
             myCounter.lastReset.delta, locale='fr', threshold=1)
     except Counter.DoesNotExist:
@@ -125,9 +125,9 @@ def home(request):
     # cause that after 1 day the « recentness score drops from 1 to 0.36
     # The counters with no seum have a like count of -1 by convention
     counters = sorted(counters, key=lambda t: - (
-                      math.log(t.likeCount + 2) *
-                      math.exp(-(t.lastReset.delta.total_seconds()) /
-                                (24 * 3600))))
+                      math.log(t.likeCount + 2) /
+                      (1 + (t.lastReset.delta.total_seconds()) /
+                       (24 * 3600))))
 
     # Column graph
     if (len(lastResets) == 0):
