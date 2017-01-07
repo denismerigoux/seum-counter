@@ -211,6 +211,13 @@
 		Activer les notifications par mail
 		{% endif %}
 	</a>
+	<a href="{% url 'toggle_sort_score' %}" class="btn btn-success">
+		{% if myCounter.sort_by_score %}
+		Trier les seums par ancienneté
+		{% else %}
+		Trier les seums par score
+		{% endif %}
+	</a>
 </div>
 
 <script>

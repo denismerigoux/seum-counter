@@ -15,6 +15,8 @@ class Counter(models.Model):
                              verbose_name='utilisateur associé')
     email_notifications = models.BooleanField(
         'notifications par email', default=False)
+    sort_by_score = models.BooleanField(
+        'trier par SeumScore™', default=True)
 
     def __str__(self):
         return '%s (%s)' % (self.trigramme, self.name)

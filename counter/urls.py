@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^like/$', views.like, name='like'),
     url(r'^toggle-notif/$', views.toggleEmailNotifications,
         name='toggle_email_notifications'),
+    url(r'^toggle-sort-score/$', views.toggleScoreSorting,
+        name='toggle_sort_score'),
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'},
         name='login'),

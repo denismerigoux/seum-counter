@@ -123,18 +123,22 @@ def home(request):
             counter.lastReset.delta, locale='fr', threshold=1)
         counter.isHidden = 'hidden'
 
-    # Now we sort the counters according to a reddit-like ranking formula
-    # We take into account the number of likes of a reset and its recentness
-    # The log on the score will give increased value to the first likes
-    # The negative exp for the time with a characteristic time of 1 day will
-    # cause that after 1 day the « recentness score drops from 1 to 0.36
-    # The counters with no seum have a like count of -1 by convention
-    counters = sorted(counters, key=lambda t: - (
-                      math.log(t.likeCount + 2) /
-                      (1 + (t.lastReset.delta.total_seconds()) /
-                       (24 * 3600))))
+    if myCounter.sort_by_score:
+        # Now we sort the counters according to a reddit-like ranking formula
+        # We take into account the number of likes of a reset and its recentness
+        # The log on the score will give increased value to the first likes
+        # The negative exp for the time with a characteristic time of 1 day will
+        # cause that after 1 day the « recentness score drops from 1 to 0.36
+        # The counters with no seum have a like count of -1 by convention
+        counters = sorted(counters, key=lambda t: - (
+            math.log(t.likeCount + 2) /
+            (1 + (t.lastReset.delta.total_seconds()) /
+             (24 * 3600))))
+    else:
+        counters = sorted(counters, key=lambda t: +
+                          t.lastReset.delta.total_seconds())
 
-    # Column graph
+        # Column graph
     if (len(lastResets) == 0):
         noGraph = True
         col_chart = None
@@ -461,6 +465,14 @@ def createUser(request):
 def toggleEmailNotifications(request):
     counter = Counter.objects.get(user=request.user)
     counter.email_notifications = not counter.email_notifications
+    counter.save()
+    return HttpResponseRedirect(reverse('home'))
+
+
+@login_required
+def toggleScoreSorting(request):
+    counter = Counter.objects.get(user=request.user)
+    counter.sort_by_score = not counter.sort_by_score
     counter.save()
     return HttpResponseRedirect(reverse('home'))
 
