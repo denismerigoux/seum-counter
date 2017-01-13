@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from counter.models import Counter, Reset, Like
+from counter.models import Counter, Reset, Like, Keyword, Hashtag
 from django.contrib.auth.models import User
 from babel.dates import format_timedelta, format_datetime
 from datetime import datetime, timedelta
@@ -18,6 +18,7 @@ import math
 import copy
 import functools
 from django.utils import timezone
+from counter.utils import parseSeumReason
 
 # JSS above this limit will not be displayed on the home page col graph
 JSS_limit = 7
@@ -275,6 +276,7 @@ def resetCounter(request):
         data = dict(request.POST)
 
         who = Counter.objects.get(pk=int(data['who'][0]))
+        reason = data['reason'][0]
         if 'counter' in data.keys():
             counter = Counter.objects.get(pk=int(data['counter'][0]))
         else:
@@ -294,6 +296,13 @@ def resetCounter(request):
             return HttpResponseRedirect(data['redirect'][0])
 
         reset.save()
+
+        # Now we deal with the hashtags
+        keywords = parseSeumReason(reason)
+        for keyword in keywords:
+            hashtag = Hashtag(reset=reset, keyword=keyword)
+            hashtag.save()
+
         # We send the emails only to those who want
         emails = [u.email for u in Counter.objects.all()
                   if u.email_notifications]

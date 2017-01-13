@@ -67,3 +67,26 @@ class Like(models.Model):
 
     def __str__(self):
         return '%s aime %s' % (self.liker, self.reset)
+
+
+class Keyword(models.Model):
+    text = models.CharField('texte', max_length=128, unique=True)
+
+    class Meta:
+        verbose_name = 'mot-clé'
+        verbose_name_plural = 'mots-clés'
+
+    def __str__(self):
+        return '#%s' % (self.text)
+
+
+class Hashtag(models.Model):
+    keyword = models.ForeignKey('Keyword', verbose_name='hashtag')
+    reset = models.ForeignKey('Reset', verbose_name='remise à zéro')
+
+    class Meta:
+        verbose_name = 'hashtag'
+        verbose_name_plural = 'hashtags'
+
+    def __str__(self):
+        return '%s pour %s' % (self.keyword, self.reset)
