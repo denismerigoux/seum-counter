@@ -438,8 +438,9 @@ def hashtag(request, keyword):
     except Keyword.DoesNotExist:
         print('erreur !')
         return HttpResponseRedirect(reverse('home'))
-    hashtag = '#'+keyword.text
-    resets = Reset.objects.filter(hashtag__keyword=keyword)
+    hashtag = '#' + keyword.text
+    resets = Reset.objects.filter(
+        hashtag__keyword=keyword).order_by('-timestamp')
     for reset in resets:
         if (reset.who is None or
                 reset.who.id == reset.counter.id):
