@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^reset-counter/$', views.resetCounter, name='reset-counter'),
     url(r'^counter/(?P<id_counter>\d+)/$', views.counter, name='counter'),
+    url(r'^hashtag/(?P<keyword>.+)/$', views.hashtag, name='hashtag'),
     url(r'^rss/$', SeumFeed()),
     url(r'^create_user/$', views.createUser, name='create_user'),
     url(r'^like/$', views.like, name='like'),

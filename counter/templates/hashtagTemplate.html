@@ -1,0 +1,52 @@
+{% extends 'baseTemplate.html' %} {% block title %}{{hashtag}}{% endblock %} {% block content %} {% load hashtags %}
+<div class="text-center">
+  <h1>
+      <a class="counter-link" href="{% url 'home' %}"><b>{{hashtag}}</b></a>
+  </h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Liste des seums contenant {{ hashtag }}<small class="badge pull-right">{{ totalNumber }}</small></h2>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Motif</th>
+                <th>Victime</th>
+                <th>Fouteur de seum</th>
+                <th>Nombre de likes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for reset in resets %}
+              <tr>
+                <td><b>{{ reset.date }}</b></td>
+                <td>{{ reset.reason | hashtag }}</td>
+                <td>{{ reset.counter.trigramme }}</td>
+                <td>
+                {% if not reset.selfSeum %}
+                    {{ reset.who.trigramme }}
+                {% endif %}
+                </td>
+                <td>{{ reset.likeCount }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="text-center">
+    <a class="btn btn-success" href="{% url 'home' %}">Retour à la liste des compteurs</a>
+  </div>
+</div>
+</div>
+{% endblock %}

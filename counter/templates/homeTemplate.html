@@ -1,4 +1,4 @@
-{% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %}
+{% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %} {% load hashtags %}
 <div class="text-center">
 	<h1><a class="counter-link" href="{% url 'home' %}">SeumBook™</a></h1>
 </div>
@@ -31,8 +31,7 @@
 						{% endif %}
 					</strong>
 						<br> {% endif %}
-
-						<p>{{ myCounter.lastReset.reason }}</p>
+						<p>{{ myCounter.lastReset.reason | hashtag }}</p>
 						<div class="text-center" id="button{{myCounter.id}}">
 							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">Remettre à zéro</button>
 						</div>
@@ -130,7 +129,7 @@
 					</strong>
 					<br> {% endif %}
 
-					<p>{{ counter.lastReset.reason }}</p>
+					<p>{{ counter.lastReset.reason | hashtag }}</p>
 				</div>
 			</div>
 		</div>

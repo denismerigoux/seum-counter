@@ -1,4 +1,4 @@
-{% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %}
+{% extends 'baseTemplate.html' %} {% block title %}{{counter.trigramme}}{% endblock %} {% block content %} {% load hashtags %}
 <div class="text-center">
   <h1>
       <a class="counter-link" href="{% url 'home' %}"><b>{{counter.trigramme}}</b> <small>{{ counter.name }}</small></a>
@@ -48,7 +48,7 @@
           </strong>
           <br> {% endif %}
 
-          <p>{{ counter.lastReset.reason }}</p>
+          <p>{{ counter.lastReset.reason | hashtag }}</p>
           <div class="text-center">
             <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{counter.id}})">Remettre à zéro</button>
           </div>
@@ -91,7 +91,7 @@
         <div class="panel-heading">
           <h2 class="panel-title">Historique du seum <small class="badge pull-right">{{seumFrequency}}/seum</small></h2>
         </div>
-        <div class="panel-body" style="max-height:350px;overflow:auto;">
+        <div class="panel-body">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -105,7 +105,7 @@
               {% for reset in resets %}
               <tr>
                 <td><b>{{ reset.date }}</b></td>
-                <td>{{ reset.reason }}</td>
+                <td>{{ reset.reason | hashtag }}</td>
                 <td>
                 {% if not reset.selfSeum %}
                     {{ reset.who.trigramme }}
