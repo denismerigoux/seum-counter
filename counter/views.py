@@ -20,8 +20,6 @@ import functools
 from django.utils import timezone
 from counter.utils import parseSeumReason
 
-# JSS above this limit will not be displayed on the home page col graph
-JSS_limit = 7
 # Number of counters displayed on the home page's best seumeurs graph
 bestSeumeursNumber = 15
 
@@ -29,7 +27,6 @@ bestSeumeursNumber = 15
 @login_required
 def home(request):
     # Used later to keep track of the maximum JSS
-    maxJSS = 0
     lastResets = []
     no_seum_delta = timedelta.max
 
@@ -89,21 +86,6 @@ def home(request):
             counter.lastReset.noSeum = False
             counter.lastReset.delta = datetime.now(
             ) - counter.lastReset.timestamp.replace(tzinfo=None)
-            if ((counter.lastReset.delta.total_seconds()) / (24 * 3600) <
-                    JSS_limit):
-                # Less than 7 JSS -> display on graph
-                lastResets.append(
-                    [counter.trigramme,
-                     {'v': (counter.lastReset.delta.total_seconds()) /
-                      (24 * 3600),
-                      'f': str(round(
-                          (counter.lastReset.delta.total_seconds()) /
-                          (24 * 3600), 1))}])
-                # Updating the max JSS displayed on the graph to compute scale
-                if (counter.lastReset.delta.total_seconds() / (24 * 3600) >
-                        maxJSS):
-                    maxJSS = (counter.lastReset.delta.total_seconds() /
-                              (24 * 3600))
             # Defining CSS attributes for the counter
             if counter.id == myCounter.id:
                 counter.CSSclass = 'primary'
@@ -126,10 +108,8 @@ def home(request):
 
     if myCounter.sort_by_score:
         # Now we sort the counters according to a reddit-like ranking formula
-        # We take into account the number of likes of a reset and its recentness
+        # We take into account the number of likes of a reset and recentness
         # The log on the score will give increased value to the first likes
-        # The negative exp for the time with a characteristic time of 1 day will
-        # cause that after 1 day the « recentness score drops from 1 to 0.36
         # The counters with no seum have a like count of -1 by convention
         counters = sorted(counters, key=lambda t: - (
             math.log(t.likeCount + 2) /
@@ -138,29 +118,6 @@ def home(request):
     else:
         counters = sorted(counters, key=lambda t: +
                           t.lastReset.delta.total_seconds())
-
-        # Column graph
-    if (len(lastResets) == 0):
-        noGraph = True
-        col_chart = None
-    else:
-        noGraph = False
-        lastResets.sort(key=lambda x: x[1]['v'])
-        lastResets.insert(0, ['Trigramme', 'Jours sans seum'])
-        col_data = SimpleDataSource(lastResets)
-        col_chart = gchart.ColumnChart(col_data, options={
-            'title': '',
-            'legend': 'none',
-            'vAxis': {
-                'viewWindow': {
-                    'max': max(maxJSS, 1),
-                    'min': 0
-                },
-                'ticks': [1, 2, 3, 4, 5, 6, 7],
-                'title': 'Jours sans seum'
-            },
-            'hAxis': {'title': 'Trigramme'},
-        })
 
     # Timeline graph
     resets = Reset.objects.filter(
@@ -253,16 +210,83 @@ def home(request):
             'hAxis': {'title': 'Mois'},
         })
 
+    # Graph of best likers
+    likersCounts = []
+    for counter in counters:
+        likersCounts.append(
+            [counter.trigramme, Like.objects.filter(liker=counter).count()])
+    if (len(likersCounts) == 0):
+        noBestLikers = True
+        likers_chart = None
+    else:
+        likersCounts.sort(key=lambda x: -x[1])
+        noBestLikers = False
+        likersCounts.insert(0, ['Trigramme', 'Nombre de likes distribués'])
+        likers_data = SimpleDataSource(likersCounts[:bestSeumeursNumber])
+        likers_chart = gchart.ColumnChart(likers_data, options={
+            'title': '',
+            'legend': 'none',
+            'vAxis': {'title': 'Nombre de likes distribués'},
+            'hAxis': {'title': 'Trigramme'},
+        })
+
+    # Graph of popular hashtags
+    hashtagsCounts = []
+    keywords = Keyword.objects.all()
+    for keyword in keywords:
+        hashtagsCounts.append(
+            ['#' + keyword.text,
+             Hashtag.objects.filter(keyword=keyword).count()])
+    if (len(hashtagsCounts) == 0):
+        noBestHashtags = True
+        hashtags_chart = None
+    else:
+        hashtagsCounts.sort(key=lambda x: -x[1])
+        noBestHashtags = False
+        hashtagsCounts.insert(0, ['Trigramme', 'Nombre de likes distribués'])
+        hashtags_data = SimpleDataSource(hashtagsCounts[:bestSeumeursNumber])
+        hashtags_chart = gchart.ColumnChart(hashtags_data, options={
+            'title': '',
+            'legend': 'none',
+            'vAxis': {'title': 'Nombre de seums contenant le hashtag'},
+            'hAxis': {'title': 'Hashtag'},
+        })
+
+    # Graph of best likee
+    likeesCounts = []
+    for counter in counters:
+        likeesCounts.append(
+            [counter.trigramme,
+             Like.objects.filter(reset__counter=counter).count()])
+    if (len(likeesCounts) == 0):
+        noBestLikees = True
+        likees_chart = None
+    else:
+        likeesCounts.sort(key=lambda x: -x[1])
+        noBestLikees = False
+        likeesCounts.insert(0, ['Trigramme', 'Nombre de likes reçus'])
+        likees_data = SimpleDataSource(likeesCounts[:bestSeumeursNumber])
+        likees_chart = gchart.ColumnChart(likees_data, options={
+            'title': '',
+            'legend': 'none',
+            'vAxis': {'title': 'Nombre de likes reçus'},
+            'hAxis': {'title': 'Trigramme'},
+        })
+
     # At last we render the page
     return render(request, 'homeTemplate.html', {
         'counters': counters,
-        'col_chart': col_chart,
         'line_chart': line_chart,
         'best_chart': best_chart,
+        'likers_chart': likers_chart,
+        'likees_chart': likees_chart,
+        'hashtags_chart': hashtags_chart,
         'activity_chart': activity_chart,
         'noTimeline': noTimeline,
-        'noGraph': noGraph,
         'noBestSeum': noBestSeum,
+        'noBestLikers': noBestLikers,
+        'noBestLikees': noBestLikees,
+        'noBestHashtags': noBestHashtags,
         'noSeumActivity': noSeumActivity,
         'myCounter': myCounter,
     })

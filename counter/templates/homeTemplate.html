@@ -155,22 +155,6 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Graphe des jours sans seum</h2>
-				</div>
-				<div class="panel-body graphs">
-					{% if noGraph %}
-					<div class="text-center text-muted">
-						<p>Personne n'a le seum...</p>
-					</div>
-					{% else %} {{ col_chart.as_html }} {% endif %}
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-info">
-				<div class="panel-heading">
 					<h2 class="panel-title">Meilleurs seumeurs</h2>
 				</div>
 				<div class="panel-body graphs">
@@ -179,6 +163,54 @@
 						<p>Personne n'a eu le seum...</p>
 					</div>
 					{% else %} {{ best_chart.as_html }} {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h2 class="panel-title">Seumeurs les plus likés</h2>
+				</div>
+				<div class="panel-body graphs">
+					{% if noBestLikees %}
+					<div class="text-center text-muted">
+						<p>Personne n'a liké...</p>
+					</div>
+					{% else %} {{ likees_chart.as_html }} {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h2 class="panel-title">Hashtags les plus populaires</h2>
+				</div>
+				<div class="panel-body graphs">
+					{% if noBestHashtags %}
+					<div class="text-center text-muted">
+						<p>Personne n'a utilisé de hashtags...</p>
+					</div>
+					{% else %} {{ hashtags_chart.as_html }} {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h2 class="panel-title">Meilleurs likeurs de seum</h2>
+				</div>
+				<div class="panel-body graphs">
+					{% if noBestLikers %}
+					<div class="text-center text-muted">
+						<p>Personne n'a liké...</p>
+					</div>
+					{% else %} {{ likers_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
