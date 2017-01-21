@@ -15,19 +15,20 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
-]
+    url(r'^', include('counter.urls')),
+)
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += [
+    urlpatterns += i18n_patterns(
         url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+    )
 
-urlpatterns += [url(r'^', include('counter.urls')), ]

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.translation import ugettext as _
 from counter.models import Counter, Reset, Like, Keyword, Hashtag
 from django.contrib.auth.models import User
 from babel.dates import format_timedelta, format_datetime
