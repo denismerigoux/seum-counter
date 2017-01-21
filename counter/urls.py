@@ -3,19 +3,21 @@ from counter.rss import SeumFeed
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 
-from .views import views, hashtag, counter, user
+from .views import counter, hashtag, home, reset, user
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$', home.index, name='home'),
+    url(r'^toggle-notif/$', home.toggleEmailNotifications,
+        name='toggle_email_notifications'),
+    url(r'^toggle-sort-score/$', home.toggleScoreSorting,
+        name='toggle_sort_score'),
+
     url(r'^reset-counter/$', counter.reset_counter, name='reset-counter'),
     url(r'^counter/(?P<id_counter>\d+)/$', counter.get, name='counter'),
+
     url(r'^hashtag/(?P<keyword>.+)/$', hashtag.get, name='hashtag'),
 
-    url(r'^like/$', views.like, name='like'),
-    url(r'^toggle-notif/$', views.toggleEmailNotifications,
-        name='toggle_email_notifications'),
-    url(r'^toggle-sort-score/$', views.toggleScoreSorting,
-        name='toggle_sort_score'),
+    url(r'^like/$', reset.like, name='like'),
 
     url(r'^create_user/$', user.create, name='create_user'),
 

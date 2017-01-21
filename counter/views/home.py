@@ -26,7 +26,7 @@ bestSeumeursNumber = 15
 
 
 @login_required
-def home(request):
+def index(request):
     # Used later to keep track of the maximum JSS
     lastResets = []
     no_seum_delta = timedelta.max
@@ -293,12 +293,6 @@ def home(request):
     })
 
 
-
-
-
-
-
-
 @login_required
 def toggleEmailNotifications(request):
     counter = Counter.objects.get(user=request.user)
@@ -315,15 +309,3 @@ def toggleScoreSorting(request):
     return HttpResponseRedirect(reverse('home'))
 
 
-@login_required
-def like(request):
-    if (request.method == 'POST'):
-        # create a form instance and populate it with data from the request:
-        data = dict(request.POST)
-        liker = Counter.objects.get(pk=data['liker'][0])
-        reset = Reset.objects.get(pk=data['reset'][0])
-        like = Like()
-        like.liker = liker
-        like.reset = reset
-        like.save()
-    return HttpResponseRedirect(data['redirect'][0])
