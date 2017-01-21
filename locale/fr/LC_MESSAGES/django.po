@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 17:37+0100\n"
+"POT-Creation-Date: 2017-01-21 18:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,7 +249,7 @@ msgstr ""
 "2 minuscules pour te foutre le seum mais en fait tu peux mettre ce que tu "
 "veux."
 
-#: counter/templates/createUser.html:45
+#: counter/templates/createUser.html:45 counter/templates/login.html:27
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -269,7 +269,8 @@ msgstr ""
 msgid "Create the counter"
 msgstr "Créer le compteur"
 
-#: counter/templates/createUser.html:64
+#: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/passwordReset.html:37
 msgid "Error"
 msgstr "Erreur"
 
@@ -278,6 +279,8 @@ msgid "Password successfully changed!"
 msgstr "Mot de passe changé !"
 
 #: counter/templates/createUserDone.html:17
+#: counter/templates/passwordResetComplete.html:17
+#: counter/templates/passwordResetDone.html:17
 msgid "Victory!"
 msgstr "Victoire !"
 
@@ -296,6 +299,83 @@ msgstr "Liste des seums contenant"
 #: counter/templates/hashtagTemplate.html:28
 msgid "Victim"
 msgstr "Victime"
+
+#: counter/templates/login.html:5
+msgid "Login"
+msgstr "Login"
+
+#: counter/templates/login.html:17
+#, fuzzy
+#| msgid "Login to access the website!"
+msgid "Login to get the seum!"
+msgstr "Connecte-toi pour accéder au site !"
+
+#: counter/templates/login.html:23
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: counter/templates/login.html:32
+msgid "Log in"
+msgstr "Se connecter"
+
+#: counter/templates/login.html:33 counter/templates/passwordReset.html:5
+msgid "Password forgotten"
+msgstr "Mot de passe oublié"
+
+#: counter/templates/login.html:46 counter/templates/passwordReset.html:40
+msgid "You cannot even login... seum!"
+msgstr "Tu n'arrives mêmes pas à te connecter, seum !"
+
+#: counter/templates/login.html:54
+msgid "You don't have a counter yet?"
+msgstr "Pas encore de compteur ?"
+
+#: counter/templates/login.html:57
+msgid "Hurry up and create it to share your seum!"
+msgstr "Dépêche-toi de le créer pour partager ton seum !"
+
+#: counter/templates/login.html:59
+msgid "Create a counter"
+msgstr "Créer un compteur"
+
+#: counter/templates/passwordReset.html:17
+msgid "Reset password"
+msgstr "Réinitialiser le mot de passe"
+
+#: counter/templates/passwordReset.html:23
+msgid "Email for the reinitialisation link"
+msgstr "Email auquel sera envoyé le lien de réinitialisation"
+
+#: counter/templates/passwordReset.html:27
+msgid "Send"
+msgstr "Envoyer"
+
+#: counter/templates/passwordResetComplete.html:5
+msgid "Your password has been reset"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/passwordResetComplete.html:20
+msgid ""
+"That's it! You have reset your password! You can reset your counter now."
+msgstr ""
+"Ça y est tu as réinitialisé ton mot de passe ! Du coup tu peux aller "
+"remettre ton compteur à zéro."
+
+#: counter/templates/passwordResetComplete.html:22
+msgid "Home"
+msgstr "Accueil"
+
+#: counter/templates/passwordResetDone.html:5
+msgid "Email sent!"
+msgstr "Email envoyé !"
+
+#: counter/templates/passwordResetDone.html:20
+msgid ""
+"We have sent you an email. Follow the instructions to reinitialise your "
+"password."
+msgstr ""
+"Un mail t'a été envoyé, suis les instructions pour aller réinitialiser ton "
+"mot de passe."
 
 #: counter/views/counter.py:41
 msgid "unknown"

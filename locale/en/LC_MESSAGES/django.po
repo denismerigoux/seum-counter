@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 17:37+0100\n"
+"POT-Creation-Date: 2017-01-21 18:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,7 +228,7 @@ msgid ""
 "you can choose whatever you want."
 msgstr ""
 
-#: counter/templates/createUser.html:45
+#: counter/templates/createUser.html:45 counter/templates/login.html:27
 msgid "Password"
 msgstr ""
 
@@ -246,7 +246,8 @@ msgstr ""
 msgid "Create the counter"
 msgstr ""
 
-#: counter/templates/createUser.html:64
+#: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/passwordReset.html:37
 msgid "Error"
 msgstr ""
 
@@ -255,6 +256,8 @@ msgid "Password successfully changed!"
 msgstr ""
 
 #: counter/templates/createUserDone.html:17
+#: counter/templates/passwordResetComplete.html:17
+#: counter/templates/passwordResetDone.html:17
 msgid "Victory!"
 msgstr ""
 
@@ -272,6 +275,77 @@ msgstr ""
 
 #: counter/templates/hashtagTemplate.html:28
 msgid "Victim"
+msgstr ""
+
+#: counter/templates/login.html:5
+msgid "Login"
+msgstr ""
+
+#: counter/templates/login.html:17
+msgid "Login to get the seum!"
+msgstr ""
+
+#: counter/templates/login.html:23
+msgid "Username"
+msgstr ""
+
+#: counter/templates/login.html:32
+msgid "Log in"
+msgstr ""
+
+#: counter/templates/login.html:33 counter/templates/passwordReset.html:5
+msgid "Password forgotten"
+msgstr ""
+
+#: counter/templates/login.html:46 counter/templates/passwordReset.html:40
+msgid "You cannot even login... seum!"
+msgstr ""
+
+#: counter/templates/login.html:54
+msgid "You don't have a counter yet?"
+msgstr ""
+
+#: counter/templates/login.html:57
+msgid "Hurry up and create it to share your seum!"
+msgstr ""
+
+#: counter/templates/login.html:59
+msgid "Create a counter"
+msgstr ""
+
+#: counter/templates/passwordReset.html:17
+msgid "Reset password"
+msgstr ""
+
+#: counter/templates/passwordReset.html:23
+msgid "Email for the reinitialisation link"
+msgstr ""
+
+#: counter/templates/passwordReset.html:27
+msgid "Send"
+msgstr ""
+
+#: counter/templates/passwordResetComplete.html:5
+msgid "Your password has been reset"
+msgstr ""
+
+#: counter/templates/passwordResetComplete.html:20
+msgid ""
+"That's it! You have reset your password! You can reset your counter now."
+msgstr ""
+
+#: counter/templates/passwordResetComplete.html:22
+msgid "Home"
+msgstr ""
+
+#: counter/templates/passwordResetDone.html:5
+msgid "Email sent!"
+msgstr ""
+
+#: counter/templates/passwordResetDone.html:20
+msgid ""
+"We have sent you an email. Follow the instructions to reinitialise your "
+"password."
 msgstr ""
 
 #: counter/views/counter.py:41
