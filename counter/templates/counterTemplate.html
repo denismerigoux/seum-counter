@@ -26,16 +26,16 @@
                 </a>
                 {% if not counter.lastReset.noSeum %}
                 {% if counter.alreadyLiked %}
-                <span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
-                    <span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
+                <span class="pull-right badge" {% if counter.likes_count > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
+                    <span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likes_count }}
                 </span>
                 {% elif counter.id == myCounter.id or counter.lastReset.who.id == myCounter.id %}
-                <span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
-                    <span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
+                <span class="pull-right badge" {% if counter.likes_count > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
+                    <span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likes_count }}
                 </span>
                 {% else %}
                 <a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
-                    <span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
+                    <span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likes_count }}
                 </a>
                 {% endif %}
                 {% endif %}
@@ -123,7 +123,7 @@
                       {{ reset.who.trigramme }}
                     {% endif %}
                   </td>
-                  <td>{{ reset.likeCount }}</td>
+                  <td>{{ reset.likes_count }}</td>
                 </tr>
               {% endfor %}
             </tbody>

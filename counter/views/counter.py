@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
-import copy
+from copy import copy
 
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
+from django.db.models import Count, Prefetch
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -25,18 +26,21 @@ def get(request, id_counter):
     except Counter.DoesNotExist:
         return HttpResponseRedirect(reverse('login'))
 
-    counter = Counter.objects.prefetch_related('resets', 'resets__likes').get(pk=id_counter)
-    resets = counter.resets.order_by('-timestamp')
-    timezero = timedelta(0)
+    counter = Counter.objects.prefetch_related(
+        # we get the related resets annotated with their number of likes
+        Prefetch('resets', queryset=Reset.objects.annotate(likes_count=Count('likes'))),
+        'resets__likes'
+    ).get(pk=id_counter)
+    resets = list(counter.resets.order_by('-timestamp'))
 
     # Display
-    if resets.count() == 0:
+    if len(resets) == 0:
         counter.lastReset = Reset()
-        counter.lastReset.delta = timezero
+        counter.lastReset.delta = timedelta(0)
         counter.lastReset.noSeum = True
         seumFrequency = _('unknown')
     else:
-        firstReset = resets.reverse()[0]
+        firstReset = copy(resets[-1])
         counter.lastReset = resets[0]
         counter.lastReset.noSeum = False
         if counter.lastReset.who is None or counter.lastReset.who == counter:
@@ -45,7 +49,7 @@ def get(request, id_counter):
             counter.lastReset.selfSeum = False
 
         counter.lastReset.formatted_delta = arrow.Arrow.fromdatetime(counter.lastReset.timestamp).humanize(locale=get_language())
-        counter.seumCount = counter.resets.count()
+        counter.seumCount = len(resets)
         seumFrequency = format_timedelta((datetime.now() - firstReset.timestamp.replace(tzinfo=None)) / counter.seumCount,
             locale=get_language(), threshold=1)
 
@@ -56,12 +60,11 @@ def get(request, id_counter):
             counter.likersString = ", ".join(like.liker.trigramme for like in counter.lastLikes)
 
     for reset in resets:
-        if reset.who is None or reset.who == reset.counter:
+        if reset.who is None or reset.who.id == reset.counter.id:
             reset.selfSeum = True
         else:
             reset.selfSeum = False
         reset.date = reset.timestamp
-        reset.likeCount = reset.likes.count()
 
     # Timeline graph
     # Data pre-processing
