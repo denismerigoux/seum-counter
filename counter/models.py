@@ -1,92 +1,86 @@
-from django.db import models
 from datetime import datetime
-from babel.dates import format_timedelta
-from django.contrib.auth.models import User
 
-# Create your models here.
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils.translation import ugettext_lazy as _, get_language
+
+import arrow
+from babel.dates import format_timedelta
 
 
 class Counter(models.Model):
-    name = models.CharField('nom', max_length=60)
-    email = models.EmailField('email', max_length=264,
-                              default='null@localhost')
-    trigramme = models.CharField('trigramme', max_length=3)
-    user = models.ForeignKey(User, blank=True, null=True,
-                             verbose_name='utilisateur associé')
-    email_notifications = models.BooleanField(
-        'notifications par email', default=False)
-    sort_by_score = models.BooleanField(
-        'trier par SeumScore™', default=True)
+    name = models.CharField(_('name'), max_length=60)
+    email = models.EmailField(_('email'), max_length=264, default='null@localhost')
+    trigramme = models.CharField(_('trigram'), max_length=3)
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name=_('associated user'))
+    email_notifications = models.BooleanField(_('email notifications'), default=False)
+    sort_by_score = models.BooleanField(_('sort by SeumScore'), default=True)
 
     def __str__(self):
-        return '%s (%s)' % (self.trigramme, self.name)
+        return _('%(trigram)s (%(name)s)') % {'trigram': self.trigramme, 'name': self.name}
 
     class Meta:
-        verbose_name = 'compteur'
+        verbose_name = _('counter')
 
 
 class Reset(models.Model):
-    timestamp = models.DateTimeField('date et heure', auto_now_add=True)
-    reason = models.TextField('raison')
-    counter = models.ForeignKey('Counter', related_name='counter',
-                                verbose_name='victime')
-    who = models.ForeignKey('Counter', related_name='who',
-                            verbose_name='fouteur de seum',
-                            blank=True, null=True, default=None)
+    timestamp = models.DateTimeField(_('datetime'), auto_now_add=True)
+    reason = models.TextField(_('reason'))
+    counter = models.ForeignKey('Counter', related_name='counter', verbose_name=_('victim'))
+    who = models.ForeignKey('Counter', related_name='who', verbose_name=_('seum giver'), blank=True, null=True, default=None)
 
     def __str__(self):
-        if (self.who is None or
-                self.who.id == self.counter.id):
-            return '%s : %s (%s)' % (self.counter,
-                                     format_timedelta(
-                                         datetime.now() -
-                                         self.timestamp.replace(tzinfo=None),
-                                         locale='fr'), self.reason)
+        if self.who is None or self.who == self.counter:
+            return _('%(counter)s : %(datetime)s (%(reason)s)') % {
+                'counter': self.counter,
+                'datetime': arrow.Arrow.fromdatetime(self.timestamp).humanize(locale=(get_language() or 'en')), # dirty hack...
+                'reason': self.reason
+            }
         else:
-            return '%s à %s : %s (%s)' % (self.who, self.counter,
-                                          format_timedelta(
-                                              datetime.now() -
-                                              self.timestamp.replace(
-                                                  tzinfo=None),
-                                              locale='fr'), self.reason)
+            return '%(who)s to %(counter)s : %(datetime)s (%(reason)s)' % {
+                'who': self.who,
+                'counter': self.counter,
+                'datetime': arrow.Arrow.fromdatetime(self.timestamp).humanize(locale=(get_language() or 'en')),
+                'reason': self.reason
+            }
 
     class Meta:
-        verbose_name = 'remise à zéro'
-        verbose_name_plural = 'remises à zéro'
+        verbose_name = _('reset')
+        verbose_name_plural = _('resets')
 
 
 class Like(models.Model):
-    liker = models.ForeignKey('Counter', verbose_name='likeur', related_name='likes')
-    reset = models.ForeignKey('Reset', verbose_name='seum', related_name='likes')
-    timestamp = models.DateTimeField('date et heure', auto_now_add=True)
+    liker = models.ForeignKey('Counter', verbose_name=_('liker'), related_name='likes')
+    reset = models.ForeignKey('Reset', verbose_name=_('seum'), related_name='likes')
+    timestamp = models.DateTimeField(_('datetime'), auto_now_add=True)
 
     class Meta:
-        verbose_name = 'like'
-        verbose_name_plural = 'likes'
+        verbose_name = _('like')
+        verbose_name_plural = _('likes')
         unique_together = ('liker', 'reset')
 
     def __str__(self):
-        return '%s aime %s' % (self.liker, self.reset)
+        return _('%(liker)s likes %(reset)s') % {'liker': self.liker, 'reset': self.reset}
 
 
 class Keyword(models.Model):
     text = models.CharField('texte', max_length=128, unique=True)
 
     class Meta:
-        verbose_name = 'mot-clé'
-        verbose_name_plural = 'mots-clés'
+        verbose_name = _('keyword')
+        verbose_name_plural = _('keywords')
 
     def __str__(self):
         return '#%s' % (self.text)
 
 
 class Hashtag(models.Model):
-    keyword = models.ForeignKey('Keyword', verbose_name='hashtag', related_name='hashtags')
-    reset = models.ForeignKey('Reset', verbose_name='remise à zéro', related_name='hashtags')
+    keyword = models.ForeignKey('Keyword', verbose_name=_('hashtag'), related_name='hashtags')
+    reset = models.ForeignKey('Reset', verbose_name=_('reset'), related_name='hashtags')
 
     class Meta:
-        verbose_name = 'hashtag'
-        verbose_name_plural = 'hashtags'
+        verbose_name = _('hashtag')
+        verbose_name_plural = _('hashtags')
 
     def __str__(self):
-        return '%s pour %s' % (self.keyword, self.reset)
+        return _('%(keyword)s for %(who)s') % {'keyword': self.keyword, 'who': self.reset}

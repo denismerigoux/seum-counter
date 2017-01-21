@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 13:36+0100\n"
+"POT-Creation-Date: 2017-01-21 14:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,110 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: counter/models.py:12
+msgid "name"
+msgstr ""
+
+#: counter/models.py:13
+msgid "email"
+msgstr ""
+
+#: counter/models.py:14
+msgid "trigram"
+msgstr ""
+
+#: counter/models.py:15
+msgid "associated user"
+msgstr ""
+
+#: counter/models.py:16
+msgid "email notifications"
+msgstr ""
+
+#: counter/models.py:17
+msgid "sort by SeumScore"
+msgstr ""
+
+#: counter/models.py:20
+#, python-format
+msgid "%(trigram)s (%(name)s)"
+msgstr ""
+
+#: counter/models.py:23
+msgid "counter"
+msgstr ""
+
+#: counter/models.py:27 counter/models.py:55
+msgid "datetime"
+msgstr ""
+
+#: counter/models.py:28
+msgid "reason"
+msgstr ""
+
+#: counter/models.py:29
+msgid "victim"
+msgstr ""
+
+#: counter/models.py:30
+msgid "seum giver"
+msgstr ""
+
+#: counter/models.py:34
+#, python-format
+msgid "%(counter)s : %(datetime)s (%(reason)s)"
+msgstr ""
+
+#: counter/models.py:48 counter/models.py:79
+msgid "reset"
+msgstr ""
+
+#: counter/models.py:49
+msgid "resets"
+msgstr ""
+
+#: counter/models.py:53
+msgid "liker"
+msgstr ""
+
+#: counter/models.py:54
+msgid "seum"
+msgstr ""
+
+#: counter/models.py:58
+msgid "like"
+msgstr ""
+
+#: counter/models.py:59
+msgid "likes"
+msgstr ""
+
+#: counter/models.py:63
+#, python-format
+msgid "%(liker)s likes %(reset)s"
+msgstr ""
+
+#: counter/models.py:70
+msgid "keyword"
+msgstr ""
+
+#: counter/models.py:71
+msgid "keywords"
+msgstr ""
+
+#: counter/models.py:78 counter/models.py:82
+msgid "hashtag"
+msgstr ""
+
+#: counter/models.py:83
+msgid "hashtags"
+msgstr ""
+
+#: counter/models.py:86
+#, python-format
+msgid "%(keyword)s for %(who)s"
+msgstr ""
 
 #: counter/templates/hashtagTemplate.html:20
 msgid "Seums containing"
@@ -45,10 +149,10 @@ msgstr ""
 msgid "Back to counters list"
 msgstr ""
 
-#: seum/settings.py:110
-msgid "French"
-msgstr ""
-
 #: seum/settings.py:111
 msgid "English"
+msgstr ""
+
+#: seum/settings.py:112
+msgid "French"
 msgstr ""

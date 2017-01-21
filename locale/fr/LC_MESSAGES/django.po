@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 13:36+0100\n"
+"POT-Creation-Date: 2017-01-21 14:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,114 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: counter/models.py:12
+msgid "name"
+msgstr "nom"
+
+#: counter/models.py:13
+msgid "email"
+msgstr "email"
+
+#: counter/models.py:14
+msgid "trigram"
+msgstr "trigramme"
+
+#: counter/models.py:15
+msgid "associated user"
+msgstr "utilisateur associé"
+
+#: counter/models.py:16
+msgid "email notifications"
+msgstr "notifications par email"
+
+#: counter/models.py:17
+msgid "sort by SeumScore"
+msgstr "trier par SeumScore"
+
+#: counter/models.py:20
+#, python-format
+msgid "%(trigram)s (%(name)s)"
+msgstr "%(trigram)s (%(name)s)"
+
+#: counter/models.py:23
+msgid "counter"
+msgstr "compteur"
+
+#: counter/models.py:27 counter/models.py:55
+msgid "datetime"
+msgstr "date et heure"
+
+#: counter/models.py:28
+msgid "reason"
+msgstr "raison"
+
+#: counter/models.py:29
+#, fuzzy
+#| msgid "Victim"
+msgid "victim"
+msgstr "victime"
+
+#: counter/models.py:30
+#, fuzzy
+#| msgid "Seum giver"
+msgid "seum giver"
+msgstr "fouteur de seum"
+
+#: counter/models.py:34
+#, python-format
+msgid "%(counter)s : %(datetime)s (%(reason)s)"
+msgstr "%(counter)s : %(datetime)s (%(reason)s)"
+
+#: counter/models.py:48 counter/models.py:79
+msgid "reset"
+msgstr "remise à zéro"
+
+#: counter/models.py:49
+msgid "resets"
+msgstr "remises à zéro"
+
+#: counter/models.py:53
+msgid "liker"
+msgstr "likeur"
+
+#: counter/models.py:54
+msgid "seum"
+msgstr "seum"
+
+#: counter/models.py:58
+msgid "like"
+msgstr "like"
+
+#: counter/models.py:59
+msgid "likes"
+msgstr "likes"
+
+#: counter/models.py:63
+#, python-format
+msgid "%(liker)s likes %(reset)s"
+msgstr "%(liker)s aime %(reset)s"
+
+#: counter/models.py:70
+msgid "keyword"
+msgstr "mot-clé"
+
+#: counter/models.py:71
+msgid "keywords"
+msgstr "mots-clés"
+
+#: counter/models.py:78 counter/models.py:82
+msgid "hashtag"
+msgstr "hashtag"
+
+#: counter/models.py:83
+msgid "hashtags"
+msgstr "hashtags"
+
+#: counter/models.py:86
+#, python-format
+msgid "%(keyword)s for %(who)s"
+msgstr "%(keyword)s pour %(who)s"
 
 #: counter/templates/hashtagTemplate.html:20
 msgid "Seums containing"
@@ -46,13 +154,13 @@ msgstr "Nombre de likes"
 msgid "Back to counters list"
 msgstr "Retour à la liste des compteurs"
 
-#: seum/settings.py:110
-msgid "French"
-msgstr "Français"
-
 #: seum/settings.py:111
 msgid "English"
 msgstr "Anglais"
+
+#: seum/settings.py:112
+msgid "French"
+msgstr "Français"
 
 #~ msgid "Seum"
 #~ msgstr "Seum"
