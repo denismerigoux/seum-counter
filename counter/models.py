@@ -56,8 +56,8 @@ class Reset(models.Model):
 
 
 class Like(models.Model):
-    liker = models.ForeignKey('Counter', verbose_name='likeur')
-    reset = models.ForeignKey('Reset', verbose_name='seum')
+    liker = models.ForeignKey('Counter', verbose_name='likeur', related_name='likes')
+    reset = models.ForeignKey('Reset', verbose_name='seum', related_name='likes')
     timestamp = models.DateTimeField('date et heure', auto_now_add=True)
 
     class Meta:
@@ -81,8 +81,8 @@ class Keyword(models.Model):
 
 
 class Hashtag(models.Model):
-    keyword = models.ForeignKey('Keyword', verbose_name='hashtag')
-    reset = models.ForeignKey('Reset', verbose_name='remise à zéro')
+    keyword = models.ForeignKey('Keyword', verbose_name='hashtag', related_name='hashtags')
+    reset = models.ForeignKey('Reset', verbose_name='remise à zéro', related_name='hashtags')
 
     class Meta:
         verbose_name = 'hashtag'

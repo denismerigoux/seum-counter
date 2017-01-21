@@ -23,7 +23,6 @@ urlpatterns = i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
-    url(r'^', include('counter.urls')),
 )
 
 if settings.DEBUG:
@@ -32,3 +31,4 @@ if settings.DEBUG:
         url(r'^__debug__/', include(debug_toolbar.urls)),
     )
 
+urlpatterns += i18n_patterns(url(r'^', include('counter.urls')), )

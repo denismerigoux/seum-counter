@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-21 13:36+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: counter/templates/hashtagTemplate.html:20
+msgid "Seums containing"
+msgstr "Liste des seums contenant"
+
+#: counter/templates/hashtagTemplate.html:26
+msgid "Date"
+msgstr "Date"
+
+#: counter/templates/hashtagTemplate.html:27
+msgid "Motive"
+msgstr "Motif"
+
+#: counter/templates/hashtagTemplate.html:28
+msgid "Victim"
+msgstr "Victime"
+
+#: counter/templates/hashtagTemplate.html:29
+msgid "Seum giver"
+msgstr "Fouteur de seum"
+
+#: counter/templates/hashtagTemplate.html:30
+msgid "Number of likes"
+msgstr "Nombre de likes"
+
+#: counter/templates/hashtagTemplate.html:56
+msgid "Back to counters list"
+msgstr "Retour à la liste des compteurs"
+
+#: seum/settings.py:110
+msgid "French"
+msgstr "Français"
+
+#: seum/settings.py:111
+msgid "English"
+msgstr "Anglais"
+
+#~ msgid "Seum"
+#~ msgstr "Seum"

@@ -3,13 +3,13 @@ from counter.rss import SeumFeed
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 
-from . import views
+from .views import views, hashtag
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^reset-counter/$', views.resetCounter, name='reset-counter'),
     url(r'^counter/(?P<id_counter>\d+)/$', views.counter, name='counter'),
-    url(r'^hashtag/(?P<keyword>.+)/$', views.hashtag, name='hashtag'),
+    url(r'^hashtag/(?P<keyword>.+)/$', hashtag.get, name='hashtag'),
     url(r'^rss/$', SeumFeed()),
     url(r'^create_user/$', views.createUser, name='create_user'),
     url(r'^like/$', views.like, name='like'),

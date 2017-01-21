@@ -456,31 +456,31 @@ def counter(request, id_counter):
     })
 
 
-@login_required
-def hashtag(request, keyword):
-    try:
-        keyword = Keyword.objects.get(text=keyword)
-    except Keyword.DoesNotExist:
-        print('erreur !')
-        return HttpResponseRedirect(reverse('home'))
-    hashtag = '#' + keyword.text
-    resets = Reset.objects.filter(
-        hashtag__keyword=keyword).order_by('-timestamp')
-    for reset in resets:
-        if (reset.who is None or
-                reset.who.id == reset.counter.id):
-            reset.selfSeum = True
-        else:
-            reset.selfSeum = False
-        reset.date = format_datetime(
-            reset.timestamp, locale='fr',
-            format="dd/MM/Y HH:mm")
-        reset.likeCount = Like.objects.filter(reset=reset).count()
-    return render(request, 'hashtagTemplate.html', {
-        'hashtag': hashtag,
-        'totalNumber': resets.count(),
-        'resets': resets,
-    })
+# @login_required
+# def hashtag(request, keyword):
+#     try:
+#         keyword = Keyword.objects.get(text=keyword)
+#     except Keyword.DoesNotExist:
+#         print('erreur !')
+#         return HttpResponseRedirect(reverse('home'))
+#     hashtag = '#' + keyword.text
+#     resets = Reset.objects.filter(
+#         hashtag__keyword=keyword).order_by('-timestamp')
+#     for reset in resets:
+#         if (reset.who is None or
+#                 reset.who.id == reset.counter.id):
+#             reset.selfSeum = True
+#         else:
+#             reset.selfSeum = False
+#         reset.date = format_datetime(
+#             reset.timestamp, locale='fr',
+#             format="dd/MM/Y HH:mm")
+#         reset.likeCount = Like.objects.filter(reset=reset).count()
+#     return render(request, 'hashtagTemplate.html', {
+#         'hashtag': hashtag,
+#         'totalNumber': resets.count(),
+#         'resets': resets,
+#     })
 
 
 def createUser(request):
