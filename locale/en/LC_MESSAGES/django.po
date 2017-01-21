@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 14:29+0100\n"
+"POT-Creation-Date: 2017-01-21 15:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,32 +121,82 @@ msgstr ""
 msgid "%(keyword)s for %(who)s"
 msgstr ""
 
-#: counter/templates/hashtagTemplate.html:20
-msgid "Seums containing"
+#: counter/templates/counterTemplate.html:47
+msgid "Has not got the seum yet"
 msgstr ""
 
+#: counter/templates/counterTemplate.html:51
+msgid "Has got the seum"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:53
+msgid "threw him/her the seum"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:61
+msgid "Reset"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:67
+msgid "Motive for the seum:"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:74
+msgid "Throw the seum"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:83
+msgid "Timeline of the seum"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:88
+msgid "No timeline of the seum yet..."
+msgstr ""
+
+#: counter/templates/counterTemplate.html:102
+msgid "Seum history"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:110
 #: counter/templates/hashtagTemplate.html:26
 msgid "Date"
 msgstr ""
 
+#: counter/templates/counterTemplate.html:111
 #: counter/templates/hashtagTemplate.html:27
 msgid "Motive"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:112
+#: counter/templates/hashtagTemplate.html:29
+msgid "Seum thrower"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:113
+#: counter/templates/hashtagTemplate.html:30
+msgid "Number of likes"
+msgstr ""
+
+#: counter/templates/counterTemplate.html:138
+#: counter/templates/hashtagTemplate.html:56
+msgid "Back to counters list"
+msgstr ""
+
+#: counter/templates/hashtagTemplate.html:20
+msgid "Seums containing"
 msgstr ""
 
 #: counter/templates/hashtagTemplate.html:28
 msgid "Victim"
 msgstr ""
 
-#: counter/templates/hashtagTemplate.html:29
-msgid "Seum giver"
+#: counter/views/counter.py:34
+msgid "unknown"
 msgstr ""
 
-#: counter/templates/hashtagTemplate.html:30
-msgid "Number of likes"
-msgstr ""
-
-#: counter/templates/hashtagTemplate.html:56
-msgid "Back to counters list"
+#: counter/views/counter.py:75
+#, python-format
+msgid "From %(who)s: %(reason)s"
 msgstr ""
 
 #: seum/settings.py:111

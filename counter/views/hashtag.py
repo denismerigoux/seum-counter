@@ -1,11 +1,11 @@
-from babel.dates import format_timedelta, format_datetime
-import arrow
-
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext as _, get_language
+
+import arrow
+from babel.dates import format_timedelta, format_datetime
 
 from counter.models import *
 

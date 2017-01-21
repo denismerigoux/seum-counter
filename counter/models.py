@@ -26,7 +26,7 @@ class Counter(models.Model):
 class Reset(models.Model):
     timestamp = models.DateTimeField(_('datetime'), auto_now_add=True)
     reason = models.TextField(_('reason'))
-    counter = models.ForeignKey('Counter', related_name='counter', verbose_name=_('victim'))
+    counter = models.ForeignKey('Counter', related_name='resets', verbose_name=_('victim'))
     who = models.ForeignKey('Counter', related_name='who', verbose_name=_('seum giver'), blank=True, null=True, default=None)
 
     def __str__(self):
