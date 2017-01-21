@@ -25,6 +25,9 @@ Then simply use the django command:
 
     python manage.py runserver 0.0.0.0:8000
 
+If you want to use the Django Debug Toolbar, follow the instructions from the [https://django-debug-toolbar.readthedocs.io/en/1.6/installation.html](official documentation).  
+You just have to edit your `settings.py` file.
+
 ### Production
 
 Install the packages needed to run an Apache server with `wsgi_mod` :

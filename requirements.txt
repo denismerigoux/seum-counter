@@ -1,4 +1,5 @@
-django
+django==1.10
 babel
 django-bootstrap3
 django-graphos-3
+django-debug-toolbar==1.6
