@@ -7,7 +7,7 @@ from .views import views, hashtag, counter
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^reset-counter/$', views.resetCounter, name='reset-counter'),
+    url(r'^reset-counter/$', counter.reset_counter, name='reset-counter'),
     url(r'^counter/(?P<id_counter>\d+)/$', counter.get, name='counter'),
     url(r'^hashtag/(?P<keyword>.+)/$', hashtag.get, name='hashtag'),
     url(r'^rss/$', SeumFeed()),

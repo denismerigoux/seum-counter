@@ -2,9 +2,11 @@ from datetime import datetime, timedelta
 import copy
 
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _, get_language
 
 import arrow
@@ -13,6 +15,7 @@ from graphos.renderers import gchart
 from graphos.sources.model import ModelDataSource
 
 from counter.models import *
+from counter.utils import parseSeumReason
 
 
 @login_required
@@ -101,3 +104,55 @@ def get(request, id_counter):
         'seumFrequency': seumFrequency,
         'myCounter': myCounter,
     })
+
+
+@login_required
+def reset_counter(request):
+    # Update Form counter
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        data = dict(request.POST)
+
+        who = Counter.objects.get(pk=int(data['who'][0]))
+        reason = data['reason'][0]
+        if 'counter' in data.keys():
+            counter = Counter.objects.get(pk=int(data['counter'][0]))
+        else:
+            try:
+                counter = Counter.objects.get(trigramme=data['trigramme'][0])
+            except Counter.DoesNotExist:
+                return HttpResponseRedirect(data['redirect'][0])
+
+        reset = Reset(counter=counter, who=who, reason=data['reason'][0])
+
+        # we check that the seumer is the autenticated user
+        if reset.who.user is None or reset.who.user != request.user:
+            return HttpResponseRedirect(data['redirect'][0])
+
+        reset.save()
+
+        # Now we deal with the hashtags
+        keywords = parseSeumReason(reason)
+        Hashtag.objects.bulk_create([Hashtag(reset=reset, keyword=keyword) for keyword in keywords])
+
+        # We send the emails only to those who want
+        emails = [u['email'] for u in Counter.objects.filter(email_notifications=True).values('email')]
+        # Now send emails to everyone
+        if reset.who is None or reset.who == counter:
+            selfSeum = True
+        else:
+            selfSeum = False
+        text_of_email = render_to_string(
+            'seumEmail.txt', {'reason': data['reason'][0],
+                              'name': counter.name,
+                              'who': reset.who,
+                              'selfSeum': selfSeum,
+                              })
+        email_to_send = EmailMessage(
+            '[SeumBook] ' + counter.trigramme + ' a le seum',
+            text_of_email,
+            'SeumMan <seum@merigoux.ovh>', emails, [],
+            reply_to=emails)
+        email_to_send.send(fail_silently=True)
+
+    return HttpResponseRedirect(data['redirect'][0])

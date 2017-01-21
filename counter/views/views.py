@@ -293,64 +293,7 @@ def home(request):
     })
 
 
-@login_required
-def resetCounter(request):
-    # Update Form counter
-    if (request.method == 'POST'):
-        # create a form instance and populate it with data from the request:
-        data = dict(request.POST)
 
-        who = Counter.objects.get(pk=int(data['who'][0]))
-        reason = data['reason'][0]
-        if 'counter' in data.keys():
-            counter = Counter.objects.get(pk=int(data['counter'][0]))
-        else:
-            try:
-                counter = Counter.objects.get(trigramme=data['trigramme'][0])
-            except Counter.DoesNotExist:
-                return HttpResponseRedirect(data['redirect'][0])
-        reset = Reset()
-        reset.counter = counter
-        reset.who = who
-        reset.reason = data['reason'][0]
-        reset.timestamp = datetime.now()
-
-        # we check that the seumer is the autenticated user
-        if (reset.who.user is None or
-                reset.who.user.id != request.user.id):
-            return HttpResponseRedirect(data['redirect'][0])
-
-        reset.save()
-
-        # Now we deal with the hashtags
-        keywords = parseSeumReason(reason)
-        for keyword in keywords:
-            hashtag = Hashtag(reset=reset, keyword=keyword)
-            hashtag.save()
-
-        # We send the emails only to those who want
-        emails = [u.email for u in Counter.objects.all()
-                  if u.email_notifications]
-        # Now send emails to everyone
-        if (reset.who is None or
-                reset.who.id == counter.id):
-            selfSeum = True
-        else:
-            selfSeum = False
-        text_of_email = render_to_string(
-            'seumEmail.txt', {'reason': data['reason'][0],
-                              'name': counter.name,
-                              'who': reset.who,
-                              'selfSeum': selfSeum,
-                              })
-        email_to_send = EmailMessage(
-            '[SeumBook] ' + counter.trigramme + ' a le seum',
-            text_of_email,
-            'SeumMan <seum@merigoux.ovh>', emails, [],
-            reply_to=emails)
-        email_to_send.send(fail_silently=True)
-
-    return HttpResponseRedirect(data['redirect'][0])
 
 
 def createUser(request):
