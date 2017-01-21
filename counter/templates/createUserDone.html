@@ -1,4 +1,10 @@
-{% extends 'baseTemplate.html' %} {% block title %}Mot de passe changé !{% endblock %}{% block content %}
+{% extends 'baseTemplate.html' %}
+
+{% load i81n %}
+
+{% block title %}{% trans "Password successfully changed!" %}{% endblock %}
+
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="text-center">
@@ -8,12 +14,12 @@
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h2 class="panel-title">Victoire !</h2>
+                <h2 class="panel-title">{% trans "Victory!" %}</h2>
             </div>
             <div class=" panel-body">
-                <p>Tu as créé ton compteur ! Ton login est <b>{{login}}</b>.</p>
+                <p>{% trans "You have created your counter! Your login is " %} <b>{{ login }}</p>.</p>
                 <div class="text-center">
-                    <a href="{% url 'login' %}" type="submit" class="btn btn-default btn-success">Connecte-toi pour accéder au site !</a>
+                    <a href="{% url 'login' %}" type="submit" class="btn btn-default btn-success">{% trans "Login to access the website!" %}</a>
                 </div>
             </div>
         </div>

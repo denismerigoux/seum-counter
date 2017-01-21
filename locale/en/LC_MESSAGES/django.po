@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 15:44+0100\n"
+"POT-Creation-Date: 2017-01-21 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,6 +182,90 @@ msgstr ""
 msgid "Back to counters list"
 msgstr ""
 
+#: counter/templates/createUser.html:17
+msgid "Create your seum counter!"
+msgstr ""
+
+#: counter/templates/createUser.html:22
+msgid ""
+"The email address will be used for password reinitialisation. Your login on "
+"this website will be the first part of this address (before the @)."
+msgstr ""
+
+#: counter/templates/createUser.html:24
+msgid "Email address"
+msgstr ""
+
+#: counter/templates/createUser.html:27
+msgid ""
+"If you check the box below, you will receive an email from <tt>seum@merigoux."
+"ovh</tt> each time someone get the seum on the site. Spamming but so "
+"enjoyable, can be deactivated and reactivated later."
+msgstr ""
+
+#: counter/templates/createUser.html:31
+msgid "Email notifications"
+msgstr ""
+
+#: counter/templates/createUser.html:34
+msgid ""
+"Other users will see your nickname and your trigram only, it will be your "
+"seum identity!"
+msgstr ""
+
+#: counter/templates/createUser.html:36
+msgid "Trigram"
+msgstr ""
+
+#: counter/templates/createUser.html:40
+msgid "Nick"
+msgstr ""
+
+#: counter/templates/createUser.html:43
+msgid ""
+"I could have required 10 characters with one digit, an emoji, three "
+"uppercase letters and two lowercase ones to throw you the seum, but actually "
+"you can choose whatever you want."
+msgstr ""
+
+#: counter/templates/createUser.html:45
+msgid "Password"
+msgstr ""
+
+#: counter/templates/createUser.html:49
+msgid "Confirm password"
+msgstr ""
+
+#: counter/templates/createUser.html:52
+msgid ""
+"If this form has given you the seum, do not forget to reset your counter "
+"once you are logged in!"
+msgstr ""
+
+#: counter/templates/createUser.html:54
+msgid "Create the counter"
+msgstr ""
+
+#: counter/templates/createUser.html:64
+msgid "Error"
+msgstr ""
+
+#: counter/templates/createUserDone.html:5
+msgid "Password successfully changed!"
+msgstr ""
+
+#: counter/templates/createUserDone.html:17
+msgid "Victory!"
+msgstr ""
+
+#: counter/templates/createUserDone.html:20
+msgid "You have created your counter! Your login is "
+msgstr ""
+
+#: counter/templates/createUserDone.html:22
+msgid "Login to access the website!"
+msgstr ""
+
 #: counter/templates/hashtagTemplate.html:20
 msgid "Seums containing"
 msgstr ""
@@ -190,13 +274,25 @@ msgstr ""
 msgid "Victim"
 msgstr ""
 
-#: counter/views/counter.py:34
+#: counter/views/counter.py:41
 msgid "unknown"
 msgstr ""
 
-#: counter/views/counter.py:75
+#: counter/views/counter.py:81
 #, python-format
 msgid "From %(who)s: %(reason)s"
+msgstr ""
+
+#: counter/views/user.py:22
+msgid "Passwords do not match."
+msgstr ""
+
+#: counter/views/user.py:27
+msgid "A user with this email address already exists."
+msgstr ""
+
+#: counter/views/user.py:33
+msgid "Use another email address, another user has already this login."
 msgstr ""
 
 #: seum/settings.py:111

@@ -296,42 +296,7 @@ def home(request):
 
 
 
-def createUser(request):
-    if (request.method == 'POST'):
-        # create a form instance and populate it with data from the request:
-        data = dict(request.POST)
-        email = data['email'][0]
-        username = email.split('@')[0]
-        trigramme = data['trigramme'][0]
-        nick = data['nick'][0]
-        password1 = data['password1'][0]
-        password2 = data['password2'][0]
-        email_notifications = ('email_notifications' in data.keys())
 
-        if password1 != password2:
-            error = "Les deux mots de passe sont différents."
-            return render(request, 'createUser.html', {'error': error})
-        try:
-            test_user = User.objects.get(email=email)
-            error = "Un utilisateur avec cette adresse email existe déjà !"
-            return render(request, 'createUser.html', {'error': error})
-        except User.DoesNotExist:
-            try:
-                user = User.objects.create_user(username, email, password1)
-            except IntegrityError:
-                error = "Utilise une autre adresse email, un autre utilisateur \
-                 a le même login que toi."
-                return render(request, 'createUser.html', {'error': error})
-            counter = Counter()
-            counter.name = nick
-            counter.email = email
-            counter.trigramme = trigramme
-            counter.user = user
-            counter.email_notifications = False
-            counter.save()
-            return render(request, 'createUserDone.html', {'login': username})
-    else:
-        return render(request, 'createUser.html', {'error': None})
 
 
 @login_required

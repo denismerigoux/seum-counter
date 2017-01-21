@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 15:44+0100\n"
+"POT-Creation-Date: 2017-01-21 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -189,6 +189,106 @@ msgstr "Nombre de likes"
 msgid "Back to counters list"
 msgstr "Retour à la liste des compteurs"
 
+#: counter/templates/createUser.html:17
+msgid "Create your seum counter!"
+msgstr "Crée ton compteur de seum !"
+
+#: counter/templates/createUser.html:22
+msgid ""
+"The email address will be used for password reinitialisation. Your login on "
+"this website will be the first part of this address (before the @)."
+msgstr ""
+"L'adresse e-mail sera utilisée pour la réinitialisation de ton mot de passe. "
+"Ton login sur le site sera la première partie de cette adresse (avant le @)."
+
+#: counter/templates/createUser.html:24
+msgid "Email address"
+msgstr "Adresse email"
+
+#: counter/templates/createUser.html:27
+msgid ""
+"If you check the box below, you will receive an email from <tt>seum@merigoux."
+"ovh</tt> each time someone get the seum on the site. Spamming but so "
+"enjoyable, can be deactivated and reactivated later."
+msgstr ""
+"Si tu coches la case en dessous, tu recevras un mail de <tt>seum@merigoux."
+"ovh</tt> à chaque fois que quelqu'un aura le seum sur le site. Spammatoire "
+"mais jouissif, peut-être désactivé ou réactivé par la suite."
+
+#: counter/templates/createUser.html:31
+#, fuzzy
+#| msgid "email notifications"
+msgid "Email notifications"
+msgstr "Notifications par email"
+
+#: counter/templates/createUser.html:34
+msgid ""
+"Other users will see your nickname and your trigram only, it will be your "
+"seum identity!"
+msgstr ""
+"Les autres utilisateurs ne pourront voir que ton pseudo et ton trigramme, ce "
+"sera ton identité seumesque !"
+
+#: counter/templates/createUser.html:36
+#, fuzzy
+#| msgid "trigram"
+msgid "Trigram"
+msgstr "Trigramme"
+
+#: counter/templates/createUser.html:40
+msgid "Nick"
+msgstr "Pseudo"
+
+#: counter/templates/createUser.html:43
+msgid ""
+"I could have required 10 characters with one digit, an emoji, three "
+"uppercase letters and two lowercase ones to throw you the seum, but actually "
+"you can choose whatever you want."
+msgstr ""
+"J'aurais pu exiger 10 caractères dont un chiffre, un emoji, 3 majuscules et "
+"2 minuscules pour te foutre le seum mais en fait tu peux mettre ce que tu "
+"veux."
+
+#: counter/templates/createUser.html:45
+msgid "Password"
+msgstr "Mot de passe"
+
+#: counter/templates/createUser.html:49
+msgid "Confirm password"
+msgstr "Confirmer le mot de passe"
+
+#: counter/templates/createUser.html:52
+msgid ""
+"If this form has given you the seum, do not forget to reset your counter "
+"once you are logged in!"
+msgstr ""
+"Si ce formulaire t'as foutu le seum, n'oublie pas de remettre ton compteur à "
+"zéro en arrivant sur le site."
+
+#: counter/templates/createUser.html:54
+msgid "Create the counter"
+msgstr "Créer le compteur"
+
+#: counter/templates/createUser.html:64
+msgid "Error"
+msgstr "Erreur"
+
+#: counter/templates/createUserDone.html:5
+msgid "Password successfully changed!"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/createUserDone.html:17
+msgid "Victory!"
+msgstr "Victoire !"
+
+#: counter/templates/createUserDone.html:20
+msgid "You have created your counter! Your login is "
+msgstr "Tu as créé ton compteur ! Ton login est "
+
+#: counter/templates/createUserDone.html:22
+msgid "Login to access the website!"
+msgstr "Connecte-toi pour accéder au site !"
+
 #: counter/templates/hashtagTemplate.html:20
 msgid "Seums containing"
 msgstr "Liste des seums contenant"
@@ -197,14 +297,26 @@ msgstr "Liste des seums contenant"
 msgid "Victim"
 msgstr "Victime"
 
-#: counter/views/counter.py:34
+#: counter/views/counter.py:41
 msgid "unknown"
 msgstr "inconnu"
 
-#: counter/views/counter.py:75
+#: counter/views/counter.py:81
 #, python-format
 msgid "From %(who)s: %(reason)s"
 msgstr "De %(who)s : %(reason)s"
+
+#: counter/views/user.py:22
+msgid "Passwords do not match."
+msgstr "Les mots de passe sont différents."
+
+#: counter/views/user.py:27
+msgid "A user with this email address already exists."
+msgstr "Un utilisateur avec cette adresse email existe déjà."
+
+#: counter/views/user.py:33
+msgid "Use another email address, another user has already this login."
+msgstr "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
 
 #: seum/settings.py:111
 msgid "English"
