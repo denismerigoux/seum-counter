@@ -28,7 +28,7 @@ def get(request, id_counter):
 
     counter = Counter.objects.prefetch_related(
         # we get the related resets annotated with their number of likes
-        Prefetch('resets', queryset=Reset.objects.annotate(likes_count=Count('likes'))),
+        Prefetch('resets', queryset=Reset.objects.select_related('who', 'counter').annotate(likes_count=Count('likes'))),
         'resets__likes'
     ).get(pk=id_counter)
     resets = list(counter.resets.order_by('-timestamp'))
@@ -55,8 +55,8 @@ def get(request, id_counter):
 
         counter.lastLikes = list(counter.lastReset.likes.all())
         counter.alreadyLiked = myCounter.id in [l.liker.id for l in counter.lastLikes]
-        counter.likeCount = len(counter.lastLikes)
-        if counter.likeCount > 0:
+        counter.likes_count = len(counter.lastLikes)
+        if counter.likes_count > 0:
             counter.likersString = ", ".join(like.liker.trigramme for like in counter.lastLikes)
 
     for reset in resets:
