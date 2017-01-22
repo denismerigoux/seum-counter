@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:19+0100\n"
+"POT-Creation-Date: 2017-01-22 13:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,110 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: counter/models.py:12
-msgid "name"
-msgstr "nom"
-
-#: counter/models.py:13
-msgid "email"
-msgstr "email"
-
-#: counter/models.py:14
-msgid "trigram"
-msgstr "trigramme"
-
-#: counter/models.py:15
-msgid "associated user"
-msgstr "utilisateur associé"
-
-#: counter/models.py:16
-msgid "email notifications"
-msgstr "notifications par email"
-
-#: counter/models.py:17
-msgid "sort by SeumScore"
-msgstr "trier par SeumScore"
-
-#: counter/models.py:20
-#, python-format
-msgid "%(trigram)s (%(name)s)"
-msgstr "%(trigram)s (%(name)s)"
-
-#: counter/models.py:23
-msgid "counter"
-msgstr "compteur"
-
-#: counter/models.py:27 counter/models.py:55
-msgid "datetime"
-msgstr "date et heure"
-
-#: counter/models.py:28
-msgid "reason"
-msgstr "raison"
-
-#: counter/models.py:29
-msgid "victim"
-msgstr "victime"
-
-#: counter/models.py:30
-msgid "seum giver"
-msgstr "fouteur de seum"
-
-#: counter/models.py:34
-#, python-format
-msgid "%(counter)s: %(datetime)s (%(reason)s)"
-msgstr "%(counter)s : %(datetime)s (%(reason)s)"
-
-#: counter/models.py:48 counter/models.py:79
-msgid "reset"
-msgstr "remise à zéro"
-
-#: counter/models.py:49
-msgid "resets"
-msgstr "remises à zéro"
-
-#: counter/models.py:53
-msgid "liker"
-msgstr "likeur"
-
-#: counter/models.py:54
-msgid "seum"
-msgstr "seum"
-
-#: counter/models.py:58
-msgid "like"
-msgstr "like"
-
-#: counter/models.py:59
-msgid "likes"
-msgstr "likes"
-
-#: counter/models.py:63
-#, python-format
-msgid "%(liker)s likes %(reset)s"
-msgstr "%(liker)s aime %(reset)s"
-
-#: counter/models.py:70
-msgid "keyword"
-msgstr "mot-clé"
-
-#: counter/models.py:71
-msgid "keywords"
-msgstr "mots-clés"
-
-#: counter/models.py:78 counter/models.py:82
-msgid "hashtag"
-msgstr "hashtag"
-
-#: counter/models.py:83
-msgid "hashtags"
-msgstr "hashtags"
-
-#: counter/models.py:86
-#, python-format
-msgid "%(keyword)s for %(who)s"
-msgstr "%(keyword)s pour %(who)s"
 
 #: counter/templates/counterTemplate.html:47
 #: counter/templates/homeTemplate.html:32
@@ -229,9 +125,6 @@ msgstr ""
 "sera ton identité seumesque !"
 
 #: counter/templates/createUser.html:36 counter/templates/homeTemplate.html:76
-#: counter/views/home.py:203 counter/views/home.py:209
-#: counter/views/home.py:247 counter/views/home.py:253
-#: counter/views/home.py:285 counter/views/home.py:291
 msgid "Trigram"
 msgstr "Trigramme"
 
@@ -509,96 +402,151 @@ msgstr ""
 "Un mail t'a été envoyé, suis les instructions pour aller réinitialiser ton "
 "mot de passe."
 
-#: counter/templates/resetEmail.txt:3
-msgid ""
-"You have lost your password and you've got the seum. You have to follow this "
-"link (or copy-paste it in your browser) to reinitialise it:"
-msgstr ""
-"T'as perdu ton mot de passe et t'as le seum. "
-"Il te reste plus qu'à suivre le lien pour le réinitialiser :"
+#~ msgid "name"
+#~ msgstr "nom"
 
-#: counter/templates/resetEmail.txt:7
-msgid "Your login is {{ user.username }} in case you have forgotten it too."
-msgstr "Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié aussi."
+#~ msgid "email"
+#~ msgstr "email"
 
-#: counter/templates/resetEmail.txt:18
-msgid ""
-"P.S.: If you don't want to receive these mails anymore, contact us at denis."
-"merigoux@gmail.com"
-msgstr "P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com"
+#~ msgid "trigram"
+#~ msgstr "trigramme"
 
-#: counter/views/counter.py:41
-msgid "unknown"
-msgstr "inconnu"
+#~ msgid "associated user"
+#~ msgstr "utilisateur associé"
 
-#: counter/views/counter.py:81
-#, python-format
-msgid "From %(who)s: %(reason)s"
-msgstr "De %(who)s : %(reason)s"
+#~ msgid "email notifications"
+#~ msgstr "notifications par email"
 
-#: counter/views/home.py:161
-#, python-format
-msgid "%(counter)s: %(reason)s"
-msgstr "%(counter)s : %(reason)s"
+#~ msgid "sort by SeumScore"
+#~ msgstr "trier par SeumScore"
 
-#: counter/views/home.py:163
-#, python-format
-msgid "%(who)s to %(counter)s: %(reason)s"
-msgstr "%(who)s pour %(counter)s : %(reason)s"
+#~ msgid "%(trigram)s (%(name)s)"
+#~ msgstr "%(trigram)s (%(name)s)"
 
-#: counter/views/home.py:167
-msgid "Seum"
-msgstr "Seum"
+#~ msgid "counter"
+#~ msgstr "compteur"
 
-#: counter/views/home.py:184
-msgid "24h ago"
-msgstr "il y a 24h"
+#~ msgid "datetime"
+#~ msgstr "date et heure"
 
-#: counter/views/home.py:185
-msgid "Now"
-msgstr "Présent"
+#~ msgid "reason"
+#~ msgstr "raison"
 
-#: counter/views/home.py:203 counter/views/home.py:208
-#: counter/views/home.py:228 counter/views/home.py:233
-msgid "Number of seums"
-msgstr "Nombre de seums"
+#~ msgid "victim"
+#~ msgstr "victime"
 
-#: counter/views/home.py:228 counter/views/home.py:234
-msgid "Month"
-msgstr "Mois"
+#~ msgid "seum giver"
+#~ msgstr "fouteur de seum"
 
-#: counter/views/home.py:247 counter/views/home.py:252
-msgid "Number of given likes"
-msgstr "Nombre de likes distribués"
+#~ msgid "%(counter)s: %(datetime)s (%(reason)s)"
+#~ msgstr "%(counter)s : %(datetime)s (%(reason)s)"
 
-#: counter/views/home.py:266 counter/views/home.py:272
-msgid "Hashtag"
-msgstr "Hashtag"
+#~ msgid "reset"
+#~ msgstr "remise à zéro"
 
-#: counter/views/home.py:266 counter/views/home.py:271
-msgid "Number of seums containing the hashtag"
-msgstr "Nombre de seums contenant le hashtag"
+#~ msgid "resets"
+#~ msgstr "remises à zéro"
 
-#: counter/views/home.py:285 counter/views/home.py:290
-msgid "Number of received likes"
-msgstr "Nombre de likes reçus"
+#~ msgid "liker"
+#~ msgstr "likeur"
 
-#: counter/views/user.py:22
-msgid "Passwords do not match."
-msgstr "Les mots de passe sont différents."
+#~ msgid "seum"
+#~ msgstr "seum"
 
-#: counter/views/user.py:27
-msgid "A user with this email address already exists."
-msgstr "Un utilisateur avec cette adresse email existe déjà."
+#~ msgid "like"
+#~ msgstr "like"
 
-#: counter/views/user.py:33
-msgid "Use another email address, another user has already this login."
-msgstr "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
+#~ msgid "likes"
+#~ msgstr "likes"
 
-#: seum/settings.py:111
-msgid "English"
-msgstr "Anglais"
+#~ msgid "%(liker)s likes %(reset)s"
+#~ msgstr "%(liker)s aime %(reset)s"
 
-#: seum/settings.py:112
-msgid "French"
-msgstr "Français"
+#~ msgid "keyword"
+#~ msgstr "mot-clé"
+
+#~ msgid "keywords"
+#~ msgstr "mots-clés"
+
+#~ msgid "hashtag"
+#~ msgstr "hashtag"
+
+#~ msgid "hashtags"
+#~ msgstr "hashtags"
+
+#~ msgid "%(keyword)s for %(who)s"
+#~ msgstr "%(keyword)s pour %(who)s"
+
+#~ msgid ""
+#~ "You have lost your password and you've got the seum. You have to follow "
+#~ "this link (or copy-paste it in your browser) to reinitialise it:"
+#~ msgstr ""
+#~ "T'as perdu ton mot de passe et t'as le seum. Il te reste plus qu'à suivre "
+#~ "le lien pour le réinitialiser :"
+
+#~ msgid "Your login is {{ user.username }} in case you have forgotten it too."
+#~ msgstr ""
+#~ "Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais "
+#~ "oublié aussi."
+
+#~ msgid ""
+#~ "P.S.: If you don't want to receive these mails anymore, contact us at "
+#~ "denis.merigoux@gmail.com"
+#~ msgstr ""
+#~ "P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis."
+#~ "merigoux@gmail.com"
+
+#~ msgid "unknown"
+#~ msgstr "inconnu"
+
+#~ msgid "From %(who)s: %(reason)s"
+#~ msgstr "De %(who)s : %(reason)s"
+
+#~ msgid "%(counter)s: %(reason)s"
+#~ msgstr "%(counter)s : %(reason)s"
+
+#~ msgid "%(who)s to %(counter)s: %(reason)s"
+#~ msgstr "%(who)s pour %(counter)s : %(reason)s"
+
+#~ msgid "Seum"
+#~ msgstr "Seum"
+
+#~ msgid "24h ago"
+#~ msgstr "il y a 24h"
+
+#~ msgid "Now"
+#~ msgstr "Présent"
+
+#~ msgid "Number of seums"
+#~ msgstr "Nombre de seums"
+
+#~ msgid "Month"
+#~ msgstr "Mois"
+
+#~ msgid "Number of given likes"
+#~ msgstr "Nombre de likes distribués"
+
+#~ msgid "Hashtag"
+#~ msgstr "Hashtag"
+
+#~ msgid "Number of seums containing the hashtag"
+#~ msgstr "Nombre de seums contenant le hashtag"
+
+#~ msgid "Number of received likes"
+#~ msgstr "Nombre de likes reçus"
+
+#~ msgid "Passwords do not match."
+#~ msgstr "Les mots de passe sont différents."
+
+#~ msgid "A user with this email address already exists."
+#~ msgstr "Un utilisateur avec cette adresse email existe déjà."
+
+#~ msgid "Use another email address, another user has already this login."
+#~ msgstr ""
+#~ "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
+
+#~ msgid "English"
+#~ msgstr "Anglais"
+
+#~ msgid "French"
+#~ msgstr "Français"
