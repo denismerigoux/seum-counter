@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:19+0100\n"
+"POT-Creation-Date: 2017-01-22 18:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,9 +221,9 @@ msgid ""
 msgstr ""
 
 #: counter/templates/createUser.html:36 counter/templates/homeTemplate.html:76
-#: counter/views/home.py:203 counter/views/home.py:209
-#: counter/views/home.py:247 counter/views/home.py:253
-#: counter/views/home.py:285 counter/views/home.py:291
+#: counter/views/home.py:200 counter/views/home.py:206
+#: counter/views/home.py:244 counter/views/home.py:250
+#: counter/views/home.py:282 counter/views/home.py:288
 msgid "Trigram"
 msgstr ""
 
@@ -490,17 +490,17 @@ msgid ""
 "password."
 msgstr ""
 
-#: counter/templates/resetEmail.txt:3
+#: counter/templates/resetEmail.txt:2
 msgid ""
 "You have lost your password and you've got the seum. You have to follow this "
 "link (or copy-paste it in your browser) to reinitialise it:"
 msgstr ""
 
-#: counter/templates/resetEmail.txt:7
+#: counter/templates/resetEmail.txt:6
 msgid "Your login is {{ user.username }} in case you have forgotten it too."
 msgstr ""
 
-#: counter/templates/resetEmail.txt:18
+#: counter/templates/resetEmail.txt:11
 msgid ""
 "P.S.: If you don't want to receive these mails anymore, contact us at denis."
 "merigoux@gmail.com"
@@ -515,50 +515,50 @@ msgstr ""
 msgid "From %(who)s: %(reason)s"
 msgstr ""
 
-#: counter/views/home.py:161
+#: counter/views/home.py:158
 #, python-format
 msgid "%(counter)s: %(reason)s"
 msgstr ""
 
-#: counter/views/home.py:163
+#: counter/views/home.py:160
 #, python-format
 msgid "%(who)s to %(counter)s: %(reason)s"
 msgstr ""
 
-#: counter/views/home.py:167
+#: counter/views/home.py:164
 msgid "Seum"
 msgstr ""
 
-#: counter/views/home.py:184
+#: counter/views/home.py:181
 msgid "24h ago"
 msgstr ""
 
-#: counter/views/home.py:185
+#: counter/views/home.py:182
 msgid "Now"
 msgstr ""
 
-#: counter/views/home.py:203 counter/views/home.py:208
-#: counter/views/home.py:228 counter/views/home.py:233
+#: counter/views/home.py:200 counter/views/home.py:205
+#: counter/views/home.py:225 counter/views/home.py:230
 msgid "Number of seums"
 msgstr ""
 
-#: counter/views/home.py:228 counter/views/home.py:234
+#: counter/views/home.py:225 counter/views/home.py:231
 msgid "Month"
 msgstr ""
 
-#: counter/views/home.py:247 counter/views/home.py:252
+#: counter/views/home.py:244 counter/views/home.py:249
 msgid "Number of given likes"
 msgstr ""
 
-#: counter/views/home.py:266 counter/views/home.py:272
+#: counter/views/home.py:263 counter/views/home.py:269
 msgid "Hashtag"
 msgstr ""
 
-#: counter/views/home.py:266 counter/views/home.py:271
+#: counter/views/home.py:263 counter/views/home.py:268
 msgid "Number of seums containing the hashtag"
 msgstr ""
 
-#: counter/views/home.py:285 counter/views/home.py:290
+#: counter/views/home.py:282 counter/views/home.py:287
 msgid "Number of received likes"
 msgstr ""
 
@@ -574,10 +574,10 @@ msgstr ""
 msgid "Use another email address, another user has already this login."
 msgstr ""
 
-#: seum/settings.py:111
+#: seum/settings.py:109
 msgid "English"
 msgstr ""
 
-#: seum/settings.py:112
+#: seum/settings.py:110
 msgid "French"
 msgstr ""
