@@ -11,6 +11,11 @@ Then copy and paste the settings file template located in folder `seum`:
 cd seum && cp settings.py.default settings.py
 ```
 
+In order to use correctly the internationalisation, compile the locale files:
+```
+python manage.py compilemessages
+```
+
 ## Running the server
 
 ### Developement
