@@ -1,11 +1,11 @@
-T'as perdu ton mot de passe et t'as le seum. Il te reste plus qu'à suivre le lien pour le réinitialiser :
+{% load i18n %}
+{% blocktrans %}You have lost your password and you've got the seum. You have to follow this link (or copy-paste it in your browser) to reinitialise it:{% endblocktrans %}
 {% block reset_link %}
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
-
-Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié aussi.
+{% trans "Your login is {{ user.username }} in case you have forgotten it too." %}
 
 --
 SeumBook™ - http://seum.merigoux.ovh
 
-P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com
+{% trans "P.S.: If you don't want to receive these mails anymore, contact us at denis.merigoux@gmail.com" %}

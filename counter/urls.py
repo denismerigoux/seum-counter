@@ -3,20 +3,26 @@ from counter.rss import SeumFeed
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 
-from . import views
+from .views import counter, hashtag, home, reset, user
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^reset-counter/$', views.resetCounter, name='reset-counter'),
-    url(r'^counter/(?P<id_counter>\d+)/$', views.counter, name='counter'),
-    url(r'^hashtag/(?P<keyword>.+)/$', views.hashtag, name='hashtag'),
-    url(r'^rss/$', SeumFeed()),
-    url(r'^create_user/$', views.createUser, name='create_user'),
-    url(r'^like/$', views.like, name='like'),
-    url(r'^toggle-notif/$', views.toggleEmailNotifications,
+    url(r'^$', home.index, name='home'),
+    url(r'^toggle-notif/$', home.toggleEmailNotifications,
         name='toggle_email_notifications'),
-    url(r'^toggle-sort-score/$', views.toggleScoreSorting,
+    url(r'^toggle-sort-score/$', home.toggleScoreSorting,
         name='toggle_sort_score'),
+
+    url(r'^reset-counter/$', counter.reset_counter, name='reset-counter'),
+    url(r'^counter/(?P<id_counter>\d+)/$', counter.get, name='counter'),
+
+    url(r'^hashtag/(?P<keyword>.+)/$', hashtag.get, name='hashtag'),
+
+    url(r'^like/$', reset.like, name='like'),
+
+    url(r'^create_user/$', user.create, name='create_user'),
+
+    url(r'^rss/$', SeumFeed()),
+
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'},
         name='login'),

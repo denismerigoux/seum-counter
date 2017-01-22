@@ -13,14 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
-urlpatterns = [
+urlpatterns = [url(r'^i18n/', include('django.conf.urls.i18n'), name='set_language'), ]
+
+urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
-    url(r'^seum/', include('counter.urls')),
+
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
-    url(r'^', RedirectView.as_view(url='seum/')),
-]
+)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += i18n_patterns(
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+
+urlpatterns += i18n_patterns(url(r'^', include('counter.urls')), )

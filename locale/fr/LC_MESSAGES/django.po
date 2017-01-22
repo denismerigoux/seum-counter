@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-22 14:19+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: counter/models.py:12
+msgid "name"
+msgstr "nom"
+
+#: counter/models.py:13
+msgid "email"
+msgstr "email"
+
+#: counter/models.py:14
+msgid "trigram"
+msgstr "trigramme"
+
+#: counter/models.py:15
+msgid "associated user"
+msgstr "utilisateur associé"
+
+#: counter/models.py:16
+msgid "email notifications"
+msgstr "notifications par email"
+
+#: counter/models.py:17
+msgid "sort by SeumScore"
+msgstr "trier par SeumScore"
+
+#: counter/models.py:20
+#, python-format
+msgid "%(trigram)s (%(name)s)"
+msgstr "%(trigram)s (%(name)s)"
+
+#: counter/models.py:23
+msgid "counter"
+msgstr "compteur"
+
+#: counter/models.py:27 counter/models.py:55
+msgid "datetime"
+msgstr "date et heure"
+
+#: counter/models.py:28
+msgid "reason"
+msgstr "raison"
+
+#: counter/models.py:29
+msgid "victim"
+msgstr "victime"
+
+#: counter/models.py:30
+msgid "seum giver"
+msgstr "fouteur de seum"
+
+#: counter/models.py:34
+#, python-format
+msgid "%(counter)s: %(datetime)s (%(reason)s)"
+msgstr "%(counter)s : %(datetime)s (%(reason)s)"
+
+#: counter/models.py:48 counter/models.py:79
+msgid "reset"
+msgstr "remise à zéro"
+
+#: counter/models.py:49
+msgid "resets"
+msgstr "remises à zéro"
+
+#: counter/models.py:53
+msgid "liker"
+msgstr "likeur"
+
+#: counter/models.py:54
+msgid "seum"
+msgstr "seum"
+
+#: counter/models.py:58
+msgid "like"
+msgstr "like"
+
+#: counter/models.py:59
+msgid "likes"
+msgstr "likes"
+
+#: counter/models.py:63
+#, python-format
+msgid "%(liker)s likes %(reset)s"
+msgstr "%(liker)s aime %(reset)s"
+
+#: counter/models.py:70
+msgid "keyword"
+msgstr "mot-clé"
+
+#: counter/models.py:71
+msgid "keywords"
+msgstr "mots-clés"
+
+#: counter/models.py:78 counter/models.py:82
+msgid "hashtag"
+msgstr "hashtag"
+
+#: counter/models.py:83
+msgid "hashtags"
+msgstr "hashtags"
+
+#: counter/models.py:86
+#, python-format
+msgid "%(keyword)s for %(who)s"
+msgstr "%(keyword)s pour %(who)s"
+
+#: counter/templates/counterTemplate.html:47
+#: counter/templates/homeTemplate.html:32
+#: counter/templates/homeTemplate.html:134
+msgid "Has not got the seum yet"
+msgstr "N'a pas encore eu le seum"
+
+#: counter/templates/counterTemplate.html:51
+#: counter/templates/homeTemplate.html:138
+msgid "Has got the seum"
+msgstr "A eu le seum"
+
+#: counter/templates/counterTemplate.html:53
+#: counter/templates/homeTemplate.html:140
+msgid "threw him/her the seum"
+msgstr "lui a foutu le seum"
+
+#: counter/templates/counterTemplate.html:61
+#: counter/templates/homeTemplate.html:45
+msgid "Reset"
+msgstr "Remise à zéro"
+
+#: counter/templates/counterTemplate.html:67
+msgid "Motive for the seum:"
+msgstr "Motif du seum :"
+
+#: counter/templates/counterTemplate.html:74
+#: counter/templates/homeTemplate.html:89
+msgid "Throw the seum"
+msgstr "Foutre le seum"
+
+#: counter/templates/counterTemplate.html:83
+msgid "Timeline of the seum"
+msgstr "Timeline du seum"
+
+#: counter/templates/counterTemplate.html:88
+msgid "No timeline of the seum yet..."
+msgstr "Pas encore de timeline du seum..."
+
+#: counter/templates/counterTemplate.html:102
+msgid "Seum history"
+msgstr "Historique du seum"
+
+#: counter/templates/counterTemplate.html:110
+#: counter/templates/hashtagTemplate.html:26
+msgid "Date"
+msgstr "Date"
+
+#: counter/templates/counterTemplate.html:111
+#: counter/templates/hashtagTemplate.html:27
+#: counter/templates/homeTemplate.html:82
+msgid "Motive"
+msgstr "Motif"
+
+#: counter/templates/counterTemplate.html:112
+#: counter/templates/hashtagTemplate.html:29
+msgid "Seum thrower"
+msgstr "Fouteur de seum"
+
+#: counter/templates/counterTemplate.html:113
+#: counter/templates/hashtagTemplate.html:30
+msgid "Number of likes"
+msgstr "Nombre de likes"
+
+#: counter/templates/counterTemplate.html:138
+#: counter/templates/hashtagTemplate.html:56
+msgid "Back to counters list"
+msgstr "Retour à la liste des compteurs"
+
+#: counter/templates/createUser.html:17
+msgid "Create your seum counter!"
+msgstr "Crée ton compteur de seum !"
+
+#: counter/templates/createUser.html:22
+msgid ""
+"The email address will be used for password reinitialisation. Your login on "
+"this website will be the first part of this address (before the @)."
+msgstr ""
+"L'adresse e-mail sera utilisée pour la réinitialisation de ton mot de passe. "
+"Ton login sur le site sera la première partie de cette adresse (avant le @)."
+
+#: counter/templates/createUser.html:24
+msgid "Email address"
+msgstr "Adresse email"
+
+#: counter/templates/createUser.html:27
+msgid ""
+"If you check the box below, you will receive an email from <tt>seum@merigoux."
+"ovh</tt> each time someone get the seum on the site. Spamming but so "
+"enjoyable, can be deactivated and reactivated later."
+msgstr ""
+"Si tu coches la case en dessous, tu recevras un mail de <tt>seum@merigoux."
+"ovh</tt> à chaque fois que quelqu'un aura le seum sur le site. Spammatoire "
+"mais jouissif, peut-être désactivé ou réactivé par la suite."
+
+#: counter/templates/createUser.html:31
+msgid "Email notifications"
+msgstr "Notifications par email"
+
+#: counter/templates/createUser.html:34
+msgid ""
+"Other users will see your nickname and your trigram only, it will be your "
+"seum identity!"
+msgstr ""
+"Les autres utilisateurs ne pourront voir que ton pseudo et ton trigramme, ce "
+"sera ton identité seumesque !"
+
+#: counter/templates/createUser.html:36 counter/templates/homeTemplate.html:76
+#: counter/views/home.py:203 counter/views/home.py:209
+#: counter/views/home.py:247 counter/views/home.py:253
+#: counter/views/home.py:285 counter/views/home.py:291
+msgid "Trigram"
+msgstr "Trigramme"
+
+#: counter/templates/createUser.html:40
+msgid "Nick"
+msgstr "Pseudo"
+
+#: counter/templates/createUser.html:43
+msgid ""
+"I could have required 10 characters with one digit, an emoji, three "
+"uppercase letters and two lowercase ones to throw you the seum, but actually "
+"you can choose whatever you want."
+msgstr ""
+"J'aurais pu exiger 10 caractères dont un chiffre, un emoji, 3 majuscules et "
+"2 minuscules pour te foutre le seum mais en fait tu peux mettre ce que tu "
+"veux."
+
+#: counter/templates/createUser.html:45 counter/templates/login.html:27
+msgid "Password"
+msgstr "Mot de passe"
+
+#: counter/templates/createUser.html:49
+msgid "Confirm password"
+msgstr "Confirmer le mot de passe"
+
+#: counter/templates/createUser.html:52
+msgid ""
+"If this form has given you the seum, do not forget to reset your counter "
+"once you are logged in!"
+msgstr ""
+"Si ce formulaire t'as foutu le seum, n'oublie pas de remettre ton compteur à "
+"zéro en arrivant sur le site."
+
+#: counter/templates/createUser.html:54
+msgid "Create the counter"
+msgstr "Créer le compteur"
+
+#: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/passwordChange.html:45
+#: counter/templates/passwordReset.html:37
+#: counter/templates/passwordResetConfirm.html:46
+#: counter/templates/passwordResetConfirm.html:57
+msgid "Error"
+msgstr "Erreur"
+
+#: counter/templates/createUserDone.html:5
+msgid "Password successfully changed!"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/createUserDone.html:17
+#: counter/templates/passwordChangeDone.html:17
+#: counter/templates/passwordResetComplete.html:17
+#: counter/templates/passwordResetDone.html:17
+msgid "Victory!"
+msgstr "Victoire !"
+
+#: counter/templates/createUserDone.html:20
+msgid "You have created your counter! Your login is "
+msgstr "Tu as créé ton compteur ! Ton login est "
+
+#: counter/templates/createUserDone.html:22
+msgid "Login to access the website!"
+msgstr "Connecte-toi pour accéder au site !"
+
+#: counter/templates/hashtagTemplate.html:20
+msgid "Seums containing"
+msgstr "Liste des seums contenant"
+
+#: counter/templates/hashtagTemplate.html:28
+msgid "Victim"
+msgstr "Victime"
+
+#: counter/templates/homeTemplate.html:6
+msgid "Counters"
+msgstr "Compteurs"
+
+#: counter/templates/homeTemplate.html:36
+msgid "I got the seum"
+msgstr "J'ai eu le seum"
+
+#: counter/templates/homeTemplate.html:52
+msgid "Motive of the seum"
+msgstr "Motif du seum"
+
+#: counter/templates/homeTemplate.html:59
+msgid "I've got the seum"
+msgstr "J'ai le seum"
+
+#: counter/templates/homeTemplate.html:70
+msgid "Break the seum wall"
+msgstr "Brise le mur du seum"
+
+#: counter/templates/homeTemplate.html:155
+msgid "Timeline of the 24h of the seum"
+msgstr "Timeline des 24 heures du seum"
+
+#: counter/templates/homeTemplate.html:160
+msgid "No seum in the last past 24h..."
+msgstr "Pas de seum durant les dernières 24h..."
+
+#: counter/templates/homeTemplate.html:173
+msgid "Best seumers"
+msgstr "Meilleurs seumers"
+
+#: counter/templates/homeTemplate.html:178
+#: counter/templates/homeTemplate.html:250
+msgid "Nobody has got the seum..."
+msgstr "Personne n'a eu le seum..."
+
+#: counter/templates/homeTemplate.html:191
+msgid "Most liked seumers"
+msgstr "Seumers les plus likés"
+
+#: counter/templates/homeTemplate.html:196
+#: counter/templates/homeTemplate.html:232
+msgid "Nobody liked..."
+msgstr "Personne n'a aimé..."
+
+#: counter/templates/homeTemplate.html:209
+msgid "Most popular hashtags"
+msgstr "Hashtags les plus populaires"
+
+#: counter/templates/homeTemplate.html:214
+msgid "Nobody used any hashtag..."
+msgstr "Personne n'a utilisé de hashtag..."
+
+#: counter/templates/homeTemplate.html:227
+msgid "Best likers of seum"
+msgstr "Meilleurs likeurs de seum"
+
+#: counter/templates/homeTemplate.html:245
+msgid "Seum activity"
+msgstr "Activité seumesque"
+
+#: counter/templates/homeTemplate.html:261
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: counter/templates/homeTemplate.html:262
+#: counter/templates/passwordChange.html:5
+#: counter/templates/passwordChange.html:35
+#: counter/templates/passwordResetConfirm.html:5
+#: counter/templates/passwordResetConfirm.html:36
+msgid "Change password"
+msgstr "Modifier le mot de passe"
+
+#: counter/templates/homeTemplate.html:265
+msgid "Deactivate email notifications"
+msgstr "Désactiver les notifications par email"
+
+#: counter/templates/homeTemplate.html:267
+msgid "Activate email notifications"
+msgstr "Activer les notifications par email"
+
+#: counter/templates/homeTemplate.html:272
+msgid "Sort seums by date"
+msgstr "Trier les seums par ancienneté"
+
+#: counter/templates/homeTemplate.html:274
+msgid "Sort seums by score"
+msgstr "Trier les seums par score"
+
+#: counter/templates/login.html:5
+msgid "Login"
+msgstr "Login"
+
+#: counter/templates/login.html:17
+msgid "Login to get the seum!"
+msgstr "Connecte-toi pour avoir le seum !"
+
+#: counter/templates/login.html:23
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: counter/templates/login.html:32
+msgid "Log in"
+msgstr "Se connecter"
+
+#: counter/templates/login.html:33 counter/templates/passwordReset.html:5
+msgid "Password forgotten"
+msgstr "Mot de passe oublié"
+
+#: counter/templates/login.html:46 counter/templates/passwordReset.html:40
+msgid "You cannot even login... seum!"
+msgstr "Tu n'arrives mêmes pas à te connecter, seum !"
+
+#: counter/templates/login.html:54
+msgid "You don't have a counter yet?"
+msgstr "Pas encore de compteur ?"
+
+#: counter/templates/login.html:57
+msgid "Hurry up and create it to share your seum!"
+msgstr "Dépêche-toi de le créer pour partager ton seum !"
+
+#: counter/templates/login.html:59
+msgid "Create a counter"
+msgstr "Créer un compteur"
+
+#: counter/templates/passwordChange.html:17
+#: counter/templates/passwordResetConfirm.html:18
+msgid "Change your password of the seum!"
+msgstr "Change ton mot de passe du seum !"
+
+#: counter/templates/passwordChange.html:23
+#: counter/templates/passwordResetConfirm.html:24
+msgid "Old password"
+msgstr "Ancien mot de passe"
+
+#: counter/templates/passwordChange.html:27
+#: counter/templates/passwordResetConfirm.html:28
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: counter/templates/passwordChange.html:31
+#: counter/templates/passwordResetConfirm.html:32
+msgid "Confirm new password"
+msgstr "Confirmer le nouveau mot de passe"
+
+#: counter/templates/passwordChange.html:48
+#: counter/templates/passwordResetConfirm.html:49
+msgid "You don't even manage to change your password, seum."
+msgstr "T'arrives même pas à changer ton mot de passe, seum."
+
+#: counter/templates/passwordChangeDone.html:5
+msgid "Password changed!"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/passwordChangeDone.html:20
+msgid "You changed your password!"
+msgstr "Tu as changé ton mot de passe !"
+
+#: counter/templates/passwordChangeDone.html:22
+#: counter/templates/passwordResetComplete.html:22
+msgid "Home"
+msgstr "Accueil"
+
+#: counter/templates/passwordReset.html:17
+msgid "Reset password"
+msgstr "Réinitialiser le mot de passe"
+
+#: counter/templates/passwordReset.html:23
+msgid "Email for the reinitialisation link"
+msgstr "Email auquel sera envoyé le lien de réinitialisation"
+
+#: counter/templates/passwordReset.html:27
+msgid "Send"
+msgstr "Envoyer"
+
+#: counter/templates/passwordResetComplete.html:5
+msgid "Your password has been reset"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/passwordResetComplete.html:20
+msgid ""
+"That's it! You have reset your password! You can reset your counter now."
+msgstr ""
+"Ça y est tu as réinitialisé ton mot de passe ! Du coup tu peux aller "
+"remettre ton compteur à zéro."
+
+#: counter/templates/passwordResetConfirm.html:60
+msgid "You've got the seum, the link that we sent you has already been used."
+msgstr ""
+"T'as le seum, le lien qui t'as été donné pour visiter cette page est déjà "
+"utilisé."
+
+#: counter/templates/passwordResetDone.html:5
+msgid "Email sent!"
+msgstr "Email envoyé !"
+
+#: counter/templates/passwordResetDone.html:20
+msgid ""
+"We have sent you an email. Follow the instructions to reinitialise your "
+"password."
+msgstr ""
+"Un mail t'a été envoyé, suis les instructions pour aller réinitialiser ton "
+"mot de passe."
+
+#: counter/templates/resetEmail.txt:3
+msgid ""
+"You have lost your password and you've got the seum. You have to follow this "
+"link (or copy-paste it in your browser) to reinitialise it:"
+msgstr ""
+"T'as perdu ton mot de passe et t'as le seum. "
+"Il te reste plus qu'à suivre le lien pour le réinitialiser :"
+
+#: counter/templates/resetEmail.txt:7
+msgid "Your login is {{ user.username }} in case you have forgotten it too."
+msgstr "Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié aussi."
+
+#: counter/templates/resetEmail.txt:18
+msgid ""
+"P.S.: If you don't want to receive these mails anymore, contact us at denis."
+"merigoux@gmail.com"
+msgstr "P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com"
+
+#: counter/views/counter.py:41
+msgid "unknown"
+msgstr "inconnu"
+
+#: counter/views/counter.py:81
+#, python-format
+msgid "From %(who)s: %(reason)s"
+msgstr "De %(who)s : %(reason)s"
+
+#: counter/views/home.py:161
+#, python-format
+msgid "%(counter)s: %(reason)s"
+msgstr "%(counter)s : %(reason)s"
+
+#: counter/views/home.py:163
+#, python-format
+msgid "%(who)s to %(counter)s: %(reason)s"
+msgstr "%(who)s pour %(counter)s : %(reason)s"
+
+#: counter/views/home.py:167
+msgid "Seum"
+msgstr "Seum"
+
+#: counter/views/home.py:184
+msgid "24h ago"
+msgstr "il y a 24h"
+
+#: counter/views/home.py:185
+msgid "Now"
+msgstr "Présent"
+
+#: counter/views/home.py:203 counter/views/home.py:208
+#: counter/views/home.py:228 counter/views/home.py:233
+msgid "Number of seums"
+msgstr "Nombre de seums"
+
+#: counter/views/home.py:228 counter/views/home.py:234
+msgid "Month"
+msgstr "Mois"
+
+#: counter/views/home.py:247 counter/views/home.py:252
+msgid "Number of given likes"
+msgstr "Nombre de likes distribués"
+
+#: counter/views/home.py:266 counter/views/home.py:272
+msgid "Hashtag"
+msgstr "Hashtag"
+
+#: counter/views/home.py:266 counter/views/home.py:271
+msgid "Number of seums containing the hashtag"
+msgstr "Nombre de seums contenant le hashtag"
+
+#: counter/views/home.py:285 counter/views/home.py:290
+msgid "Number of received likes"
+msgstr "Nombre de likes reçus"
+
+#: counter/views/user.py:22
+msgid "Passwords do not match."
+msgstr "Les mots de passe sont différents."
+
+#: counter/views/user.py:27
+msgid "A user with this email address already exists."
+msgstr "Un utilisateur avec cette adresse email existe déjà."
+
+#: counter/views/user.py:33
+msgid "Use another email address, another user has already this login."
+msgstr "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
+
+#: seum/settings.py:111
+msgid "English"
+msgstr "Anglais"
+
+#: seum/settings.py:112
+msgid "French"
+msgstr "Français"
