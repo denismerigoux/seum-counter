@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 18:05+0000\n"
+"POT-Creation-Date: 2017-01-22 14:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,68 +123,68 @@ msgstr ""
 
 #: counter/templates/counterTemplate.html:47
 #: counter/templates/homeTemplate.html:32
-#: counter/templates/homeTemplate.html:134
-msgid "Has not got the seum yet"
+msgid "No seum yet"
 msgstr ""
 
 #: counter/templates/counterTemplate.html:51
 #: counter/templates/homeTemplate.html:138
-msgid "Has got the seum"
+msgid "Got the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:53
-#: counter/templates/homeTemplate.html:140
-msgid "threw him/her the seum"
+#: counter/templates/counterTemplate.html:52
+#: counter/templates/homeTemplate.html:139
+#, python-format
+msgid "Seum thrown by %(trigram)s %(time_ago)s."
 msgstr ""
 
-#: counter/templates/counterTemplate.html:61
+#: counter/templates/counterTemplate.html:60
 #: counter/templates/homeTemplate.html:45
-msgid "Reset"
+msgid "Reset the counter"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:67
+#: counter/templates/counterTemplate.html:66
 msgid "Motive for the seum:"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:74
+#: counter/templates/counterTemplate.html:73
 #: counter/templates/homeTemplate.html:89
 msgid "Throw the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:83
+#: counter/templates/counterTemplate.html:82
 msgid "Timeline of the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:88
+#: counter/templates/counterTemplate.html:87
 msgid "No timeline of the seum yet..."
 msgstr ""
 
-#: counter/templates/counterTemplate.html:102
+#: counter/templates/counterTemplate.html:101
 msgid "Seum history"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:110
+#: counter/templates/counterTemplate.html:109
 #: counter/templates/hashtagTemplate.html:26
 msgid "Date"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:111
+#: counter/templates/counterTemplate.html:110
 #: counter/templates/hashtagTemplate.html:27
 #: counter/templates/homeTemplate.html:82
 msgid "Motive"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:112
+#: counter/templates/counterTemplate.html:111
 #: counter/templates/hashtagTemplate.html:29
 msgid "Seum thrower"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:113
+#: counter/templates/counterTemplate.html:112
 #: counter/templates/hashtagTemplate.html:30
 msgid "Number of likes"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:138
+#: counter/templates/counterTemplate.html:137
 #: counter/templates/hashtagTemplate.html:56
 msgid "Back to counters list"
 msgstr ""
@@ -311,53 +311,57 @@ msgstr ""
 msgid "Break the seum wall"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:155
+#: counter/templates/homeTemplate.html:134
+msgid "Has not got the seum yet"
+msgstr ""
+
+#: counter/templates/homeTemplate.html:154
 msgid "Timeline of the 24h of the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:160
+#: counter/templates/homeTemplate.html:159
 msgid "No seum in the last past 24h..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:173
+#: counter/templates/homeTemplate.html:172
 msgid "Best seumers"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:178
-#: counter/templates/homeTemplate.html:250
-msgid "Nobody has got the seum..."
+#: counter/templates/homeTemplate.html:177
+#: counter/templates/homeTemplate.html:249
+msgid "Nobody got the seum..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:191
+#: counter/templates/homeTemplate.html:190
 msgid "Most liked seumers"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:196
-#: counter/templates/homeTemplate.html:232
+#: counter/templates/homeTemplate.html:195
+#: counter/templates/homeTemplate.html:231
 msgid "Nobody liked..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:209
+#: counter/templates/homeTemplate.html:208
 msgid "Most popular hashtags"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:214
+#: counter/templates/homeTemplate.html:213
 msgid "Nobody used any hashtag..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:227
+#: counter/templates/homeTemplate.html:226
 msgid "Best likers of seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:245
+#: counter/templates/homeTemplate.html:244
 msgid "Seum activity"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:261
+#: counter/templates/homeTemplate.html:260
 msgid "Logout"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:262
+#: counter/templates/homeTemplate.html:261
 #: counter/templates/passwordChange.html:5
 #: counter/templates/passwordChange.html:35
 #: counter/templates/passwordResetConfirm.html:5
@@ -365,19 +369,19 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:265
+#: counter/templates/homeTemplate.html:264
 msgid "Deactivate email notifications"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:267
+#: counter/templates/homeTemplate.html:266
 msgid "Activate email notifications"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:272
+#: counter/templates/homeTemplate.html:271
 msgid "Sort seums by date"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:274
+#: counter/templates/homeTemplate.html:273
 msgid "Sort seums by score"
 msgstr ""
 
@@ -574,10 +578,10 @@ msgstr ""
 msgid "Use another email address, another user has already this login."
 msgstr ""
 
-#: seum/settings.py:109
+#: seum/settings.py:107
 msgid "English"
 msgstr ""
 
-#: seum/settings.py:110
+#: seum/settings.py:108
 msgid "French"
 msgstr ""

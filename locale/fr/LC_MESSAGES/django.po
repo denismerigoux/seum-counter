@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 13:49-0500\n"
+"POT-Creation-Date: 2017-01-22 14:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: counter/models.py:12
-#, fuzzy
-#| msgid "Username"
 msgid "name"
 msgstr "Nom d'utilisateur"
 
@@ -29,8 +27,6 @@ msgid "email"
 msgstr "email"
 
 #: counter/models.py:14
-#, fuzzy
-#| msgid "Trigram"
 msgid "trigram"
 msgstr "Trigramme"
 
@@ -39,14 +35,10 @@ msgid "associated user"
 msgstr "utilisateur associé"
 
 #: counter/models.py:16
-#, fuzzy
-#| msgid "Email notifications"
 msgid "email notifications"
 msgstr "Notifications par email"
 
 #: counter/models.py:17
-#, fuzzy
-#| msgid "Sort seums by score"
 msgid "sort by SeumScore"
 msgstr "Trier les seums par score"
 
@@ -56,8 +48,6 @@ msgid "%(trigram)s (%(name)s)"
 msgstr "%(trigram)s (%(name)s)"
 
 #: counter/models.py:23
-#, fuzzy
-#| msgid "Counters"
 msgid "counter"
 msgstr "Compteurs"
 
@@ -70,8 +60,6 @@ msgid "reason"
 msgstr "raison"
 
 #: counter/models.py:29
-#, fuzzy
-#| msgid "Victim"
 msgid "victim"
 msgstr "Victime"
 
@@ -80,20 +68,15 @@ msgid "seum giver"
 msgstr "fouteur de seum"
 
 #: counter/models.py:34
-#, fuzzy, python-format
-#| msgid "%(counter)s: %(reason)s"
+#, python-format
 msgid "%(counter)s: %(datetime)s (%(reason)s)"
-msgstr "%(counter)s : %(reason)s"
+msgstr "%(counter)s : %(datetime)s %(reason)s"
 
 #: counter/models.py:48 counter/models.py:79
-#, fuzzy
-#| msgid "Reset"
 msgid "reset"
 msgstr "Remise à zéro"
 
 #: counter/models.py:49
-#, fuzzy
-#| msgid "Reset"
 msgid "resets"
 msgstr "Remise à zéro"
 
@@ -127,13 +110,10 @@ msgid "keywords"
 msgstr "mots-clé"
 
 #: counter/models.py:78 counter/models.py:82
-#, fuzzy
-#| msgid "Hashtag"
 msgid "hashtag"
 msgstr "Hashtag"
 
 #: counter/models.py:83
-#, fuzzy
 #| msgid "Hashtag"
 msgid "hashtags"
 msgstr "Hashtag"
@@ -145,17 +125,13 @@ msgstr "%(keyword)s pour %(who)s"
 
 #: counter/templates/counterTemplate.html:47
 #: counter/templates/homeTemplate.html:32
-#, fuzzy
-#| msgid "Sort seums by date"
 msgid "No seum yet"
-msgstr "Trier les seums par ancienneté"
+msgstr "Pas encore de seum"
 
 #: counter/templates/counterTemplate.html:51
 #: counter/templates/homeTemplate.html:138
-#, fuzzy
-#| msgid "I got the seum"
 msgid "Got the seum"
-msgstr "J'ai eu le seum"
+msgstr "A eu le seum"
 
 #: counter/templates/counterTemplate.html:52
 #: counter/templates/homeTemplate.html:139
@@ -165,8 +141,6 @@ msgstr "%(trigram)s lui a foutu le seum %(time_ago)s"
 
 #: counter/templates/counterTemplate.html:60
 #: counter/templates/homeTemplate.html:45
-#, fuzzy
-#| msgid "Create the counter"
 msgid "Reset the counter"
 msgstr "Remettre à zéro"
 
@@ -369,8 +343,6 @@ msgstr "Meilleurs seumers"
 
 #: counter/templates/homeTemplate.html:177
 #: counter/templates/homeTemplate.html:249
-#, fuzzy
-#| msgid "Nobody has got the seum..."
 msgid "Nobody got the seum..."
 msgstr "Personne n'a eu le seum..."
 
@@ -639,6 +611,3 @@ msgstr "Anglais"
 #: seum/settings.py:108
 msgid "French"
 msgstr "Français"
-
-#~ msgid "Has got the seum"
-#~ msgstr "A eu le seum"
