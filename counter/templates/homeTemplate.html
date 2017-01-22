@@ -29,7 +29,7 @@
 				<div class="primary-counter panel-body" id="container{{myCounter.id}}">
 					<div style="width:100%;">
 						{% if myCounter.lastReset.noSeum %}
-							<strong>{% trans "Has not got the seum yet" %}.</strong><br />
+							<strong>{% trans "No seum yet" %}.</strong><br />
 						{% else %}
 							<strong>
 								{% if myCounter.lastReset.selfSeum %}
@@ -42,7 +42,7 @@
 						<p>{{ myCounter.lastReset.reason | hashtag }}</p>
 						<div class="text-center" id="button{{myCounter.id}}">
 							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">
-								{% trans "Reset" %}
+								{% trans "Reset the counter" %}
 							</button>
 						</div>
 						{# reset form for my counter #}
@@ -135,9 +135,8 @@
 					{% else %}
 						<strong>
 							{% if counter.lastReset.selfSeum %}
-								{% trans "Has got the seum" %} {{ counter.lastReset.formatted_delta }}.
-							{% else %}
-								{{ counter.lastReset.who.trigramme }} {% trans "threw him/her the seum" %} {{ counter.lastReset.formatted_delta }}.
+								{% trans "Got the seum" %} {{ counter.lastReset.formatted_delta }}.
+							{% else %}{% blocktrans with trigram=counter.lastReset.who.trigramme time_ago=counter.lastReset.formatted_delta %}Seum thrown by {{ trigram }} {{ time_ago }}.{% endblocktrans %}
 							{% endif %}
 						</strong><br />
 					{% endif %}
@@ -175,7 +174,7 @@
 				<div class="panel-body graphs">
 					{% if noBestSeum %}
 						<div class="text-center text-muted">
-							<p>{% trans "Nobody has got the seum..." %}</p>
+							<p>{% trans "Nobody got the seum..." %}</p>
 						</div>
 					{% else %}
 						{{ best_chart.as_html }}
@@ -247,7 +246,7 @@
 				<div class="panel-body graphs">
 					{% if noSeumActivity %}
 						<div class="text-center text-muted">
-							<p>{% trans "Nobody has got the seum..." %}</p>
+							<p>{% trans "Nobody got the seum..." %}</p>
 						</div>
 					{% else %}
 						{{ activity_chart.as_html }}

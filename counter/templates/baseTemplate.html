@@ -1,6 +1,4 @@
-{% load i18n %}
-
-{% get_current_language as LANGUAGE_CODE %}
+{% load i18n %} {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
 <html>
@@ -14,13 +12,7 @@
 	<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico" />
 	<title>SeumBook™ – {% block title %}{% endblock %}</title>
 
-	{# Load the tag library #}
-	{% load bootstrap3 %}
-	{# Load CSS and JavaScript #}
-	{% bootstrap_css %}
-	{% bootstrap_javascript jquery=True %}
-	{# Display django.contrib.messages as Bootstrap alerts #}
-	{% bootstrap_messages %}
+	{# Load the tag library #} {% load bootstrap3 %} {# Load CSS and JavaScript #} {% bootstrap_css %} {% bootstrap_javascript jquery=True %} {# Display django.contrib.messages as Bootstrap alerts #} {% bootstrap_messages %}
 
 	<style>
 		body {
@@ -75,23 +67,18 @@
 	</script>
 </head>
 <section id="content">
-	<div class="container-fluid" style="padding-top: 15px; ">
- 		<div class="row">
- 			<div class="col-md-12">
- 				<form class="form-horizontal" action="{% url 'set_language' %}" method="post">{% csrf_token %}
- 				{% if LANGUAGE_CODE == 'fr' %}
- 					<input name="language" type="hidden" value="en" />
-					<input type="submit" class="btn btn-info pull-right" value="English version" />
-				{% else %}
-					<input name="language" type="hidden" value="fr" />
-					<input type="submit" class="btn btn-info pull-right" value="Version française" />
- 				{% endif %}
- 				</form>
-			</div>
-		</div>
-	</div>
 	{% block content %}{% endblock %}
 </section>
+<div class="container">
+	<div class="text-center">
+		<form action="{% url 'set_language' %}" method="post">{% csrf_token %} {% if LANGUAGE_CODE == 'fr' %}
+			<input name="language" type="hidden" value="en" />
+			<input type="submit" class="btn btn-primary" value="English version" /> {% else %}
+			<input name="language" type="hidden" value="fr" />
+			<input type="submit" class="btn btn-primary" value="Version française" /> {% endif %}
+		</form>
+	</div>
+</div>
 </body>
 
 </html>

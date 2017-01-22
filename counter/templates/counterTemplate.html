@@ -44,13 +44,12 @@
         </div>
         <div class="seum-counter panel-body" style="height:125px" id="container{{counter.id}}">
           {% if counter.lastReset.noSeum %}
-            <strong>{% trans "Has not got the seum yet" %}.</strong><br />
+            <strong>{% trans "No seum yet" %}.</strong><br />
           {% else %}
             <strong>
             {% if counter.lastReset.selfSeum %}
-              {% trans "Has got the seum" %} {{ counter.lastReset.formatted_delta }}.
-            {% else %}
-              {{ counter.lastReset.who.trigramme }} {% trans "threw him/her the seum" %} {{ counter.lastReset.formatted_delta }}.
+              {% trans "Got the seum" %} {{ counter.lastReset.formatted_delta }}.
+            {% else %}{% blocktrans with trigram=counter.lastReset.who.trigramme time_ago=counter.lastReset.formatted_delta %}Seum thrown by {{ trigram }} {{ time_ago }}.{% endblocktrans %}
             {% endif %}
             </strong><br />
           {% endif %}
@@ -58,7 +57,7 @@
           <p>{{ counter.lastReset.reason | hashtag }}</p>
           <div class="text-center">
             <button id="button{{counter.id}}" class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{counter.id}})">
-              {% trans "Reset" %}
+              {% trans "Reset the counter" %}
             </button>
           </div>
           <form style="display:none" id="counter{{counter.id}}" action="{% url 'reset-counter' %}" method="post">

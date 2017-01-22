@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 13:09-0500\n"
+"POT-Creation-Date: 2017-01-22 13:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,70 +18,201 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: counter/models.py:12
+#, fuzzy
+#| msgid "Username"
+msgid "name"
+msgstr "Nom d'utilisateur"
+
+#: counter/models.py:13
+msgid "email"
+msgstr "email"
+
+#: counter/models.py:14
+#, fuzzy
+#| msgid "Trigram"
+msgid "trigram"
+msgstr "Trigramme"
+
+#: counter/models.py:15
+msgid "associated user"
+msgstr "utilisateur associé"
+
+#: counter/models.py:16
+#, fuzzy
+#| msgid "Email notifications"
+msgid "email notifications"
+msgstr "Notifications par email"
+
+#: counter/models.py:17
+#, fuzzy
+#| msgid "Sort seums by score"
+msgid "sort by SeumScore"
+msgstr "Trier les seums par score"
+
+#: counter/models.py:20
+#, python-format
+msgid "%(trigram)s (%(name)s)"
+msgstr "%(trigram)s (%(name)s)"
+
+#: counter/models.py:23
+#, fuzzy
+#| msgid "Counters"
+msgid "counter"
+msgstr "Compteurs"
+
+#: counter/models.py:27 counter/models.py:55
+msgid "datetime"
+msgstr "date et heure"
+
+#: counter/models.py:28
+msgid "reason"
+msgstr "raison"
+
+#: counter/models.py:29
+#, fuzzy
+#| msgid "Victim"
+msgid "victim"
+msgstr "Victime"
+
+#: counter/models.py:30
+msgid "seum giver"
+msgstr "fouteur de seum"
+
+#: counter/models.py:34
+#, fuzzy, python-format
+#| msgid "%(counter)s: %(reason)s"
+msgid "%(counter)s: %(datetime)s (%(reason)s)"
+msgstr "%(counter)s : %(reason)s"
+
+#: counter/models.py:48 counter/models.py:79
+#, fuzzy
+#| msgid "Reset"
+msgid "reset"
+msgstr "Remise à zéro"
+
+#: counter/models.py:49
+#, fuzzy
+#| msgid "Reset"
+msgid "resets"
+msgstr "Remise à zéro"
+
+#: counter/models.py:53
+msgid "liker"
+msgstr "liker"
+
+#: counter/models.py:54
+msgid "seum"
+msgstr "seum"
+
+#: counter/models.py:58
+msgid "like"
+msgstr "like"
+
+#: counter/models.py:59
+msgid "likes"
+msgstr "likes"
+
+#: counter/models.py:63
+#, python-format
+msgid "%(liker)s likes %(reset)s"
+msgstr "%(liker)s likes %(reset)s"
+
+#: counter/models.py:70
+msgid "keyword"
+msgstr "mot-clé"
+
+#: counter/models.py:71
+msgid "keywords"
+msgstr "mots-clé"
+
+#: counter/models.py:78 counter/models.py:82
+#, fuzzy
+#| msgid "Hashtag"
+msgid "hashtag"
+msgstr "Hashtag"
+
+#: counter/models.py:83
+#, fuzzy
+#| msgid "Hashtag"
+msgid "hashtags"
+msgstr "Hashtag"
+
+#: counter/models.py:86
+#, python-format
+msgid "%(keyword)s for %(who)s"
+msgstr "%(keyword)s pour %(who)s"
+
 #: counter/templates/counterTemplate.html:47
 #: counter/templates/homeTemplate.html:32
-#: counter/templates/homeTemplate.html:134
-msgid "Has not got the seum yet"
-msgstr "N'a pas encore eu le seum"
+#, fuzzy
+#| msgid "Sort seums by date"
+msgid "No seum yet"
+msgstr "Trier les seums par ancienneté"
 
 #: counter/templates/counterTemplate.html:51
 #: counter/templates/homeTemplate.html:138
-msgid "Has got the seum"
-msgstr "A eu le seum"
+#, fuzzy
+#| msgid "I got the seum"
+msgid "Got the seum"
+msgstr "J'ai eu le seum"
 
-#: counter/templates/counterTemplate.html:53
-#: counter/templates/homeTemplate.html:140
-msgid "threw him/her the seum"
-msgstr "lui a foutu le seum"
+#: counter/templates/counterTemplate.html:52
+#: counter/templates/homeTemplate.html:139
+#, python-format
+msgid "Seum thrown by %(trigram)s %(time_ago)s."
+msgstr "%(trigram)s lui a foutu le seum %(time_ago)s"
 
-#: counter/templates/counterTemplate.html:61
+#: counter/templates/counterTemplate.html:60
 #: counter/templates/homeTemplate.html:45
-msgid "Reset"
-msgstr "Remise à zéro"
+#, fuzzy
+#| msgid "Create the counter"
+msgid "Reset the counter"
+msgstr "Remettre à zéro"
 
-#: counter/templates/counterTemplate.html:67
+#: counter/templates/counterTemplate.html:66
 msgid "Motive for the seum:"
 msgstr "Motif du seum :"
 
-#: counter/templates/counterTemplate.html:74
+#: counter/templates/counterTemplate.html:73
 #: counter/templates/homeTemplate.html:89
 msgid "Throw the seum"
 msgstr "Foutre le seum"
 
-#: counter/templates/counterTemplate.html:83
+#: counter/templates/counterTemplate.html:82
 msgid "Timeline of the seum"
 msgstr "Timeline du seum"
 
-#: counter/templates/counterTemplate.html:88
+#: counter/templates/counterTemplate.html:87
 msgid "No timeline of the seum yet..."
 msgstr "Pas encore de timeline du seum..."
 
-#: counter/templates/counterTemplate.html:102
+#: counter/templates/counterTemplate.html:101
 msgid "Seum history"
 msgstr "Historique du seum"
 
-#: counter/templates/counterTemplate.html:110
+#: counter/templates/counterTemplate.html:109
 #: counter/templates/hashtagTemplate.html:26
 msgid "Date"
 msgstr "Date"
 
-#: counter/templates/counterTemplate.html:111
+#: counter/templates/counterTemplate.html:110
 #: counter/templates/hashtagTemplate.html:27
 #: counter/templates/homeTemplate.html:82
 msgid "Motive"
 msgstr "Motif"
 
-#: counter/templates/counterTemplate.html:112
+#: counter/templates/counterTemplate.html:111
 #: counter/templates/hashtagTemplate.html:29
 msgid "Seum thrower"
 msgstr "Fouteur de seum"
 
-#: counter/templates/counterTemplate.html:113
+#: counter/templates/counterTemplate.html:112
 #: counter/templates/hashtagTemplate.html:30
 msgid "Number of likes"
 msgstr "Nombre de likes"
 
-#: counter/templates/counterTemplate.html:138
+#: counter/templates/counterTemplate.html:137
 #: counter/templates/hashtagTemplate.html:56
 msgid "Back to counters list"
 msgstr "Retour à la liste des compteurs"
@@ -220,53 +351,59 @@ msgstr "J'ai le seum"
 msgid "Break the seum wall"
 msgstr "Brise le mur du seum"
 
-#: counter/templates/homeTemplate.html:155
+#: counter/templates/homeTemplate.html:134
+msgid "Has not got the seum yet"
+msgstr "N'a pas encore eu le seum"
+
+#: counter/templates/homeTemplate.html:154
 msgid "Timeline of the 24h of the seum"
 msgstr "Timeline des 24 heures du seum"
 
-#: counter/templates/homeTemplate.html:160
+#: counter/templates/homeTemplate.html:159
 msgid "No seum in the last past 24h..."
 msgstr "Pas de seum durant les dernières 24h..."
 
-#: counter/templates/homeTemplate.html:173
+#: counter/templates/homeTemplate.html:172
 msgid "Best seumers"
 msgstr "Meilleurs seumers"
 
-#: counter/templates/homeTemplate.html:178
-#: counter/templates/homeTemplate.html:250
-msgid "Nobody has got the seum..."
+#: counter/templates/homeTemplate.html:177
+#: counter/templates/homeTemplate.html:249
+#, fuzzy
+#| msgid "Nobody has got the seum..."
+msgid "Nobody got the seum..."
 msgstr "Personne n'a eu le seum..."
 
-#: counter/templates/homeTemplate.html:191
+#: counter/templates/homeTemplate.html:190
 msgid "Most liked seumers"
 msgstr "Seumers les plus likés"
 
-#: counter/templates/homeTemplate.html:196
-#: counter/templates/homeTemplate.html:232
+#: counter/templates/homeTemplate.html:195
+#: counter/templates/homeTemplate.html:231
 msgid "Nobody liked..."
 msgstr "Personne n'a aimé..."
 
-#: counter/templates/homeTemplate.html:209
+#: counter/templates/homeTemplate.html:208
 msgid "Most popular hashtags"
 msgstr "Hashtags les plus populaires"
 
-#: counter/templates/homeTemplate.html:214
+#: counter/templates/homeTemplate.html:213
 msgid "Nobody used any hashtag..."
 msgstr "Personne n'a utilisé de hashtag..."
 
-#: counter/templates/homeTemplate.html:227
+#: counter/templates/homeTemplate.html:226
 msgid "Best likers of seum"
 msgstr "Meilleurs likeurs de seum"
 
-#: counter/templates/homeTemplate.html:245
+#: counter/templates/homeTemplate.html:244
 msgid "Seum activity"
 msgstr "Activité seumesque"
 
-#: counter/templates/homeTemplate.html:261
+#: counter/templates/homeTemplate.html:260
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: counter/templates/homeTemplate.html:262
+#: counter/templates/homeTemplate.html:261
 #: counter/templates/passwordChange.html:5
 #: counter/templates/passwordChange.html:35
 #: counter/templates/passwordResetConfirm.html:5
@@ -274,19 +411,19 @@ msgstr "Se déconnecter"
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: counter/templates/homeTemplate.html:265
+#: counter/templates/homeTemplate.html:264
 msgid "Deactivate email notifications"
 msgstr "Désactiver les notifications par email"
 
-#: counter/templates/homeTemplate.html:267
+#: counter/templates/homeTemplate.html:266
 msgid "Activate email notifications"
 msgstr "Activer les notifications par email"
 
-#: counter/templates/homeTemplate.html:272
+#: counter/templates/homeTemplate.html:271
 msgid "Sort seums by date"
 msgstr "Trier les seums par ancienneté"
 
-#: counter/templates/homeTemplate.html:274
+#: counter/templates/homeTemplate.html:273
 msgid "Sort seums by score"
 msgstr "Trier les seums par score"
 
@@ -495,10 +632,13 @@ msgstr "Un utilisateur avec cette adresse email existe déjà."
 msgid "Use another email address, another user has already this login."
 msgstr "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
 
-#: seum/settings.py:109
+#: seum/settings.py:107
 msgid "English"
 msgstr "Anglais"
 
-#: seum/settings.py:110
+#: seum/settings.py:108
 msgid "French"
 msgstr "Français"
+
+#~ msgid "Has got the seum"
+#~ msgstr "A eu le seum"

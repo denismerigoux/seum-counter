@@ -16,6 +16,12 @@ In order to use correctly the internationalisation, compile the locale files:
 python manage.py compilemessages
 ```
 
+To  update the locale file for the project, use
+```
+django-admin makemessages -l fr --ignore=env
+```
+where `env` is the name of the folder containing your virtualenv.
+
 ## Running the server
 
 ### Developement
