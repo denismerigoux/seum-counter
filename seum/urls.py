@@ -22,11 +22,11 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n'), name='set_language'),]
 
-urlpatterns += [
+urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
-]
+)
 
 if settings.DEBUG:
     import debug_toolbar
