@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:12+0100\n"
+"POT-Creation-Date: 2017-01-22 14:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -488,6 +488,22 @@ msgstr ""
 msgid ""
 "We have sent you an email. Follow the instructions to reinitialise your "
 "password."
+msgstr ""
+
+#: counter/templates/resetEmail.txt:3
+msgid ""
+"You have lost your password and you've got the seum. You have to follow this "
+"link (or copy-paste it in your browser) to reinitialise it:"
+msgstr ""
+
+#: counter/templates/resetEmail.txt:7
+msgid "Your login is {{ user.username }} in case you have forgotten it too."
+msgstr ""
+
+#: counter/templates/resetEmail.txt:18
+msgid ""
+"P.S.: If you don't want to receive these mails anymore, contact us at denis."
+"merigoux@gmail.com"
 msgstr ""
 
 #: counter/views/counter.py:41

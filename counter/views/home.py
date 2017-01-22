@@ -1,9 +1,6 @@
 import copy
 from datetime import datetime, timedelta
-import functools
 import math
-import random
-from time import clock
 
 from django import forms
 from django.contrib.auth.decorators import login_required

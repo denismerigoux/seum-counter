@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:12+0100\n"
+"POT-Creation-Date: 2017-01-22 14:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -493,7 +493,9 @@ msgstr ""
 
 #: counter/templates/passwordResetConfirm.html:60
 msgid "You've got the seum, the link that we sent you has already been used."
-msgstr "T'as le seum, le lien qui t'as été donné pour visiter cette page est déjà utilisé."
+msgstr ""
+"T'as le seum, le lien qui t'as été donné pour visiter cette page est déjà "
+"utilisé."
 
 #: counter/templates/passwordResetDone.html:5
 msgid "Email sent!"
@@ -506,6 +508,24 @@ msgid ""
 msgstr ""
 "Un mail t'a été envoyé, suis les instructions pour aller réinitialiser ton "
 "mot de passe."
+
+#: counter/templates/resetEmail.txt:3
+msgid ""
+"You have lost your password and you've got the seum. You have to follow this "
+"link (or copy-paste it in your browser) to reinitialise it:"
+msgstr ""
+"T'as perdu ton mot de passe et t'as le seum. "
+"Il te reste plus qu'à suivre le lien pour le réinitialiser :"
+
+#: counter/templates/resetEmail.txt:7
+msgid "Your login is {{ user.username }} in case you have forgotten it too."
+msgstr "Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié aussi."
+
+#: counter/templates/resetEmail.txt:18
+msgid ""
+"P.S.: If you don't want to receive these mails anymore, contact us at denis."
+"merigoux@gmail.com"
+msgstr "P.S. : Pour ne plus recevoir ces messages, envoie un mail à denis.merigoux@gmail.com"
 
 #: counter/views/counter.py:41
 msgid "unknown"
