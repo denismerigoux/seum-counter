@@ -1,3 +1,7 @@
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
 <html>
 
@@ -71,6 +75,21 @@
 	</script>
 </head>
 <section id="content">
+	<div class="container-fluid" style="padding-top: 15px; ">
+ 		<div class="row">
+ 			<div class="col-md-12">
+ 				<form class="form-horizontal" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+ 				{% if LANGUAGE_CODE == 'fr' %}
+ 					<input name="language" type="hidden" value="en" />
+					<input type="submit" class="btn btn-info pull-right" value="English version" />
+				{% else %}
+					<input name="language" type="hidden" value="fr" />
+					<input type="submit" class="btn btn-info pull-right" value="Version française" />
+ 				{% endif %}
+ 				</form>
+			</div>
+		</div>
+	</div>
 	{% block content %}{% endblock %}
 </section>
 </body>

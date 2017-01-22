@@ -19,8 +19,11 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
-urlpatterns = i18n_patterns(
+urlpatterns = [url(r'^i18n/', include('django.conf.urls.i18n'), name='set_language'), ]
+
+urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
+
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
 )
