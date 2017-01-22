@@ -31,7 +31,7 @@ class Reset(models.Model):
 
     def __str__(self):
         if self.who is None or self.who == self.counter:
-            return _('%(counter)s : %(datetime)s (%(reason)s)') % {
+            return _('%(counter)s: %(datetime)s (%(reason)s)') % {
                 'counter': self.counter,
                 'datetime': arrow.Arrow.fromdatetime(self.timestamp).humanize(locale=(get_language() or 'en')), # dirty hack...
                 'reason': self.reason

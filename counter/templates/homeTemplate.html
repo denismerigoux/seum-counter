@@ -1,9 +1,17 @@
-{% extends 'baseTemplate.html' %} {% block title %}Compteurs{% endblock %} {% block content %} {% load hashtags %}
+{% extends 'baseTemplate.html' %}
+
+{% load i18n %}
+{% load hashtags %}
+
+{% block title %}{% trans "Counters" %}{% endblock %}
+
+{% block content %}
 <div class="text-center">
 	<h1><a class="counter-link" href="{% url 'home' %}">SeumBook™</a></h1>
 </div>
 <div class="container-fluid">
 	<div class="row" id="my-counter">
+		{# my counter #}
 		<div class="col-sm-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -21,60 +29,64 @@
 				<div class="primary-counter panel-body" id="container{{myCounter.id}}">
 					<div style="width:100%;">
 						{% if myCounter.lastReset.noSeum %}
-						<strong>N'a pas encore eu le seum.</strong>
-						<br> {% else %}
-						<strong>
-						{% if myCounter.lastReset.selfSeum %}
-						J'ai eu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
+							<strong>{% trans "Has not got the seum yet" %}.</strong><br />
 						{% else %}
-						{{myCounter.lastReset.who.trigramme}} m'a foutu le seum il y a {{ myCounter.lastReset.formatted_delta }}.
+							<strong>
+								{% if myCounter.lastReset.selfSeum %}
+									{% trans "I got the seum" %} {{ myCounter.lastReset.formatted_delta }}.
+								{% else %}
+									{{ myCounter.lastReset.who.trigramme }} {% trans "threw me the seum"} {{ myCounter.lastReset.formatted_delta }}.
+								{% endif %}
+							</strong><br />
 						{% endif %}
-					</strong>
-						<br> {% endif %}
 						<p>{{ myCounter.lastReset.reason | hashtag }}</p>
 						<div class="text-center" id="button{{myCounter.id}}">
-							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">Remettre à zéro</button>
+							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">
+								{% trans "Reset" %}
+							</button>
 						</div>
+						{# reset form for my counter #}
 						<form style="display:none" id="counter{{myCounter.id}}" action="{% url 'reset-counter' %}" method="post">
 							{% csrf_token %}
 							<div class="form-group">
-								<label for="reason">Motif du seum</label>
+								<label for="reason">{% trans "Motive of the seum" %}</label>
 								<input id="reason{{myCounter.id}}" type="text" class="form-control" name="reason"></input>
 							</div>
 							<input type="hidden" name="counter" value="{{myCounter.id}}"></input>
 							<input type="hidden" name="redirect" value="{% url 'home' %}"></input>
 							<input type="hidden" name="who" value="{{myCounter.id}}"></input>
 							<div class="text-center">
-								<button type="submit" class="btn btn-default btn-success">J'ai le seum</button>
+								<button type="submit" class="btn btn-default btn-success">{% trans "I've got the seum" %}</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		{# QuickSeum #}
 		<div class="col-sm-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h2 class="panel-title"><b>QuickSeum™</b> <small>Brise le mur du seum</small></h2>
+					<h2 class="panel-title"><b>QuickSeum™</b> <small>{% trans "Break the seum wall" %}</small></h2>
 				</div>
 				<div class="primary-counter panel-body">
 					<form class="form-horizontal" action="{% url 'reset-counter'%}" method="POST" style="width:100%;">
 						{% csrf_token %}
 						<div class="form-group">
-							<label for="id_quicktrigramme" class="col-sm-3 control-label">Trigramme</label>
+							<label for="id_quicktrigramme" class="col-sm-3 control-label">{% trans "Trigram" %}</label>
 							<div class="col-sm-9">
 								<input id="id_quicktrigramme" maxlength="3" type="text" class="form-control text-uppercase" name="trigramme" onkeyup="this.value=this.value.toUpperCase();" required />
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="id_quickreason" class="col-sm-3 control-label">Motif</label>
+							<label for="id_quickreason" class="col-sm-3 control-label">{% trans "Motive" %}</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="id_quickreason" name="reason" />
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-9">
-								<button type="submit" class="btn btn-danger">Foutre le seum</button>
+								<button type="submit" class="btn btn-danger">{% trans "Throw the seum" %}</button>
 							</div>
 						</div>
 						<input type="hidden" name="who" value="{{myCounter.id}}"></input>
@@ -84,6 +96,7 @@
 			</div>
 		</div>
 	</div>
+	{# Counters panel #}
 	<div class="row">
 		{% for counter in counters %}
 		<div class="col-md-4 col-sm-6 col-lg-3">
@@ -99,54 +112,56 @@
 								<b>{{ counter.trigramme }}</b> <small>{{ counter.name }}</small>
 							</a>
 							{% if not counter.lastReset.noSeum %}
-							{% if counter.alreadyLiked %}
-							<span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
-								<span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
-							</span>
-							{% elif counter.id == myCounter.id or counter.lastReset.who.id == myCounter.id %}
-			                <span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
-			                    <span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
-			                </span>
-							{% else %}
-							<a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
-								<span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
-							</a>
-							{% endif %}
+								{% if counter.alreadyLiked %}
+									<span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
+										<span class="glyphicon glyphicon-ok"></span>&emsp;{{ counter.likeCount }}
+									</span>
+								{% elif counter.id == myCounter.id or counter.lastReset.who.id == myCounter.id %}
+			                		<span class="pull-right badge" {% if counter.likeCount > 0 %} data-toggle="tooltip" data-placement="top" title="{{ counter.likersString }}" {% endif %}>
+			                    		<span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
+			                		</span>
+								{% else %}
+									<a class="pull-right badge" onclick="document.forms['like{{counter.id}}'].submit();">
+										<span class="glyphicon glyphicon-heart"></span>&emsp;{{ counter.likeCount }}
+									</a>
+								{% endif %}
 							{% endif %}
 						</h2>
 					</form>
 				</div>
 				<div class="seum-counter panel-body">
 					{% if counter.lastReset.noSeum %}
-					<strong>N'a pas encore eu le seum.</strong>
-					<br> {% else %}
-					<strong>
-					{% if counter.lastReset.selfSeum %}
-						A eu le seum il y a {{ counter.lastReset.formatted_delta }}.
+						<strong>{% trans "Has not got the seum yet" %}</strong><br />
 					{% else %}
-						{{ counter.lastReset.who.trigramme }} lui a foutu le seum il y a {{ counter.lastReset.formatted_delta }}.
+						<strong>
+							{% if counter.lastReset.selfSeum %}
+								{% trans "Has got the seum" %} {{ counter.lastReset.formatted_delta }}.
+							{% else %}
+								{{ counter.lastReset.who.trigramme }} {% trans "threw him/her the seum" %} {{ counter.lastReset.formatted_delta }}.
+							{% endif %}
+						</strong><br />
 					{% endif %}
-					</strong>
-					<br> {% endif %}
-
 					<p>{{ counter.lastReset.reason | hashtag }}</p>
 				</div>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
+	{# Graphs #}
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Timeline des 24 heures du seum</h2>
+					<h2 class="panel-title">{% trans "Timeline of the 24h of the seum" %}{# Timeline des 24 heures du seum #}</h2>
 				</div>
 				<div class="panel-body timeline graphs">
 					{% if noTimeline %}
-					<div class="text-center text-muted">
-						<p>Pas de seum dans les dernières 24 heures...</p>
-					</div>
-					{% else %} {{ line_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "No seum in the last past 24h..." %}</p>
+						</div>
+					{% else %}
+						{{ line_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -155,14 +170,16 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Meilleurs seumeurs</h2>
+					<h2 class="panel-title">{% trans "Best seumers" %}</h2>
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestSeum %}
-					<div class="text-center text-muted">
-						<p>Personne n'a eu le seum...</p>
-					</div>
-					{% else %} {{ best_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "Nobody has got the seum..." %}</p>
+						</div>
+					{% else %}
+						{{ best_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -171,14 +188,16 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Seumeurs les plus likés</h2>
+					<h2 class="panel-title">{% trans "Most liked seumers" %}</h2>
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestLikees %}
-					<div class="text-center text-muted">
-						<p>Personne n'a liké...</p>
-					</div>
-					{% else %} {{ likees_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "Nobody liked..." %}</p>
+						</div>
+					{% else %}
+						{{ likees_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -187,14 +206,16 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Hashtags les plus populaires</h2>
+					<h2 class="panel-title">{% trans "Most popular hashtags" %}</h2>
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestHashtags %}
-					<div class="text-center text-muted">
-						<p>Personne n'a utilisé de hashtags...</p>
-					</div>
-					{% else %} {{ hashtags_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "Nobody used any hashtag..." %}</p>
+						</div>
+					{% else %}
+						{{ hashtags_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -203,14 +224,16 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Meilleurs likeurs de seum</h2>
+					<h2 class="panel-title">{% trans "Best likers of seum" %}</h2>
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestLikers %}
-					<div class="text-center text-muted">
-						<p>Personne n'a liké...</p>
-					</div>
-					{% else %} {{ likers_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "Nobody liked..." %}</p>
+						</div>
+					{% else %}
+						{{ likers_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -219,34 +242,36 @@
 		<div class="col-sm-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h2 class="panel-title">Activité seumesque</h2>
+					<h2 class="panel-title">{% trans "Seum activity" %}</h2>
 				</div>
 				<div class="panel-body graphs">
 					{% if noSeumActivity %}
-					<div class="text-center text-muted">
-						<p>Personne n'a eu le seum...</p>
-					</div>
-					{% else %} {{ activity_chart.as_html }} {% endif %}
+						<div class="text-center text-muted">
+							<p>{% trans "Nobody has got the seum..." %}</p>
+						</div>
+					{% else %}
+						{{ activity_chart.as_html }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="row text-center">
-	<a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a>
-	<a href="{% url 'password_change' %}" class="btn btn-warning">Changer de mot de passe</a>
+	<a href="{% url 'logout' %}" class="btn btn-danger">{% trans "Logout" %}</a>
+	<a href="{% url 'password_change' %}" class="btn btn-warning">{% trans "Change password" %}</a>
 	<a href="{% url 'toggle_email_notifications' %}" class="btn btn-info">
 		{% if myCounter.email_notifications %}
-		Désactiver les notifications par mail
+			{% trans "Deactivate email notifications" %}
 		{% else %}
-		Activer les notifications par mail
+			{% trans "Activate email notifications" %}
 		{% endif %}
 	</a>
 	<a href="{% url 'toggle_sort_score' %}" class="btn btn-success">
 		{% if myCounter.sort_by_score %}
-		Trier les seums par ancienneté
+			{% trans "Sort seums by date" %}
 		{% else %}
-		Trier les seums par score
+			{% trans "Sort seums by score" %}
 		{% endif %}
 	</a>
 </div>
