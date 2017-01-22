@@ -98,7 +98,7 @@ def index(request):
             # Computing the total number of likes for this counter
             likesMe = list(counter.lastReset.likes.all())
             counter.lastReset.likes_count = len(likesMe)
-            counter.alreadyLiked = myCounter in likesMe
+            counter.alreadyLiked = myCounter.id in [likeMe.liker.id for likeMe in likesMe]
             if counter.lastReset.likes_count > 0:
                 counter.likersString = ", ".join([like.liker.trigramme for like in likesMe])
             counter.lastReset.formatted_delta = arrow.Arrow.fromdatetime(counter.lastReset.timestamp).humanize(locale=get_language())
@@ -321,5 +321,3 @@ def toggleScoreSorting(request):
     counter.sort_by_score = not counter.sort_by_score
     counter.save()
     return HttpResponseRedirect(reverse('home'))
-
-
