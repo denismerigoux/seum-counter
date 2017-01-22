@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:49-0500\n"
+"POT-Creation-Date: 2017-01-22 15:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,7 +114,6 @@ msgid "hashtag"
 msgstr "Hashtag"
 
 #: counter/models.py:83
-#| msgid "Hashtag"
 msgid "hashtags"
 msgstr "Hashtag"
 
@@ -312,6 +311,10 @@ msgstr "Compteurs"
 #: counter/templates/homeTemplate.html:36
 msgid "I got the seum"
 msgstr "J'ai eu le seum"
+
+#: counter/templates/homeTemplate.html:38
+msgid "threw me the seum"
+msgstr "m'a foutu le seum"
 
 #: counter/templates/homeTemplate.html:52
 msgid "Motive of the seum"
