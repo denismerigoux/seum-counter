@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:00+0100\n"
+"POT-Creation-Date: 2017-01-22 14:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,7 +270,10 @@ msgid "Create the counter"
 msgstr "Créer le compteur"
 
 #: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/passwordChange.html:45
 #: counter/templates/passwordReset.html:37
+#: counter/templates/passwordResetConfirm.html:46
+#: counter/templates/passwordResetConfirm.html:57
 msgid "Error"
 msgstr "Erreur"
 
@@ -279,6 +282,7 @@ msgid "Password successfully changed!"
 msgstr "Mot de passe changé !"
 
 #: counter/templates/createUserDone.html:17
+#: counter/templates/passwordChangeDone.html:17
 #: counter/templates/passwordResetComplete.html:17
 #: counter/templates/passwordResetDone.html:17
 msgid "Victory!"
@@ -367,6 +371,10 @@ msgid "Logout"
 msgstr "Se déconnecter"
 
 #: counter/templates/homeTemplate.html:262
+#: counter/templates/passwordChange.html:5
+#: counter/templates/passwordChange.html:35
+#: counter/templates/passwordResetConfirm.html:5
+#: counter/templates/passwordResetConfirm.html:36
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
@@ -422,6 +430,44 @@ msgstr "Dépêche-toi de le créer pour partager ton seum !"
 msgid "Create a counter"
 msgstr "Créer un compteur"
 
+#: counter/templates/passwordChange.html:17
+#: counter/templates/passwordResetConfirm.html:18
+msgid "Change your password of the seum!"
+msgstr "Change ton mot de passe du seum !"
+
+#: counter/templates/passwordChange.html:23
+#: counter/templates/passwordResetConfirm.html:24
+msgid "Old password"
+msgstr "Ancien mot de passe"
+
+#: counter/templates/passwordChange.html:27
+#: counter/templates/passwordResetConfirm.html:28
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: counter/templates/passwordChange.html:31
+#: counter/templates/passwordResetConfirm.html:32
+msgid "Confirm new password"
+msgstr "Confirmer le nouveau mot de passe"
+
+#: counter/templates/passwordChange.html:48
+#: counter/templates/passwordResetConfirm.html:49
+msgid "You don't even manage to change your password, seum."
+msgstr "T'arrives même pas à changer ton mot de passe, seum."
+
+#: counter/templates/passwordChangeDone.html:5
+msgid "Password changed!"
+msgstr "Mot de passe changé !"
+
+#: counter/templates/passwordChangeDone.html:20
+msgid "You changed your password!"
+msgstr "Tu as changé ton mot de passe !"
+
+#: counter/templates/passwordChangeDone.html:22
+#: counter/templates/passwordResetComplete.html:22
+msgid "Home"
+msgstr "Accueil"
+
 #: counter/templates/passwordReset.html:17
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
@@ -445,9 +491,9 @@ msgstr ""
 "Ça y est tu as réinitialisé ton mot de passe ! Du coup tu peux aller "
 "remettre ton compteur à zéro."
 
-#: counter/templates/passwordResetComplete.html:22
-msgid "Home"
-msgstr "Accueil"
+#: counter/templates/passwordResetConfirm.html:60
+msgid "You've got the seum, the link that we sent you has already been used."
+msgstr "T'as le seum, le lien qui t'as été donné pour visiter cette page est déjà utilisé."
 
 #: counter/templates/passwordResetDone.html:5
 msgid "Email sent!"

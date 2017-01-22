@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 14:00+0100\n"
+"POT-Creation-Date: 2017-01-22 14:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -257,7 +257,10 @@ msgid "Create the counter"
 msgstr ""
 
 #: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/passwordChange.html:45
 #: counter/templates/passwordReset.html:37
+#: counter/templates/passwordResetConfirm.html:46
+#: counter/templates/passwordResetConfirm.html:57
 msgid "Error"
 msgstr ""
 
@@ -266,6 +269,7 @@ msgid "Password successfully changed!"
 msgstr ""
 
 #: counter/templates/createUserDone.html:17
+#: counter/templates/passwordChangeDone.html:17
 #: counter/templates/passwordResetComplete.html:17
 #: counter/templates/passwordResetDone.html:17
 msgid "Victory!"
@@ -354,6 +358,10 @@ msgid "Logout"
 msgstr ""
 
 #: counter/templates/homeTemplate.html:262
+#: counter/templates/passwordChange.html:5
+#: counter/templates/passwordChange.html:35
+#: counter/templates/passwordResetConfirm.html:5
+#: counter/templates/passwordResetConfirm.html:36
 msgid "Change password"
 msgstr ""
 
@@ -409,6 +417,44 @@ msgstr ""
 msgid "Create a counter"
 msgstr ""
 
+#: counter/templates/passwordChange.html:17
+#: counter/templates/passwordResetConfirm.html:18
+msgid "Change your password of the seum!"
+msgstr ""
+
+#: counter/templates/passwordChange.html:23
+#: counter/templates/passwordResetConfirm.html:24
+msgid "Old password"
+msgstr ""
+
+#: counter/templates/passwordChange.html:27
+#: counter/templates/passwordResetConfirm.html:28
+msgid "New password"
+msgstr ""
+
+#: counter/templates/passwordChange.html:31
+#: counter/templates/passwordResetConfirm.html:32
+msgid "Confirm new password"
+msgstr ""
+
+#: counter/templates/passwordChange.html:48
+#: counter/templates/passwordResetConfirm.html:49
+msgid "You don't even manage to change your password, seum."
+msgstr ""
+
+#: counter/templates/passwordChangeDone.html:5
+msgid "Password changed!"
+msgstr ""
+
+#: counter/templates/passwordChangeDone.html:20
+msgid "You changed your password!"
+msgstr ""
+
+#: counter/templates/passwordChangeDone.html:22
+#: counter/templates/passwordResetComplete.html:22
+msgid "Home"
+msgstr ""
+
 #: counter/templates/passwordReset.html:17
 msgid "Reset password"
 msgstr ""
@@ -430,8 +476,8 @@ msgid ""
 "That's it! You have reset your password! You can reset your counter now."
 msgstr ""
 
-#: counter/templates/passwordResetComplete.html:22
-msgid "Home"
+#: counter/templates/passwordResetConfirm.html:60
+msgid "You've got the seum, the link that we sent you has already been used."
 msgstr ""
 
 #: counter/templates/passwordResetDone.html:5
