@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-23 12:30+0000\n"
+"POT-Creation-Date: 2017-01-23 15:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -505,7 +505,7 @@ msgstr ""
 
 #: counter/templates/resetEmail.txt:6
 #, python-format
-msgid "Your login is %(user.username)s in case you have forgotten it too."
+msgid "Your login is %(login)s in case you have forgotten it too."
 msgstr ""
 
 #: counter/templates/resetEmail.txt:11

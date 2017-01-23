@@ -3,7 +3,7 @@
 {% block reset_link %}
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
-{% blocktrans %}Your login is {{ user.username }} in case you have forgotten it too.{% endblocktrans %}
+{% blocktrans with login=user.username %}Your login is {{ login }} in case you have forgotten it too.{% endblocktrans %}
 
 --
 SeumBook™ - http://seum.merigoux.ovh
