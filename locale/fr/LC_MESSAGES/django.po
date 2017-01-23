@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-22 15:38-0500\n"
+"POT-Creation-Date: 2017-01-23 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -272,8 +272,8 @@ msgstr "Créer le compteur"
 #: counter/templates/createUser.html:64 counter/templates/login.html:43
 #: counter/templates/passwordChange.html:45
 #: counter/templates/passwordReset.html:37
-#: counter/templates/passwordResetConfirm.html:46
-#: counter/templates/passwordResetConfirm.html:57
+#: counter/templates/passwordResetConfirm.html:42
+#: counter/templates/passwordResetConfirm.html:53
 msgid "Error"
 msgstr "Erreur"
 
@@ -382,7 +382,7 @@ msgstr "Se déconnecter"
 #: counter/templates/passwordChange.html:5
 #: counter/templates/passwordChange.html:35
 #: counter/templates/passwordResetConfirm.html:5
-#: counter/templates/passwordResetConfirm.html:36
+#: counter/templates/passwordResetConfirm.html:32
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
@@ -444,22 +444,21 @@ msgid "Change your password of the seum!"
 msgstr "Change ton mot de passe du seum !"
 
 #: counter/templates/passwordChange.html:23
-#: counter/templates/passwordResetConfirm.html:24
 msgid "Old password"
 msgstr "Ancien mot de passe"
 
 #: counter/templates/passwordChange.html:27
-#: counter/templates/passwordResetConfirm.html:28
+#: counter/templates/passwordResetConfirm.html:24
 msgid "New password"
 msgstr "Nouveau mot de passe"
 
 #: counter/templates/passwordChange.html:31
-#: counter/templates/passwordResetConfirm.html:32
+#: counter/templates/passwordResetConfirm.html:28
 msgid "Confirm new password"
 msgstr "Confirmer le nouveau mot de passe"
 
 #: counter/templates/passwordChange.html:48
-#: counter/templates/passwordResetConfirm.html:49
+#: counter/templates/passwordResetConfirm.html:45
 msgid "You don't even manage to change your password, seum."
 msgstr "T'arrives même pas à changer ton mot de passe, seum."
 
@@ -499,7 +498,7 @@ msgstr ""
 "Ça y est tu as réinitialisé ton mot de passe ! Du coup tu peux aller "
 "remettre ton compteur à zéro."
 
-#: counter/templates/passwordResetConfirm.html:60
+#: counter/templates/passwordResetConfirm.html:56
 msgid "You've got the seum, the link that we sent you has already been used."
 msgstr ""
 "T'as le seum, le lien qui t'as été donné pour visiter cette page est déjà "
@@ -526,7 +525,9 @@ msgstr ""
 "lien pour le réinitialiser :"
 
 #: counter/templates/resetEmail.txt:6
-msgid "Your login is {{ user.username }} in case you have forgotten it too."
+#, fuzzy, python-format
+#| msgid "Your login is {{ user.username }} in case you have forgotten it too."
+msgid "Your login is %(user.username)s in case you have forgotten it too."
 msgstr ""
 "Ton nom d'utilisateur c'est {{ user.username }} au cas où tu l'aurais oublié "
 "aussi."
@@ -607,10 +608,10 @@ msgstr "Un utilisateur avec cette adresse email existe déjà."
 msgid "Use another email address, another user has already this login."
 msgstr "Utilise une autre adresse email, un autre utilisateur a déjà ce login."
 
-#: seum/settings.py:107
+#: seum/settings.py:109
 msgid "English"
 msgstr "Anglais"
 
-#: seum/settings.py:108
+#: seum/settings.py:110
 msgid "French"
 msgstr "Français"
