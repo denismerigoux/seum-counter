@@ -1,11 +1,4 @@
-{% extends 'baseTemplate.html' %}
-
-{% load i18n %}
-{% load hashtags %}
-
-{% block title %}{% trans "Counters" %}{% endblock %}
-
-{% block content %}
+{% extends 'baseTemplate.html' %} {% load i18n %} {% load hashtags %} {% block title %}{% trans "Counters" %}{% endblock %} {% block content %}
 <div class="text-center">
 	<h1><a class="counter-link" href="{% url 'home' %}">SeumBook™</a></h1>
 </div>
@@ -29,16 +22,14 @@
 				<div class="primary-counter panel-body" id="container{{myCounter.id}}">
 					<div style="width:100%;">
 						{% if myCounter.lastReset.noSeum %}
-							<strong>{% trans "No seum yet" %}.</strong><br />
-						{% else %}
-							<strong>
+						<strong>{% trans "No seum yet" %}.</strong><br /> {% else %}
+						<strong>
 								{% if myCounter.lastReset.selfSeum %}
 									{% trans "I got the seum" %} {{ myCounter.lastReset.formatted_delta }}.
 								{% else %}
 									{{ myCounter.lastReset.who.trigramme }} {% trans "threw me the seum" %} {{ myCounter.lastReset.formatted_delta }}.
 								{% endif %}
-							</strong><br />
-						{% endif %}
+							</strong><br /> {% endif %}
 						<p>{{ myCounter.lastReset.reason | hashtag }}</p>
 						<div class="text-center" id="button{{myCounter.id}}">
 							<button class="btn btn-default btn-danger" type="button" onclick="revealSeumForm({{myCounter.id}})">
@@ -130,17 +121,17 @@
 					</form>
 				</div>
 				<div class="seum-counter panel-body">
-					{% if counter.lastReset.noSeum %}
-						<strong>{% trans "Has not got the seum yet" %}</strong><br />
-					{% else %}
+					<div style="width:100%">
+						{% if counter.lastReset.noSeum %}
+						<strong>{% trans "Has not got the seum yet" %}</strong><br /> {% else %}
 						<strong>
 							{% if counter.lastReset.selfSeum %}
 								{% trans "Got the seum" %} {{ counter.lastReset.formatted_delta }}.
 							{% else %}{% blocktrans with trigram=counter.lastReset.who.trigramme time_ago=counter.lastReset.formatted_delta %}Seum thrown by {{ trigram }} {{ time_ago }}.{% endblocktrans %}
 							{% endif %}
-						</strong><br />
-					{% endif %}
-					<p>{{ counter.lastReset.reason | hashtag }}</p>
+						</strong><br /> {% endif %}
+						<p>{{ counter.lastReset.reason | hashtag }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -155,12 +146,10 @@
 				</div>
 				<div class="panel-body timeline graphs">
 					{% if noTimeline %}
-						<div class="text-center text-muted">
-							<p>{% trans "No seum in the last past 24h..." %}</p>
-						</div>
-					{% else %}
-						{{ line_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "No seum in the last past 24h..." %}</p>
+					</div>
+					{% else %} {{ line_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -173,12 +162,10 @@
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestSeum %}
-						<div class="text-center text-muted">
-							<p>{% trans "Nobody got the seum..." %}</p>
-						</div>
-					{% else %}
-						{{ best_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "Nobody got the seum..." %}</p>
+					</div>
+					{% else %} {{ best_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -191,12 +178,10 @@
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestLikees %}
-						<div class="text-center text-muted">
-							<p>{% trans "Nobody liked..." %}</p>
-						</div>
-					{% else %}
-						{{ likees_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "Nobody liked..." %}</p>
+					</div>
+					{% else %} {{ likees_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -209,12 +194,10 @@
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestHashtags %}
-						<div class="text-center text-muted">
-							<p>{% trans "Nobody used any hashtag..." %}</p>
-						</div>
-					{% else %}
-						{{ hashtags_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "Nobody used any hashtag..." %}</p>
+					</div>
+					{% else %} {{ hashtags_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -227,12 +210,10 @@
 				</div>
 				<div class="panel-body graphs">
 					{% if noBestLikers %}
-						<div class="text-center text-muted">
-							<p>{% trans "Nobody liked..." %}</p>
-						</div>
-					{% else %}
-						{{ likers_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "Nobody liked..." %}</p>
+					</div>
+					{% else %} {{ likers_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -245,12 +226,10 @@
 				</div>
 				<div class="panel-body graphs">
 					{% if noSeumActivity %}
-						<div class="text-center text-muted">
-							<p>{% trans "Nobody got the seum..." %}</p>
-						</div>
-					{% else %}
-						{{ activity_chart.as_html }}
-					{% endif %}
+					<div class="text-center text-muted">
+						<p>{% trans "Nobody got the seum..." %}</p>
+					</div>
+					{% else %} {{ activity_chart.as_html }} {% endif %}
 				</div>
 			</div>
 		</div>
@@ -276,8 +255,8 @@
 </div>
 
 <script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 </script>
 {% endblock %}

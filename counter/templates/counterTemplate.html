@@ -43,6 +43,7 @@
             </form>
         </div>
         <div class="seum-counter panel-body" style="height:125px" id="container{{counter.id}}">
+         <div style="width:100%">
           {% if counter.lastReset.noSeum %}
             <strong>{% trans "No seum yet" %}.</strong><br />
           {% else %}
@@ -73,6 +74,7 @@
               <button type="submit" class="btn btn-default btn-success">{% trans "Throw the seum" %}</button>
             </div>
           </form>
+         </div>
         </div>
       </div>
     </div>
