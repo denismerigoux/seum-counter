@@ -26,7 +26,7 @@ where `env` is the name of the folder containing your virtualenv.
 
 ### Developement
 
-First, comment out the lines below "#Production settings" in `settings.py`.
+First, comment out the lines below "#Production settings" in `seum/settings.py`.
 
 You will also need to apply the unapplied migrations:
 
