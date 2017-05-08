@@ -26,7 +26,7 @@ telegram_bot_name = settings.BOT_TELEGRAM_NAME
 
 @receiver(post_save, sender=Reset)
 def notify_telegram(sender, instance, created, **kwargs):
-    if not settings.BOT_TELEGRAM_KEY or not settings.telegram_bot_id or not settings.telegram_bot_name:
+    if not settings.BOT_TELEGRAM_KEY or not settings.BOT_TELEGRAM_ID or not settings.BOT_TELEGRAM_NAME:
         return
     if created:
         chat_ids = [e.chat_id for e in TelegramChat.objects.filter(notify_only_members=False)]
