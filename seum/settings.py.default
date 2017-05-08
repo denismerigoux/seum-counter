@@ -124,6 +124,10 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'SeumMan <seum@merigoux.ovh>'
 
+# Telegram Bot
+# BOT_TELEGRAM_KEY = 'telegram-bot-key'
+# BOT_TELEGRAM_ID = 1234
+# BOT_TELEGRAM_NAME = 'telegramBot'
 
 #Production settings
 SECURE_CONTENT_TYPE_NOSNIFF = True

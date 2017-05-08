@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    url(r'^bot/', include('bot.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n'), name='set_language'),]
 
 urlpatterns += i18n_patterns(

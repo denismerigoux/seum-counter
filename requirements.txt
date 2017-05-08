@@ -5,3 +5,5 @@ django-bootstrap3
 django-debug-toolbar==1.6
 django-graphos-3
 pandas==0.19
+django_extensions==1.7.8
+requests==2.13.0
