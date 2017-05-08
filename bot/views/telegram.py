@@ -38,9 +38,9 @@ def notify_telegram(sender, instance, created, **kwargs):
             do_nothing = True
 
         if instance.who is None or instance.who == instance.counter:
-            message = str(instance.counter) + ' has le seum: ' + instance.reason
+            message = str(instance.counter) + ' a le seum: ' + instance.reason
         else:
-            message = str(instance.who) + ' put le seum to ' + str(instance.counter) + ': ' + instance.reason
+            message = str(instance.who) + ' a foutu le seum à ' + str(instance.counter) + ': ' + instance.reason
 
         for chat_id in set(chat_ids):
             requests.post(telegram_url + 'sendMessage', json={'chat_id': chat_id, 'text': message})
