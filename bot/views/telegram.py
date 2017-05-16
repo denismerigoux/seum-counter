@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.utils import IntegrityError
 from django.conf import settings
-from counter.views.counter import reset_counter
+from counter.views.counter import perform_reset
 
 import json
 import requests
@@ -160,11 +160,7 @@ def webhook(request):
                 yes_counter = telegram_user.counter
                 seum_message = m
 
-            reset_counter({
-                'who': telegram_ser.counter.id,
-                'reason': seum_message,
-                'counter': yes_counter.id
-            })
+            reset_counter(telegram_ser.counter, binyes_counter, seum_message,)
     except TelegramUser.DoesNotExist:
         print('in that case we send a link to the user')
         if chat['type'] == 'private' and chat['id'] == telegram_user_id:

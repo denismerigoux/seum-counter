@@ -126,36 +126,41 @@ def reset_counter(request):
             except Counter.DoesNotExist:
                 return HttpResponseRedirect(data['redirect'][0])
 
-        reset = Reset(counter=counter, who=who, reason=data['reason'][0])
-
         # we check that the seumer is the autenticated user
-        if reset.who.user is None or reset.who.user != request.user:
+        if who.user is None or who.user != request.user:
             return HttpResponseRedirect(data['redirect'][0])
 
-        reset.save()
-
-        # Now we deal with the hashtags
-        keywords = parseSeumReason(reason)
-        Hashtag.objects.bulk_create([Hashtag(reset=reset, keyword=keyword) for keyword in keywords])
-
-        # We send the emails only to those who want
-        emails = [u['email'] for u in Counter.objects.filter(email_notifications=True).values('email')]
-        # Now send emails to everyone
-        if reset.who is None or reset.who == counter:
-            selfSeum = True
-        else:
-            selfSeum = False
-        text_of_email = render_to_string(
-            'seumEmail.txt', {'reason': data['reason'][0],
-                              'name': counter.name,
-                              'who': reset.who,
-                              'selfSeum': selfSeum,
-                              })
-        email_to_send = EmailMessage(
-            '[SeumBook] ' + counter.trigramme + ' a le seum',
-            text_of_email,
-            'SeumMan <seum@merigoux.ovh>', emails, [],
-            reply_to=emails)
-        email_to_send.send(fail_silently=True)
+        reason = data['reason'][0]
+        perform_reset(who, counter, reason)
 
     return HttpResponseRedirect(data['redirect'][0])
+
+
+def perform_reset(who, counter, reason):
+    reset = Reset(counter=counter, who=who, reason=reason)
+
+    reset.save()
+
+    # Now we deal with the hashtags
+    keywords = parseSeumReason(reason)
+    Hashtag.objects.bulk_create([Hashtag(reset=reset, keyword=keyword) for keyword in keywords])
+
+    # We send the emails only to those who want
+    emails = [u['email'] for u in Counter.objects.filter(email_notifications=True).values('email')]
+    # Now send emails to everyone
+    if reset.who is None or reset.who == counter:
+        selfSeum = True
+    else:
+        selfSeum = False
+    text_of_email = render_to_string(
+        'seumEmail.txt', {'reason': reason,
+                          'name': counter.name,
+                          'who': reset.who,
+                          'selfSeum': selfSeum,
+                          })
+    email_to_send = EmailMessage(
+        '[SeumBook] ' + counter.trigramme + ' a le seum',
+        text_of_email,
+        'SeumMan <seum@merigoux.ovh>', emails, [],
+        reply_to=emails)
+    email_to_send.send(fail_silently=True)
