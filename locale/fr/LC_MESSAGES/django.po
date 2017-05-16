@@ -49,7 +49,7 @@ msgstr "%(trigram)s (%(name)s)"
 
 #: counter/models.py:23
 msgid "counter"
-msgstr "Compteurs"
+msgstr "Compteur"
 
 #: counter/models.py:27 counter/models.py:55
 msgid "datetime"
@@ -306,7 +306,7 @@ msgstr "Victime"
 
 #: counter/templates/homeTemplate.html:6
 msgid "Counters"
-msgstr "Compteur"
+msgstr "Compteurs"
 
 #: counter/templates/homeTemplate.html:36
 msgid "I got the seum"
