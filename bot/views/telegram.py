@@ -160,7 +160,7 @@ def webhook(request):
                 yes_counter = telegram_user.counter
                 seum_message = m
 
-            reset_counter(telegram_ser.counter, binyes_counter, seum_message,)
+            perform_reset(telegram_user.counter, yes_counter, seum_message)
     except TelegramUser.DoesNotExist:
         print('in that case we send a link to the user')
         if chat['type'] == 'private' and chat['id'] == telegram_user_id:
