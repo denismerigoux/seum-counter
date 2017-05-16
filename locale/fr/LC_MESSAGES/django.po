@@ -78,7 +78,7 @@ msgstr "Remise à zéro"
 
 #: counter/models.py:49
 msgid "resets"
-msgstr "Remise à zéro"
+msgstr "Remises à zéro"
 
 #: counter/models.py:53
 msgid "liker"
@@ -115,7 +115,7 @@ msgstr "Hashtag"
 
 #: counter/models.py:83
 msgid "hashtags"
-msgstr "Hashtag"
+msgstr "Hashtags"
 
 #: counter/models.py:86
 #, python-format
@@ -306,7 +306,7 @@ msgstr "Victime"
 
 #: counter/templates/homeTemplate.html:6
 msgid "Counters"
-msgstr "Compteurs"
+msgstr "Compteur"
 
 #: counter/templates/homeTemplate.html:36
 msgid "I got the seum"
