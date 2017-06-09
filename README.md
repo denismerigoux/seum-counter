@@ -81,3 +81,13 @@ To backup the database, execute the command
 You can then restore your data into a freshly migrated new database with
 
     python manage.py loaddata seum.json
+    
+## Helpful commands
+
+### Inactive users
+
+To track down inactive users, launch `python manage.py shell` and type
+   
+    no_reset = Counter.objects.annotate(num_resets=Count('resets__counter')).filter(num_resets=0)
+    no_like = Counter.objects.annotate(num_likes=Count('likes')).filter(num_likes=0)
+    [ (u.user.email, u.trigramme) for u in (no_rest & no-like)]
