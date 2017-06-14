@@ -2,4 +2,4 @@
 --
 SeumBook™ - https://seum.merigoux.ovh
 
-P.S. : Pour ne plus recevoir ces messages, coche le bouton en bas de la page d'acceuil du site{% endautoescape %}
+P.S. : Pour ne plus recevoir ces messages, coche le bouton en bas de la page d'accueil du site{% endautoescape %}
