@@ -145,22 +145,22 @@ def perform_reset(who, counter, reason):
     keywords = parseSeumReason(reason)
     Hashtag.objects.bulk_create([Hashtag(reset=reset, keyword=keyword) for keyword in keywords])
 
-    # We send the emails only to those who want
-    emails = [u['email'] for u in Counter.objects.filter(email_notifications=True).values('email')]
-    # Now send emails to everyone
-    if reset.who is None or reset.who == counter:
-        selfSeum = True
-    else:
-        selfSeum = False
-    text_of_email = render_to_string(
-        'seumEmail.txt', {'reason': reason,
-                          'name': counter.name,
-                          'who': reset.who,
-                          'selfSeum': selfSeum,
-                          })
-    email_to_send = EmailMessage(
-        '[SeumBook] ' + counter.trigramme + ' a le seum',
-        text_of_email,
-        'SeumMan <seum@merigoux.ovh>', emails, [],
-        reply_to=emails)
-    email_to_send.send(fail_silently=True)
+    # # We send the emails only to those who want
+    # emails = [u['email'] for u in Counter.objects.filter(email_notifications=True).values('email')]
+    # # Now send emails to everyone
+    # if reset.who is None or reset.who == counter:
+    #     selfSeum = True
+    # else:
+    #     selfSeum = False
+    # text_of_email = render_to_string(
+    #     'seumEmail.txt', {'reason': reason,
+    #                       'name': counter.name,
+    #                       'who': reset.who,
+    #                       'selfSeum': selfSeum,
+    #                       })
+    # email_to_send = EmailMessage(
+    #     '[SeumBook] ' + counter.trigramme + ' a le seum',
+    #     text_of_email,
+    #     'SeumMan <seum@merigoux.ovh>', emails, [],
+    #     reply_to=emails)
+    # email_to_send.send(fail_silently=True)
