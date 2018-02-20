@@ -123,6 +123,9 @@ def webhook(request):
         except:
             do_nothing = True
 
+    if not 'text' in data['message']:
+        return HttpResponse(201)
+
     text = data['message']['text']
     if text == '/notify_every_seum_or_not' or text == '/notify_every_seum_or_not@' + telegram_bot_name:
         tchat = TelegramChat.objects.get(chat_id=chat['id'])
