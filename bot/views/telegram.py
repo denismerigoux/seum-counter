@@ -20,7 +20,7 @@ import re
 from counter.models import Counter, Reset
 from bot.models import TelegramUser, TelegramUserCheck, TelegramUserChat, TelegramChat
 
-telegram_ips = ['149.154.167.' + str(i) for i in range(197, 234)]
+telegram_ips = ['149.154.' + str(i) + '.' for i in range(160, 176)] + ['91.108.' + str(i) + '.' for i in range(4, 8)]
 telegram_url = 'https://api.telegram.org/bot' + settings.BOT_TELEGRAM_KEY + '/'
 telegram_bot_id = settings.BOT_TELEGRAM_ID
 telegram_bot_name = settings.BOT_TELEGRAM_NAME
@@ -59,11 +59,8 @@ def link(request, verif_key):
 
 @csrf_exempt
 def webhook(request):
-    ip = request.META.get('REMOTE_ADDR')
+    ip = re.sub(r"\.([^.]+)$", '.', request.META.get('REMOTE_ADDR'))
 
-    # Uncomment the following two lines, and correctly configure the
-    # reverse proxy to enable the security, or everyone will be able
-    # to put le seum to everyone
     if not ip in telegram_ips:
         return HttpResponse(status=401)
 
