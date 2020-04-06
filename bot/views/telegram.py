@@ -123,7 +123,7 @@ def webhook(request):
     if not 'text' in data['message']:
         return HttpResponse(201)
 
-    text = data['message']['text']
+    text = data['message']['text'].strip()
     if text == '/notify_every_seum_or_not' or text == '/notify_every_seum_or_not@' + telegram_bot_name:
         tchat = TelegramChat.objects.get(chat_id=chat['id'])
         tchat.notify_only_members = not tchat.notify_only_members
@@ -148,7 +148,7 @@ def webhook(request):
             requests.post(telegram_url + 'sendMessage', json={'chat_id': chat['id'], 'text': 'Hello ' + telegram_user.counter.name + ' :-)', 'reply_to_message_id': data['message']['message_id']})
             return HttpResponse('')
 
-        seum_cmd = r"^/seum((@" + telegram_bot_name + ")?) (.+)$"
+        seum_cmd = r"^/seum((@" + telegram_bot_name + ")?)\s+(.+)$"
         if re.match(seum_cmd, text) is not None:
             # it's a /seum cmd
             m = re.sub(seum_cmd, r"\3", text)
