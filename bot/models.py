@@ -13,6 +13,7 @@ class TelegramUser(models.Model):
     telegram_user_id = models.BigIntegerField(_('telegram_user_id'), unique=True)
 
     class Meta:
+        app_label = 'bot'
         verbose_name = _('telegram_user')
         verbose_name_plural = _('telegram_users')
 
@@ -30,6 +31,7 @@ class TelegramUserCheck(models.Model):
     verif_key = models.TextField(_('verify_key'), unique=True)
 
     class Meta:
+        app_label = 'bot'
         verbose_name = _('telegram_user_check')
         verbose_name_plural = _('telegram_user_checks')
 
@@ -42,6 +44,7 @@ class TelegramUserChat(models.Model):
     telegram_chat_id = models.BigIntegerField(_('telegram_chat_id'))
 
     class Meta:
+        app_label = 'bot'
         verbose_name = _('telegram_user_chat')
         verbose_name_plural = _('telegram_user_chats')
         unique_together = ('telegram_user_id', 'telegram_chat_id')
@@ -58,6 +61,7 @@ class TelegramChat(models.Model):
     notify_only_members = models.BooleanField(_('notify_only_members'))
 
     class Meta:
+        app_label = 'bot'
         verbose_name = _('telegram_chat')
         verbose_name_plural = _('telegram_chats')
 

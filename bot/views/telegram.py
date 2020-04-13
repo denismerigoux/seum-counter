@@ -153,14 +153,24 @@ def webhook(request):
             # it's a /seum cmd
             m = re.sub(seum_cmd, r"\3", text)
             maybe_counter = m.split(' ')[0]
-            try:
-                yes_counter = Counter.objects.get(trigramme=maybe_counter)
+            # allow multiple seums: /seum ABC+DEF Message
+            counters = [maybe_counter[i:i+3] for i in range(0, len(maybe_counter), 4)]
+            yes_counters = Counter.objects.filter(trigramme__in=counters)
+            seums_to_throw = []
+            user_counter = telegram_user.counter
+            if len(yes_counters):
                 seum_message = ' '.join(m.split(' ')[1:])
-            except Counter.DoesNotExist:
-                yes_counter = telegram_user.counter
-                seum_message = m
+                for counter in yes_counters:
+                    seums_to_throw.append((user_counter, counter, seum_message))
+                # for non existing trigrams, we throw the seum to the seum giver
+                for not_a_counter in set(counters) - set([c.trigramme for c in yes_counters]):
+                    seums_to_throw.append((user_counter, user_counter,
+                                           f"Trigramme {not_a_counter} qui n'existe pas du seum"))
+            else:
+                seums_to_throw.append((user_counter, user_counter, m))
 
-            perform_reset(telegram_user.counter, yes_counter, seum_message)
+            for (who, counter, message) in seums_to_throw:
+                perform_reset(who, counter, message)
     except TelegramUser.DoesNotExist:
         print('in that case we send a link to the user')
         if chat['type'] == 'private' and chat['id'] == telegram_user_id:

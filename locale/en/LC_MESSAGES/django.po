@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-23 15:08+0000\n"
+"POT-Creation-Date: 2020-04-13 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,174 +17,248 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: counter/models.py:12
-msgid "name"
+#: bot/models.py:12 counter/models.py:28
+msgid "counter"
+msgstr ""
+
+#: bot/models.py:13 bot/models.py:30 bot/models.py:43
+msgid "telegram_user_id"
+msgstr ""
+
+#: bot/models.py:17
+msgid "telegram_user"
+msgstr ""
+
+#: bot/models.py:18
+msgid "telegram_users"
+msgstr ""
+
+#: bot/models.py:21
+#, python-format
+msgid "%(counter)s is %(telegram_user_id)d"
+msgstr ""
+
+#: bot/models.py:31
+msgid "verify_key"
+msgstr ""
+
+#: bot/models.py:35
+msgid "telegram_user_check"
+msgstr ""
+
+#: bot/models.py:36
+msgid "telegram_user_checks"
+msgstr ""
+
+#: bot/models.py:39
+#, python-format
+msgid "%(telegram_user_id)d has verif key %(verif_key)s"
+msgstr ""
+
+#: bot/models.py:44 bot/models.py:57
+msgid "telegram_chat_id"
+msgstr ""
+
+#: bot/models.py:48
+msgid "telegram_user_chat"
+msgstr ""
+
+#: bot/models.py:49
+msgid "telegram_user_chats"
+msgstr ""
+
+#: bot/models.py:53
+#, python-format
+msgid "%(telegram_user_id)d is in the chat %(telegram_chat)d"
+msgstr ""
+
+#: bot/models.py:61
+msgid "notify_only_members"
+msgstr ""
+
+#: bot/models.py:65
+msgid "telegram_chat"
+msgstr ""
+
+#: bot/models.py:66
+msgid "telegram_chats"
+msgstr ""
+
+#: bot/models.py:69
+#, python-format
+msgid ""
+"%(chat_id)d is a telegram chat, with option notify_only_members to "
+"%(notify_only_members)s"
 msgstr ""
 
 #: counter/models.py:13
-msgid "email"
+msgid "name"
 msgstr ""
 
 #: counter/models.py:14
-msgid "trigram"
-msgstr ""
-
-#: counter/models.py:15
-msgid "associated user"
+msgid "email"
 msgstr ""
 
 #: counter/models.py:16
-msgid "email notifications"
+msgid "trigram"
 msgstr ""
 
-#: counter/models.py:17
-msgid "sort by SeumScore"
+#: counter/models.py:18 counter/views/user.py:22
+msgid "Trigram must be 3 characters long."
 msgstr ""
 
 #: counter/models.py:20
+msgid "associated user"
+msgstr ""
+
+#: counter/models.py:21
+msgid "email notifications"
+msgstr ""
+
+#: counter/models.py:22
+msgid "sort by SeumScore"
+msgstr ""
+
+#: counter/models.py:25
 #, python-format
 msgid "%(trigram)s (%(name)s)"
 msgstr ""
 
-#: counter/models.py:23
-msgid "counter"
-msgstr ""
-
-#: counter/models.py:27 counter/models.py:55
+#: counter/models.py:36 counter/models.py:64
 msgid "datetime"
 msgstr ""
 
-#: counter/models.py:28
+#: counter/models.py:37
 msgid "reason"
 msgstr ""
 
-#: counter/models.py:29
+#: counter/models.py:38
 msgid "victim"
 msgstr ""
 
-#: counter/models.py:30
+#: counter/models.py:39
 msgid "seum giver"
 msgstr ""
 
-#: counter/models.py:34
+#: counter/models.py:43
 #, python-format
 msgid "%(counter)s: %(datetime)s (%(reason)s)"
 msgstr ""
 
-#: counter/models.py:48 counter/models.py:79
+#: counter/models.py:57 counter/models.py:88
 msgid "reset"
 msgstr ""
 
-#: counter/models.py:49
+#: counter/models.py:58
 msgid "resets"
 msgstr ""
 
-#: counter/models.py:53
+#: counter/models.py:62
 msgid "liker"
 msgstr ""
 
-#: counter/models.py:54
+#: counter/models.py:63
 msgid "seum"
 msgstr ""
 
-#: counter/models.py:58
+#: counter/models.py:67
 msgid "like"
 msgstr ""
 
-#: counter/models.py:59
+#: counter/models.py:68
 msgid "likes"
 msgstr ""
 
-#: counter/models.py:63
+#: counter/models.py:72
 #, python-format
 msgid "%(liker)s likes %(reset)s"
 msgstr ""
 
-#: counter/models.py:70
+#: counter/models.py:79
 msgid "keyword"
 msgstr ""
 
-#: counter/models.py:71
+#: counter/models.py:80
 msgid "keywords"
 msgstr ""
 
-#: counter/models.py:78 counter/models.py:82
+#: counter/models.py:87 counter/models.py:91
 msgid "hashtag"
 msgstr ""
 
-#: counter/models.py:83
+#: counter/models.py:92
 msgid "hashtags"
 msgstr ""
 
-#: counter/models.py:86
+#: counter/models.py:95
 #, python-format
 msgid "%(keyword)s for %(who)s"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:47
-#: counter/templates/homeTemplate.html:32
+#: counter/templates/counterTemplate.html:48
+#: counter/templates/homeTemplate.html:25
 msgid "No seum yet"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:51
-#: counter/templates/homeTemplate.html:138
+#: counter/templates/counterTemplate.html:52
+#: counter/templates/homeTemplate.html:129
 msgid "Got the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:52
-#: counter/templates/homeTemplate.html:139
+#: counter/templates/counterTemplate.html:53
+#: counter/templates/homeTemplate.html:130
 #, python-format
 msgid "Seum thrown by %(trigram)s %(time_ago)s."
 msgstr ""
 
-#: counter/templates/counterTemplate.html:60
-#: counter/templates/homeTemplate.html:45
+#: counter/templates/counterTemplate.html:61
+#: counter/templates/homeTemplate.html:36
 msgid "Reset the counter"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:66
+#: counter/templates/counterTemplate.html:67
 msgid "Motive for the seum:"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:73
-#: counter/templates/homeTemplate.html:89
+#: counter/templates/counterTemplate.html:74
+#: counter/templates/homeTemplate.html:80
 msgid "Throw the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:82
+#: counter/templates/counterTemplate.html:84
 msgid "Timeline of the seum"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:87
+#: counter/templates/counterTemplate.html:89
 msgid "No timeline of the seum yet..."
 msgstr ""
 
-#: counter/templates/counterTemplate.html:101
+#: counter/templates/counterTemplate.html:103
 msgid "Seum history"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:109
+#: counter/templates/counterTemplate.html:111
 #: counter/templates/hashtagTemplate.html:26
 msgid "Date"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:110
+#: counter/templates/counterTemplate.html:112
 #: counter/templates/hashtagTemplate.html:27
-#: counter/templates/homeTemplate.html:82
+#: counter/templates/homeTemplate.html:73
 msgid "Motive"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:111
+#: counter/templates/counterTemplate.html:113
 #: counter/templates/hashtagTemplate.html:29
 msgid "Seum thrower"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:112
+#: counter/templates/counterTemplate.html:114
 #: counter/templates/hashtagTemplate.html:30
 msgid "Number of likes"
 msgstr ""
 
-#: counter/templates/counterTemplate.html:137
+#: counter/templates/counterTemplate.html:139
 #: counter/templates/hashtagTemplate.html:56
 msgid "Back to counters list"
 msgstr ""
@@ -214,49 +288,53 @@ msgstr ""
 msgid "Email notifications"
 msgstr ""
 
-#: counter/templates/createUser.html:34
+#: counter/templates/createUser.html:35
 msgid ""
 "Other users will see your nickname and your trigram only, it will be your "
 "seum identity!"
 msgstr ""
 
-#: counter/templates/createUser.html:36 counter/templates/homeTemplate.html:76
+#: counter/templates/createUser.html:36
+msgid "This trigram must be 3 characters long exactly."
+msgstr ""
+
+#: counter/templates/createUser.html:39 counter/templates/homeTemplate.html:67
 #: counter/views/home.py:200 counter/views/home.py:206
 #: counter/views/home.py:244 counter/views/home.py:250
 #: counter/views/home.py:282 counter/views/home.py:288
 msgid "Trigram"
 msgstr ""
 
-#: counter/templates/createUser.html:40
+#: counter/templates/createUser.html:43
 msgid "Nick"
 msgstr ""
 
-#: counter/templates/createUser.html:43
+#: counter/templates/createUser.html:46
 msgid ""
 "I could have required 10 characters with one digit, an emoji, three "
 "uppercase letters and two lowercase ones to throw you the seum, but actually "
 "you can choose whatever you want."
 msgstr ""
 
-#: counter/templates/createUser.html:45 counter/templates/login.html:27
+#: counter/templates/createUser.html:48 counter/templates/login.html:27
 msgid "Password"
 msgstr ""
 
-#: counter/templates/createUser.html:49
+#: counter/templates/createUser.html:52
 msgid "Confirm password"
 msgstr ""
 
-#: counter/templates/createUser.html:52
+#: counter/templates/createUser.html:55
 msgid ""
 "If this form has given you the seum, do not forget to reset your counter "
 "once you are logged in!"
 msgstr ""
 
-#: counter/templates/createUser.html:54
+#: counter/templates/createUser.html:57
 msgid "Create the counter"
 msgstr ""
 
-#: counter/templates/createUser.html:64 counter/templates/login.html:43
+#: counter/templates/createUser.html:67 counter/templates/login.html:43
 #: counter/templates/passwordChange.html:45
 #: counter/templates/passwordReset.html:37
 #: counter/templates/passwordResetConfirm.html:42
@@ -291,81 +369,81 @@ msgstr ""
 msgid "Victim"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:6
+#: counter/templates/homeTemplate.html:1
 msgid "Counters"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:36
+#: counter/templates/homeTemplate.html:28
 msgid "I got the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:38
+#: counter/templates/homeTemplate.html:30
 msgid "threw me the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:52
+#: counter/templates/homeTemplate.html:43
 msgid "Motive of the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:59
+#: counter/templates/homeTemplate.html:50
 msgid "I've got the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:70
+#: counter/templates/homeTemplate.html:61
 msgid "Break the seum wall"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:134
+#: counter/templates/homeTemplate.html:126
 msgid "Has not got the seum yet"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:154
+#: counter/templates/homeTemplate.html:145
 msgid "Timeline of the 24h of the seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:159
+#: counter/templates/homeTemplate.html:150
 msgid "No seum in the last past 24h..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:172
+#: counter/templates/homeTemplate.html:161
 msgid "Best seumers"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:177
-#: counter/templates/homeTemplate.html:249
+#: counter/templates/homeTemplate.html:166
+#: counter/templates/homeTemplate.html:230
 msgid "Nobody got the seum..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:190
+#: counter/templates/homeTemplate.html:177
 msgid "Most liked seumers"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:195
-#: counter/templates/homeTemplate.html:231
+#: counter/templates/homeTemplate.html:182
+#: counter/templates/homeTemplate.html:214
 msgid "Nobody liked..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:208
+#: counter/templates/homeTemplate.html:193
 msgid "Most popular hashtags"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:213
+#: counter/templates/homeTemplate.html:198
 msgid "Nobody used any hashtag..."
 msgstr ""
 
-#: counter/templates/homeTemplate.html:226
+#: counter/templates/homeTemplate.html:209
 msgid "Best likers of seum"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:244
+#: counter/templates/homeTemplate.html:225
 msgid "Seum activity"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:260
+#: counter/templates/homeTemplate.html:239
 msgid "Logout"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:261
+#: counter/templates/homeTemplate.html:240
 #: counter/templates/passwordChange.html:5
 #: counter/templates/passwordChange.html:35
 #: counter/templates/passwordResetConfirm.html:5
@@ -373,19 +451,19 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:264
+#: counter/templates/homeTemplate.html:243
 msgid "Deactivate email notifications"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:266
+#: counter/templates/homeTemplate.html:245
 msgid "Activate email notifications"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:271
+#: counter/templates/homeTemplate.html:250
 msgid "Sort seums by date"
 msgstr ""
 
-#: counter/templates/homeTemplate.html:273
+#: counter/templates/homeTemplate.html:252
 msgid "Sort seums by score"
 msgstr ""
 
@@ -570,22 +648,22 @@ msgstr ""
 msgid "Number of received likes"
 msgstr ""
 
-#: counter/views/user.py:22
+#: counter/views/user.py:26
 msgid "Passwords do not match."
 msgstr ""
 
-#: counter/views/user.py:27
+#: counter/views/user.py:31
 msgid "A user with this email address already exists."
 msgstr ""
 
-#: counter/views/user.py:33
+#: counter/views/user.py:37
 msgid "Use another email address, another user has already this login."
 msgstr ""
 
-#: seum/settings.py:109
+#: seum/settings.py:105
 msgid "English"
 msgstr ""
 
-#: seum/settings.py:110
+#: seum/settings.py:106
 msgid "French"
 msgstr ""
