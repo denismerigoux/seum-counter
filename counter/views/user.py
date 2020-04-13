@@ -18,6 +18,10 @@ def create(request):
         password2 = data['password2'][0]
         email_notifications = 'email_notifications' in data.keys()
 
+        if len(trigramme) != 3:
+            error = _("Trigram must be 3 characters long.")
+            return render(request, 'createUser.html', {'error': error})
+
         if password1 != password2:
             error = _("Passwords do not match.")
             return render(request, 'createUser.html', {'error': error})

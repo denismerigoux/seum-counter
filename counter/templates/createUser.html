@@ -31,10 +31,13 @@
                             {% trans "Email notifications" %}
                         </label>
                     </div>
-                    <p>{% trans "Other users will see your nickname and your trigram only, it will be your seum identity!" %}</p>
+                    <p>
+                        {% trans "Other users will see your nickname and your trigram only, it will be your seum identity!" %}
+                        {% trans "This trigram must be 3 characters long exactly." %}
+                    </p>
                     <div class="form-group">
                         <label for="id_trigramme">{% trans "Trigram" %}</label>
-                        <input id="id_trigramme" maxlength="3" type="text" class="form-control text-uppercase" name="trigramme" onkeyup="this.value=this.value.toUpperCase();" required />
+                        <input id="id_trigramme" minlength="3" maxlength="3" type="text" class="form-control text-uppercase" name="trigramme" onkeyup="this.value=this.value.toUpperCase();" required />
                     </div>
                     <div class="form-group">
                         <label for="id_nick">{% trans "Nick" %}</label>

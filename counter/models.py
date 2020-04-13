@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _, get_language
 
@@ -11,7 +12,11 @@ from babel.dates import format_timedelta
 class Counter(models.Model):
     name = models.CharField(_('name'), max_length=60)
     email = models.EmailField(_('email'), max_length=264, default='null@localhost')
-    trigramme = models.CharField(_('trigram'), max_length=3)
+    trigramme = models.CharField(
+        _('trigram'),
+        max_length=3,
+        validators=[RegexValidator(regex='^\S{3}$', message=_('Trigram must be 3 characters long.'))]
+    )
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=_('associated user'))
     email_notifications = models.BooleanField(_('email notifications'), default=False)
     sort_by_score = models.BooleanField(_('sort by SeumScore'), default=True)
@@ -21,6 +26,10 @@ class Counter(models.Model):
 
     class Meta:
         verbose_name = _('counter')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Counter, self).save(*args, **kwargs)
 
 
 class Reset(models.Model):
