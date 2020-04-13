@@ -165,7 +165,7 @@ def webhook(request):
                 # for non existing trigrams, we throw the seum to the seum giver
                 for not_a_counter in set(counters) - set([c.trigramme for c in yes_counters]):
                     seums_to_throw.append((user_counter, user_counter,
-                                           f"Trigramme {not_a_counter} qui n'existe pas du seum"))
+                                           "Trigramme {} qui n'existe pas du seum".format(not_a_counter)))
             else:
                 seums_to_throw.append((user_counter, user_counter, m))
 
