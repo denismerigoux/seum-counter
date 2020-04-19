@@ -152,10 +152,7 @@ def webhook(request):
         if re.match(seum_cmd, text) is not None:
             # it's a /seum cmd
             m = re.sub(seum_cmd, r"\3", text)
-            maybe_counter = m.split(' ')[0]
-            # allow multiple seums: /seum ABC+DEF Message
-            counters = [maybe_counter[i:i+3] for i in range(0, len(maybe_counter), 4)]
-            yes_counters = Counter.objects.filter(trigramme__in=counters)
+            (counters, yes_counters) = _extract_counters(m)
             seums_to_throw = []
             user_counter = telegram_user.counter
             if len(yes_counters):
@@ -184,3 +181,15 @@ def webhook(request):
             requests.post(telegram_url + 'sendMessage', json={'chat_id': chat['id'], 'text': 'Your Telegram account isn\'t linked to a SeumBook account. Say hello to me in a private chat to link it :-)! https://telegram.me/' + telegram_bot_name + '?start=Hello', 'reply_to_message_id': data['message']['message_id']})
 
     return HttpResponse('')
+
+
+def _extract_counters(message):
+    maybe_counter = message.split(' ')[0]
+    if re.match(r"^\S{3}(?:[+,/_:;&-]\S{3})*$", maybe_counter) is not None:
+        # allow multiple seums: /seum ABC+DEF Message
+        counters = [maybe_counter[i:i+3] for i in range(0, len(maybe_counter), 4)]
+        yes_counters = Counter.objects.filter(trigramme__in=counters)
+        return (counters, yes_counters)
+
+    # the message does not start with a (list of) trigram(s)
+    return ([], [])
