@@ -2,7 +2,7 @@ arrow==0.10
 babel
 django==1.10
 django-bootstrap3
-django-debug-toolbar==1.6
+django-debug-toolbar==1.11.1
 django-graphos-3
 pandas==0.19
 django_extensions==1.7.8
